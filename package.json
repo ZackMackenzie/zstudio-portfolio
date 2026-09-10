@@ -2,7 +2,7 @@
   "name": "zstudio",
   "version": "0.1.0",
   "private": true,
-  "description": "ZStudio — digital design & technology studio. Portfolio site.",
+  "description": "Zstudio — digital design & technology studio. Portfolio site.",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

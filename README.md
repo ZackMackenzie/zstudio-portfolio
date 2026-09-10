@@ -1,6 +1,6 @@
-# ZStudio
+# Zstudio
 
-Portfolio site for **ZStudio** — a digital design & technology studio (web design, development,
+Portfolio site for **Zstudio** — a digital design & technology studio (web design, development,
 UI/UX, brand, social, motion, AI-accelerated production).
 
 Single-page experience with dedicated `/work/[slug]` case studies, a custom cursor, smooth

@@ -6,7 +6,7 @@ import { usePointerFine } from '@/lib/hooks/usePointerFine';
 import { lerp } from '@/lib/utils';
 
 /**
- * Hero backdrop — the ZStudio signature: pure black with a blue→cyan aura
+ * Hero backdrop — the Zstudio signature: pure black with a blue→cyan aura
  * anchored to the bottom-left, a faint cool grid, and two thin outlined shapes
  * that parallax to the cursor via a single rAF loop (transform-only).
  * Fully static under reduced-motion / touch.

@@ -5,10 +5,10 @@
  */
 
 export const site = {
-  name: 'ZStudio',
-  shortName: 'ZStudio',
-  wordmark: 'ZStudio',
-  wordmarkFull: 'ZStudio',
+  name: 'Zstudio',
+  shortName: 'Zstudio',
+  wordmark: 'Zstudio',
+  wordmarkFull: 'Zstudio',
 
   /** Used for <title>, OG, canonical URLs. Update on deploy. */
   url: 'https://zstudio.studio', // PLACEHOLDER domain
@@ -17,7 +17,7 @@ export const site = {
   role: 'Digital design & technology studio',
   tagline: 'Design meets technology.',
   description:
-    'ZStudio is an independent digital studio building websites, products, brands and digital experiences — designed and engineered with technology, design and AI.',
+    'Zstudio is an independent digital studio building websites, products, brands and digital experiences — designed and engineered with technology, design and AI.',
 
   /** Contact — PLACEHOLDER values. Replace with real details. */
   contact: {
