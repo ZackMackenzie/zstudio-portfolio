@@ -1,7 +1,7 @@
 export const capabilityGroups: { label: string; items: string[] }[] = [
   {
     label: 'Design',
-    items: ['Figma', 'Design systems', 'Type & layout', 'Art direction', 'Prototyping'],
+    items: ['Figma', 'Design systems', 'Tipografia e layout', 'Direção de arte', 'Prototipagem'],
   },
   {
     label: 'Frontend',
@@ -9,27 +9,27 @@ export const capabilityGroups: { label: string; items: string[] }[] = [
   },
   {
     label: 'Motion',
-    items: ['Remotion', 'After Effects', 'Scroll animation', 'Interaction design'],
+    items: ['Remotion', 'After Effects', 'Animação de scroll', 'Design de interação'],
   },
   {
-    label: 'AI',
-    items: ['LLM workflows', 'Generative assets', 'Research & synthesis', 'Automated QA'],
+    label: 'IA',
+    items: ['Workflows de LLM', 'Assets generativos', 'Pesquisa e síntese', 'QA automatizado'],
   },
   {
-    label: 'Delivery',
-    items: ['Static export', 'Vercel', 'Performance budgets', 'Accessibility', 'SEO'],
+    label: 'Entrega',
+    items: ['Export estático', 'Vercel', 'Orçamento de performance', 'Acessibilidade', 'SEO'],
   },
 ];
 
-/** Short discipline list for the hero + footer marquees. */
+/** Lista curta de disciplinas para os marquees do hero e do rodapé. */
 export const disciplines = [
   'Web Design',
-  'Development',
+  'Desenvolvimento',
   'UI/UX',
   'Landing Pages',
   'SaaS',
-  'Brand',
+  'Marca',
   'Social',
   'Motion Design',
-  'Digital Experiences',
+  'Experiências Digitais',
 ];

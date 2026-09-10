@@ -43,11 +43,11 @@ export default function OpengraphImage() {
             {site.wordmark}
           </div>
           <div style={{ display: 'flex', fontSize: 40, color: '#7a7e85', marginTop: 20 }}>
-            I build digital experiences.
+            Eu construo experiências digitais.
           </div>
         </div>
         <div style={{ display: 'flex', fontSize: 24, letterSpacing: 2, color: '#7a7e85' }}>
-          Web · Product · Brand · Motion · AI
+          Web · Produto · Marca · Motion · IA
         </div>
       </div>
     ),

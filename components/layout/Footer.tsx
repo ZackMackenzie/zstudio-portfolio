@@ -18,7 +18,7 @@ export function Footer() {
           </div>
 
           <nav className="flex flex-col gap-2">
-            <p className="label mb-2">Index</p>
+            <p className="label mb-2">Índice</p>
             {site.nav.map((item) => (
               <button
                 key={item.id}
@@ -32,7 +32,7 @@ export function Footer() {
           </nav>
 
           <nav className="flex flex-col gap-2">
-            <p className="label mb-2">Elsewhere</p>
+            <p className="label mb-2">Redes</p>
             {site.socials.map((s) => (
               <a
                 key={s.label}
@@ -56,7 +56,7 @@ export function Footer() {
             Hanken Grotesk · Inter · IBM Plex Mono — Next.js · Remotion
           </span>
           <button onClick={() => scrollToId('top')} className="link-underline w-fit" {...cursorHover('link')}>
-            Back to top ↑
+            Voltar ao topo ↑
           </button>
         </div>
       </div>

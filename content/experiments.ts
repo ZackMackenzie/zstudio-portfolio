@@ -1,12 +1,12 @@
 /**
- * LAB — experiments, studies and concepts.
- * `clipId` refers to a rendered file in /public/media (see remotion/). Entries
- * without a clip fall back to generated art. Add freely; order = display order.
+ * LAB — experimentos, estudos e conceitos.
+ * `clipId` aponta para um arquivo renderizado em /public/media (ver remotion/).
+ * Entradas sem clipe usam arte gerada como fallback. Adicione à vontade; ordem = ordem de exibição.
  */
 export type Experiment = {
   id: string;
   title: string;
-  kind: string; // e.g. "Motion", "Typography", "Generative"
+  kind: string; // ex.: "Motion", "Tipografia", "Generativo"
   note: string;
   clipId?: string;
   seed: string;
@@ -16,9 +16,9 @@ export type Experiment = {
 export const experiments: Experiment[] = [
   {
     id: 'kinetic-type',
-    title: 'Kinetic Type',
-    kind: 'Typography / Motion',
-    note: 'A typographic reel exploring weight, tracking and rhythm in motion — rendered with Remotion.',
+    title: 'Tipografia Cinética',
+    kind: 'Tipografia / Motion',
+    note: 'Um reel tipográfico explorando peso, tracking e ritmo em movimento — renderizado com Remotion.',
     clipId: 'typography-reel',
     seed: 'kinetic-type',
     accent: true,
@@ -26,39 +26,39 @@ export const experiments: Experiment[] = [
   {
     id: 'motion-poster',
     title: 'Motion Poster',
-    kind: 'Motion / Composition',
-    note: 'A looping poster study: grid, one shape, one accent. A test of how little movement still reads as alive.',
+    kind: 'Motion / Composição',
+    note: 'Um estudo de pôster em loop: grid, uma forma, um acento. Um teste de quão pouco movimento ainda parece vivo.',
     clipId: 'motion-poster',
     seed: 'motion-poster',
   },
   {
     id: 'generative-grids',
-    title: 'Generative Grids',
-    kind: 'Generative / Code',
-    note: 'Deterministic abstract compositions seeded from a string — the system behind every placeholder visual on this site.',
+    title: 'Grids Generativos',
+    kind: 'Generativo / Código',
+    note: 'Composições abstratas determinísticas geradas a partir de uma string — o sistema por trás de todo visual placeholder deste site.',
     seed: 'generative-grids',
   },
   {
     id: 'case-teaser',
-    title: 'Case Teaser',
+    title: 'Abertura de Case',
     kind: 'Motion / Editorial',
-    note: 'A short format for opening a case study with motion instead of a static hero.',
+    note: 'Um formato curto para abrir um case study com movimento em vez de um hero estático.',
     clipId: 'case-teaser',
     seed: 'case-teaser',
     accent: true,
   },
   {
-    id: 'cursor-states',
-    title: 'Cursor States',
-    kind: 'Interaction',
-    note: 'The custom cursor system used across this site — contextual labels, magnetic targets, reduced-motion aware.',
-    seed: 'cursor-states',
+    id: 'reveal-system',
+    title: 'Sistema de Revelações',
+    kind: 'Interação',
+    note: 'As animações acionadas por scroll usadas neste site — máscaras de clip, stagger, parallax; todas cientes de reduced-motion.',
+    seed: 'reveal-system',
   },
   {
     id: 'social-render-pipeline',
-    title: 'Render Pipeline',
-    kind: 'Tooling / Motion',
-    note: 'Batch-rendering social motion from a manifest — change the data, re-render the set.',
+    title: 'Pipeline de Render',
+    kind: 'Ferramentas / Motion',
+    note: 'Renderização em lote de motion para social a partir de um manifesto — muda o dado, re-renderiza o conjunto.',
     clipId: 'social-creative',
     seed: 'social-render-pipeline',
   },

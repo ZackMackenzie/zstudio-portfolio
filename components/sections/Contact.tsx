@@ -14,7 +14,7 @@ function useLocalTime() {
     const update = () => {
       try {
         setTime(
-          new Intl.DateTimeFormat('en-GB', {
+          new Intl.DateTimeFormat('pt-BR', {
             hour: '2-digit',
             minute: '2-digit',
             timeZone: site.contact.timezone,
@@ -39,19 +39,19 @@ export function Contact() {
       <Reveal>
         <span className="label">
           <span className="text-accent">{formatIndex(6)}</span>
-          <span className="mx-2 opacity-40">/</span>Contact
+          <span className="mx-2 opacity-40">/</span>Contato
         </span>
       </Reveal>
 
       <div className="mt-10">
         <MotionText
           as="h2"
-          lines={["Let’s build", 'something.']}
+          lines={['Vamos criar', 'algo.']}
           className="font-display text-3xl font-medium leading-[0.95] tracking-tightest md:text-4xl"
         />
         <p className="mt-8 max-w-xl text-lg text-dim">
-          Have an idea, a product, or a brand that needs to exist properly? Send the rough
-          version — I’ll come back with a direction.
+          Tem uma ideia, um produto ou uma marca que precisa existir de verdade? Manda a versão
+          crua — eu volto com uma direção.
         </p>
       </div>
 
@@ -60,7 +60,7 @@ export function Contact() {
           {site.contact.email}
           <span aria-hidden>↗</span>
         </MagneticButton>
-        <MagneticButton href={site.socials[0].href} cursorLabel="Chat" className="text-dim">
+        <MagneticButton href={site.socials[0].href} cursorLabel="Conversar" className="text-dim">
           WhatsApp
         </MagneticButton>
       </div>
@@ -71,15 +71,15 @@ export function Contact() {
           <p className="mt-1">{site.contact.availability}</p>
         </div>
         <div>
-          <p className="text-text/60">Based</p>
+          <p className="text-text/60">Base</p>
           <p className="mt-1">{site.contact.baseLocation}</p>
         </div>
         <div>
-          <p className="text-text/60">Local time</p>
+          <p className="text-text/60">Horário local</p>
           <p className="mt-1">{time || '—'}</p>
         </div>
         <div>
-          <p className="text-text/60">Social</p>
+          <p className="text-text/60">Redes</p>
           <div className="mt-1 flex flex-wrap gap-x-3 gap-y-1">
             {site.socials.slice(2).map((s) => (
               <a

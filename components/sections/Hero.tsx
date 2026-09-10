@@ -25,8 +25,8 @@ export function Hero() {
       >
         <p className="label mb-6 flex items-center gap-3">
           <span className="inline-block h-1.5 w-1.5 rounded-pill bg-accent2" />
-          Digital design &amp; technology studio
-          <span className="ml-auto hidden text-dim/60 sm:inline">Portfolio — 2026</span>
+          Estúdio de design e tecnologia digital
+          <span className="ml-auto hidden text-dim/60 sm:inline">Portfólio — 2026</span>
         </p>
 
         <h1 className="font-display text-3xl font-medium leading-[0.95] tracking-tightest md:text-4xl">
@@ -35,10 +35,10 @@ export function Hero() {
             trigger="mount"
             lineClassName="block"
             lines={[
-              'I build',
-              'digital',
+              'Eu construo',
+              'experiências',
               <span key="3" className="text-gradient">
-                experiences.
+                digitais.
               </span>,
             ]}
           />
@@ -51,8 +51,8 @@ export function Hero() {
             transition={{ delay: 0.9, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             className="max-w-md text-base text-dim md:text-lg"
           >
-            Websites, products, brands and digital experiences — designed and engineered with
-            technology, design and AI.
+            Sites, produtos, marcas e experiências digitais — desenhados e desenvolvidos com
+            tecnologia, design e IA.
           </motion.p>
 
           <motion.button
@@ -71,7 +71,7 @@ export function Hero() {
                 ↓
               </motion.span>
             </span>
-            Selected work
+            Trabalhos
           </motion.button>
         </div>
       </motion.div>

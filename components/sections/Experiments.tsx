@@ -18,12 +18,12 @@ export function Experiments() {
       <SectionHeader
         index={5}
         label="Lab"
-        title={['Experiments', '& studies']}
+        title={['Experimentos', 'e estudos']}
       />
 
       <p className="mt-8 max-w-prose text-sm text-dim">
-        Not everything is a client project. The Lab is where motion, generative systems and
-        interface ideas get tested — some feed the commercial work, some just exist.
+        Nem tudo é projeto de cliente. O Lab é onde motion, sistemas generativos e ideias de
+        interface são testados — alguns alimentam o trabalho comercial, outros só existem.
       </p>
 
       <div className="mt-14 grid gap-px overflow-hidden border border-line bg-line sm:grid-cols-2 lg:grid-cols-3">
@@ -36,7 +36,7 @@ export function Experiments() {
             transition={{ delay: (i % 3) * 0.06, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
             onClick={() => setOpen(exp)}
             className="group relative flex flex-col bg-bg p-6 text-left transition-colors duration-400 hover:bg-raised"
-            {...cursorHover('view', 'Open')}
+            {...cursorHover('view', 'Abrir')}
           >
             <div className="relative mb-5 aspect-[4/3] overflow-hidden">
               <GeneratedArt seed={exp.seed} accent={exp.accent} variant={(['a', 'b', 'c'] as const)[i % 3]} />
@@ -85,7 +85,7 @@ export function Experiments() {
                   className="font-mono text-xs uppercase tracking-[0.16em] text-dim hover:text-text"
                   {...cursorHover('link')}
                 >
-                  Close ✕
+                  Fechar ✕
                 </button>
               </div>
               {open.clipId ? (

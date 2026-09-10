@@ -15,7 +15,7 @@ export function CaseIntro({ project }: { project: Project }) {
         className="link-underline font-mono text-xs uppercase tracking-[0.16em] text-dim hover:text-text"
         {...cursorHover('link')}
       >
-        ← Selected work
+        ← Trabalhos
       </Link>
 
       <div className="mt-10 flex flex-wrap items-end justify-between gap-6 border-b border-line pb-8">
@@ -29,7 +29,7 @@ export function CaseIntro({ project }: { project: Project }) {
           <span>{project.discipline}</span>
           <span>{project.year}</span>
           {project.status === 'placeholder' && (
-            <span className="rounded-pill border border-line px-2 py-0.5">Case in progress</span>
+            <span className="rounded-pill border border-line px-2 py-0.5">Case em andamento</span>
           )}
         </div>
       </div>

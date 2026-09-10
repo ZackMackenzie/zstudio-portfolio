@@ -94,12 +94,6 @@
     border-radius: 2px;
   }
 
-  /* hide default cursor only when the custom cursor is active */
-  [data-custom-cursor='on'],
-  [data-custom-cursor='on'] * {
-    cursor: none;
-  }
-
   img,
   video {
     display: block;

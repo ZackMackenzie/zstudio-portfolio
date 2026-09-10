@@ -6,7 +6,7 @@ export type SocialCreativeProps = { headline?: string; kicker?: string };
 
 /** Square (1:1) social motion template — data-driven. */
 export function SocialCreative({
-  headline = 'FROM IDEA\nTO INTERFACE',
+  headline = 'DA IDEIA\nÀ INTERFACE',
   kicker = 'ZSTUDIO',
 }: SocialCreativeProps) {
   const { fps, durationInFrames } = useVideoConfig();

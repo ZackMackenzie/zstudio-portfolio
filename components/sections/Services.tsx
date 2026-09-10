@@ -12,7 +12,7 @@ export function Services() {
 
   return (
     <section id="services" className="shell scroll-mt-24 py-section">
-      <SectionHeader index={2} label="Services" title={['What I', 'do']} />
+      <SectionHeader index={2} label="Serviços" title={['O que', 'eu faço']} />
 
       <div className="mt-14 md:mt-20">
         {services.map((service, i) => {

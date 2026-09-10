@@ -29,7 +29,7 @@ export function RemotionRoot() {
         fps={FPS}
         width={1400}
         height={900}
-        defaultProps={{ title: 'BUILT TO BE SEEN' }}
+        defaultProps={{ title: 'FEITO PARA SER VISTO' }}
       />
       <Composition
         id="case-teaser"
@@ -40,8 +40,8 @@ export function RemotionRoot() {
         height={900}
         defaultProps={{
           index: '01',
-          name: 'PRODUCT PLATFORM',
-          tags: 'SAAS / PRODUCT DESIGN / DEVELOPMENT',
+          name: 'PLATAFORMA DE PRODUTO',
+          tags: 'SAAS / DESIGN DE PRODUTO / DESENVOLVIMENTO',
         }}
       />
       <Composition
@@ -51,7 +51,7 @@ export function RemotionRoot() {
         fps={FPS}
         width={1080}
         height={1080}
-        defaultProps={{ headline: 'FROM IDEA\nTO INTERFACE', kicker: 'ZSTUDIO' }}
+        defaultProps={{ headline: 'DA IDEIA\nÀ INTERFACE', kicker: 'ZSTUDIO' }}
       />
     </>
   );

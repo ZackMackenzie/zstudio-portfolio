@@ -3,7 +3,6 @@ import { fontVars } from './fonts';
 import { site } from '@/content/site';
 import { SmoothScroll } from '@/components/layout/SmoothScroll';
 import { Grain } from '@/components/layout/Grain';
-import { CustomCursor } from '@/components/cursor/CustomCursor';
 import { Navigation } from '@/components/layout/Navigation';
 import { Footer } from '@/components/layout/Footer';
 import './globals.css';
@@ -20,15 +19,15 @@ export const metadata: Metadata = {
   creator: site.name,
   keywords: [
     'web design',
-    'web development',
+    'desenvolvimento web',
     'UI/UX',
-    'product design',
-    'brand identity',
-    'landing pages',
+    'design de produto',
+    'identidade visual',
+    'landing page',
     'SaaS',
     'motion design',
-    'creative technology',
-    'digital experiences',
+    'estúdio digital',
+    'experiências digitais',
   ],
   alternates: { canonical: '/' },
   openGraph: {
@@ -37,7 +36,7 @@ export const metadata: Metadata = {
     siteName: site.name,
     title: `${site.name} — ${site.role}`,
     description: site.description,
-    locale: 'en_US',
+    locale: 'pt_BR',
   },
   twitter: {
     card: 'summary_large_image',
@@ -56,7 +55,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: '#0b0b0c',
+  themeColor: '#000000',
   colorScheme: 'dark',
   width: 'device-width',
   initialScale: 1,
@@ -71,11 +70,11 @@ const jsonLd = {
   description: site.description,
   knowsAbout: [
     'Web Design',
-    'Web Development',
+    'Desenvolvimento Web',
     'UI/UX Design',
-    'Brand Identity',
+    'Identidade Visual',
     'Motion Design',
-    'Creative Technology',
+    'Tecnologia Criativa',
   ],
   sameAs: site.socials.filter((s) => !s.href.startsWith('mailto')).map((s) => s.href),
 };
@@ -92,12 +91,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           href="#main"
           className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[200] focus:bg-accent focus:px-4 focus:py-2 focus:font-mono focus:text-xs focus:uppercase focus:tracking-widest focus:text-white"
         >
-          Skip to content
+          Pular para o conteúdo
         </a>
 
         <SmoothScroll />
         <Grain />
-        <CustomCursor />
 
         <Navigation />
         <main id="main">{children}</main>

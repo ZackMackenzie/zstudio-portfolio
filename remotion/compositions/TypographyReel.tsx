@@ -2,7 +2,7 @@ import { AbsoluteFill, interpolate, spring, useCurrentFrame, useVideoConfig, Seq
 import { theme } from '../theme';
 import { Grid } from '../components/Grid';
 
-const WORDS = ['DESIGN', 'MEETS', 'TECHNOLOGY', 'AND', 'AI'];
+const WORDS = ['DESIGN', 'ENCONTRA', 'TECNOLOGIA', 'E', 'IA'];
 const HOLD = 24;
 
 export type TypographyReelProps = { words?: string[] };
@@ -83,7 +83,7 @@ function Progress({ frame, total }: { frame: number; total: number }) {
           marginTop: 16,
         }}
       >
-        ZSTUDIO — TYPOGRAPHY STUDY
+        ZSTUDIO — ESTUDO DE TIPOGRAFIA
       </div>
     </div>
   );

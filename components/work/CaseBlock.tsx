@@ -4,15 +4,15 @@ import { MediaPlayer } from '@/components/ui/MediaPlayer';
 import { Reveal } from '@/components/ui/Reveal';
 
 const HEADINGS: Record<Block['type'], string> = {
-  overview: 'Overview',
-  challenge: 'Challenge',
-  approach: 'Approach',
+  overview: 'Visão geral',
+  challenge: 'Desafio',
+  approach: 'Abordagem',
   design: 'Design',
-  development: 'Development',
+  development: 'Desenvolvimento',
   motion: 'Motion',
-  result: 'Final result',
-  gallery: 'Gallery',
-  technologies: 'Technologies',
+  result: 'Resultado final',
+  gallery: 'Galeria',
+  technologies: 'Tecnologias',
 };
 
 function BlockShell({
@@ -112,9 +112,9 @@ export function CaseBlock({ block }: { block: Block }) {
             <p className="max-w-prose text-lg leading-relaxed md:text-xl">{block.body}</p>
             <div className="mt-8">
               {block.clipId ? (
-                <MediaPlayer id={block.clipId} alt={`${label} — motion study`} seed={block.clipId} />
+                <MediaPlayer id={block.clipId} alt={`${label} — estudo de motion`} seed={block.clipId} />
               ) : (
-                <Media alt="Motion study" width={1600} height={900} seed="motion-fallback" accent />
+                <Media alt="Estudo de motion" width={1600} height={900} seed="motion-fallback" accent />
               )}
             </div>
           </Reveal>

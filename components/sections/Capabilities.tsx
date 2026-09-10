@@ -7,7 +7,7 @@ export function Capabilities() {
   return (
     <section id="capabilities" className="scroll-mt-24 py-section">
       <div className="shell">
-        <SectionHeader index={4} label="Capabilities" title={['Tools &', 'stack']} />
+        <SectionHeader index={4} label="Capacidades" title={['Ferramentas', 'e stack']} />
       </div>
 
       <div className="my-14 border-y border-line py-6 md:my-20">
@@ -40,8 +40,8 @@ export function Capabilities() {
 
         <Reveal className="mt-14">
           <p className="max-w-prose text-sm text-dim">
-            The stack is a means, not the point. It changes when a better tool shows up — the
-            constant is shipping work that holds a studio standard.
+            A stack é um meio, não o ponto. Ela muda quando aparece uma ferramenta melhor — o
+            constante é entregar trabalho com padrão de estúdio.
           </p>
         </Reveal>
       </div>

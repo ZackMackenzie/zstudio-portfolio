@@ -10,49 +10,49 @@ export const services: Service[] = [
   {
     id: 'web-design',
     title: 'Web Design',
-    summary: 'Websites, landing pages and digital experiences.',
+    summary: 'Sites, landing pages e experiências digitais.',
     detail:
-      'Editorial, motion-led websites designed around a single narrative — built to make the right impression in the first few seconds and hold up on every screen after that.',
-    deliverables: ['Marketing sites', 'Landing pages', 'Interactive experiences', 'Design systems'],
+      'Sites editoriais, conduzidos por movimento e construídos em torno de uma única narrativa — feitos para causar a impressão certa nos primeiros segundos e se sustentar em qualquer tela depois disso.',
+    deliverables: ['Sites institucionais', 'Landing pages', 'Experiências interativas', 'Design systems'],
   },
   {
     id: 'development',
-    title: 'Development',
-    summary: 'Modern web applications and SaaS products.',
+    title: 'Desenvolvimento',
+    summary: 'Aplicações web modernas e produtos SaaS.',
     detail:
-      'Production front ends in React and TypeScript. Component libraries, static-fast marketing builds, and product UI wired to real data — engineered, not stitched together.',
-    deliverables: ['React / Next.js builds', 'Component libraries', 'SaaS front ends', 'Performance work'],
+      'Front-ends de produção em React e TypeScript. Bibliotecas de componentes, sites de marketing estáticos e rápidos, e UI de produto ligada a dados reais — engenharia, não gambiarra.',
+    deliverables: ['Builds React / Next.js', 'Bibliotecas de componentes', 'Front-ends de SaaS', 'Trabalho de performance'],
   },
   {
     id: 'ui-ux',
     title: 'UI/UX',
-    summary: 'Interfaces, systems and product experiences.',
+    summary: 'Interfaces, sistemas e experiências de produto.',
     detail:
-      'Information architecture, flows and interface systems. The work starts at the data model and the core jobs, so the screens that follow feel inevitable.',
-    deliverables: ['Product UX', 'Design systems', 'Flows & prototypes', 'Interface audits'],
+      'Arquitetura de informação, fluxos e sistemas de interface. O trabalho começa no modelo de dados e nas tarefas centrais, para que as telas que vêm depois pareçam inevitáveis.',
+    deliverables: ['UX de produto', 'Design systems', 'Fluxos e protótipos', 'Auditorias de interface'],
   },
   {
     id: 'brand-design',
-    title: 'Brand & Design',
-    summary: 'Visual identities, digital design and creative direction.',
+    title: 'Marca & Design',
+    summary: 'Identidades visuais, design digital e direção criativa.',
     detail:
-      'Identity built for screens first — wordmark, type, color and a motion signature — then extracted into guidelines and applications a team can actually use.',
-    deliverables: ['Visual identity', 'Type & color systems', 'Art direction', 'Guidelines'],
+      'Identidade pensada primeiro para telas — wordmark, tipografia, cor e uma assinatura de movimento — depois extraída em guidelines e aplicações que um time consegue de fato usar.',
+    deliverables: ['Identidade visual', 'Sistemas de tipo e cor', 'Direção de arte', 'Guidelines'],
   },
   {
     id: 'social-creative',
-    title: 'Social & Creative',
-    summary: 'Social content, campaigns and digital creatives.',
+    title: 'Social & Criativo',
+    summary: 'Conteúdo social, campanhas e criativos digitais.',
     detail:
-      'Templated content systems and campaign creative that stay on-brand at volume — programmatic layouts plus motion rendered from a repeatable pipeline.',
-    deliverables: ['Content systems', 'Campaign creative', 'Motion templates', 'Ad variants'],
+      'Sistemas de conteúdo templatizados e criativo de campanha que permanecem fiéis à marca em escala — layouts programáticos e motion renderizado a partir de um pipeline repetível.',
+    deliverables: ['Sistemas de conteúdo', 'Criativo de campanha', 'Templates de motion', 'Variações de anúncio'],
   },
   {
     id: 'ai-production',
-    title: 'AI-Powered Production',
-    summary: 'Modern AI workflows across the whole process.',
+    title: 'Produção com IA',
+    summary: 'Workflows modernos de IA em todo o processo.',
     detail:
-      'AI used deliberately to accelerate research, exploration, copy drafting, asset generation and QA — so more of the timeline goes to judgment and craft. The output is held to a studio standard, not an AI one.',
-    deliverables: ['Faster iteration', 'Research & synthesis', 'Asset generation', 'Automated QA'],
+      'IA usada de propósito para acelerar pesquisa, exploração, redação e geração de assets, além de QA — para que mais do cronograma vá para julgamento e ofício. O resultado é medido por padrão de estúdio, não de IA.',
+    deliverables: ['Iteração mais rápida', 'Pesquisa e síntese', 'Geração de assets', 'QA automatizado'],
   },
 ];

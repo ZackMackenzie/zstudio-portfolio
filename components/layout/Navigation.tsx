@@ -81,7 +81,7 @@ export function Navigation() {
             aria-controls="menu-overlay"
             {...cursorHover('link')}
           >
-            <span className="hidden sm:inline">{open ? 'Close' : 'Menu'}</span>
+            <span className="hidden sm:inline">{open ? 'Fechar' : 'Menu'}</span>
             <span className="relative flex h-3 w-5 flex-col justify-between">
               <motion.span
                 animate={{ rotate: open ? 45 : 0, y: open ? 5 : 0 }}

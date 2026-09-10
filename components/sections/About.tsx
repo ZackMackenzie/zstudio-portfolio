@@ -7,13 +7,13 @@ import { formatIndex } from '@/lib/utils';
 import { viewport } from '@/lib/motion';
 
 const pillars = [
-  { label: 'Design', body: 'Composition, type and art direction — the part people feel before they can name it.' },
-  { label: 'Technology', body: 'Production React and TypeScript. I ship the thing, not a handoff.' },
-  { label: 'AI', body: 'Modern AI workflows to move faster through research, exploration and production.' },
-  { label: 'Direction', body: 'One point of view holding strategy, interface, motion and launch together.' },
+  { label: 'Design', body: 'Composição, tipografia e direção de arte — a parte que as pessoas sentem antes de conseguir nomear.' },
+  { label: 'Tecnologia', body: 'React e TypeScript em produção. Eu entrego o produto, não um handoff.' },
+  { label: 'IA', body: 'Workflows modernos de IA para avançar mais rápido em pesquisa, exploração e produção.' },
+  { label: 'Direção', body: 'Um ponto de vista único ligando estratégia, interface, movimento e lançamento.' },
 ];
 
-const pipeline = ['Idea', 'Strategy', 'Design', 'Interface', 'Build', 'Motion', 'Launch'];
+const pipeline = ['Ideia', 'Estratégia', 'Design', 'Interface', 'Build', 'Motion', 'Lançamento'];
 
 export function About() {
   return (
@@ -22,18 +22,18 @@ export function About() {
         <Reveal>
           <span className="label">
             <span className="text-accent">{formatIndex(3)}</span>
-            <span className="mx-2 opacity-40">/</span>About
+            <span className="mx-2 opacity-40">/</span>Sobre
           </span>
         </Reveal>
 
         <div className="mt-10 max-w-4xl">
           <MotionText
             as="p"
-            lines={['I don’t just design', 'interfaces. I build', 'the thing.']}
+            lines={['Não desenho só', 'interfaces —', 'eu construo tudo.']}
             className="font-display text-2xl font-medium leading-[1.05] tracking-tighter md:text-3xl"
           />
           <p className="mt-8 font-serif text-xl italic text-dim md:text-2xl">
-            Strategy, design, interface, development and motion — held by one point of view.
+            Estratégia, design, interface, desenvolvimento e movimento — sob um único ponto de vista.
           </p>
         </div>
 
@@ -49,14 +49,14 @@ export function About() {
         <div className="mt-16 grid gap-10 border-t border-line pt-10 md:grid-cols-[1fr_1fr]">
           <Reveal>
             <p className="max-w-prose text-base leading-relaxed">
-              Self-taught, and relentless about it. I learn by building — taking a project end to
-              end until it works, then doing it again with a higher bar. The result is autonomy:
-              hand me an idea and I can carry it from a sentence to a shipped experience.
+              Autodidata, e obcecado por isso. Aprendo construindo — levando um projeto do começo
+              ao fim até funcionar, e então repetindo com um padrão mais alto. O resultado é
+              autonomia: me dá uma ideia e eu levo de uma frase até uma experiência no ar.
             </p>
           </Reveal>
 
           <Reveal delay={0.1}>
-            <p className="label mb-5">How the work moves</p>
+            <p className="label mb-5">Como o trabalho flui</p>
             <ol className="flex flex-col">
               {pipeline.map((step, i) => (
                 <motion.li

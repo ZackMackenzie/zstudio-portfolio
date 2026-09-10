@@ -6,8 +6,8 @@ export type CaseTeaserProps = { index?: string; name?: string; tags?: string };
 
 export function CaseTeaser({
   index = '01',
-  name = 'PRODUCT PLATFORM',
-  tags = 'SAAS / PRODUCT DESIGN / DEVELOPMENT',
+  name = 'PLATAFORMA DE PRODUTO',
+  tags = 'SAAS / DESIGN DE PRODUTO / DESENVOLVIMENTO',
 }: CaseTeaserProps) {
   const { fps } = useVideoConfig();
   const frame = useCurrentFrame();
@@ -36,7 +36,7 @@ export function CaseTeaser({
                 color: theme.dim,
               }}
             >
-              <span style={{ color: theme.accent }}>{index}</span> &nbsp;/&nbsp; SELECTED WORK
+              <span style={{ color: theme.accent }}>{index}</span> &nbsp;/&nbsp; TRABALHOS
             </div>
           </FadeUp>
         </Sequence>

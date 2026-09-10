@@ -4,7 +4,7 @@ import { Grid } from '../components/Grid';
 
 export type MotionPosterProps = { title?: string };
 
-export function MotionPoster({ title = 'BUILT TO BE SEEN' }: MotionPosterProps) {
+export function MotionPoster({ title = 'FEITO PARA SER VISTO' }: MotionPosterProps) {
   const frame = useCurrentFrame();
   const { durationInFrames } = useVideoConfig();
   const loop = frame / durationInFrames; // 0..1

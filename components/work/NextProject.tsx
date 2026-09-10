@@ -17,13 +17,13 @@ export function NextProject({ project }: { project: Project }) {
       ref={ref}
       href={`/work/${project.slug}`}
       className="group relative block overflow-hidden border-t border-line"
-      {...cursorHover('view', 'Next')}
+      {...cursorHover('view', 'Próximo')}
     >
       <motion.div style={{ scale }} className="absolute inset-0 opacity-30">
         <GeneratedArt seed={project.slug} accent />
       </motion.div>
       <div className="shell relative flex flex-col items-center py-24 text-center md:py-40">
-        <span className="label">Next project</span>
+        <span className="label">Próximo projeto</span>
         <h2 className="mt-5 font-display text-3xl font-medium tracking-tightest transition-transform duration-500 ease-expo group-hover:-translate-y-1 md:text-4xl">
           {project.title}
         </h2>

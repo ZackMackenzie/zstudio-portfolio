@@ -20,7 +20,7 @@ export function ProjectListItem({ project, index }: { project: Project; index: n
       className="group block border-t border-line py-6 md:py-10"
       onMouseEnter={() => {
         setHover(true);
-        cursorHover('view', 'View').onMouseEnter();
+        cursorHover('view', 'Ver').onMouseEnter();
       }}
       onMouseLeave={() => {
         setHover(false);
@@ -44,7 +44,7 @@ export function ProjectListItem({ project, index }: { project: Project; index: n
         <div className="flex items-center gap-4">
           {project.status === 'placeholder' && (
             <span className="hidden rounded-pill border border-line px-3 py-1 font-mono text-2xs uppercase tracking-[0.14em] text-dim sm:inline">
-              In progress
+              Em andamento
             </span>
           )}
           <span className="font-mono text-2xs text-dim">{project.year}</span>

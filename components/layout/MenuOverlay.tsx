@@ -31,7 +31,7 @@ export function MenuOverlay({
       ref={ref}
       role="dialog"
       aria-modal="true"
-      aria-label="Menu"
+      aria-label="Menu de navegação"
       initial={{ clipPath: 'inset(0 0 100% 0)' }}
       animate={{ clipPath: 'inset(0 0 0% 0)' }}
       exit={{ clipPath: 'inset(0 0 100% 0)' }}

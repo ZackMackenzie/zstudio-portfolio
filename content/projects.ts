@@ -1,19 +1,19 @@
 /**
  * ============================================================================
- * PROJECTS — single source of truth
+ * PROJETOS — fonte única de verdade
  * ============================================================================
- * The homepage "Selected Work" list and every /work/[slug] case study are
- * generated from this array. To add a project:
+ * A lista "Trabalhos" da home e cada case em /work/[slug] são gerados a partir
+ * deste array. Para adicionar um projeto:
  *
- *   1. Copy one object below and give it a unique `slug`.
- *   2. Set `status: 'live'` once it has real visuals + copy (placeholders show
- *      an "In progress" tag and a holding state on the case page).
- *   3. Drop real assets in /public/media and reference them via `cover` /
- *      block `media` (base filename, no extension — see components/ui/Media.tsx).
- *   4. Order in this array = order on the site. `next` links auto-wrap around.
+ *   1. Copie um objeto abaixo e dê a ele um `slug` único.
+ *   2. Marque `status: 'live'` quando ele tiver visuais e texto reais
+ *      (placeholders mostram a tag "Em andamento" e um estado de espera no case).
+ *   3. Coloque assets reais em /public/media e referencie via `cover` / `media`
+ *      do bloco (nome-base do arquivo, sem extensão — ver components/ui/Media.tsx).
+ *   4. A ordem neste array = a ordem no site. `next` volta ao início em loop.
  *
- * Do not invent client names, metrics, or testimonials. Placeholder entries
- * describe the *kind* of work and the approach — all true, all generic.
+ * Não invente nomes de clientes, métricas ou depoimentos. Entradas placeholder
+ * descrevem o *tipo* de trabalho e a abordagem — tudo verdadeiro, tudo genérico.
  * ============================================================================
  */
 
@@ -29,19 +29,19 @@ export type CaseBlock =
   | { type: 'technologies'; groups: { label: string; items: string[] }[] };
 
 export type MediaRef = {
-  src?: string; // base filename under /public/media, no extension
+  src?: string; // nome-base do arquivo em /public/media, sem extensão
   alt: string;
   width: number;
   height: number;
-  seed?: string; // generated-art fallback seed
+  seed?: string; // seed do fallback de arte gerada
   accent?: boolean;
 };
 
 export type Project = {
   slug: string;
   title: string;
-  discipline: string; // short line under the title
-  disciplines: string[]; // tag list
+  discipline: string; // linha curta abaixo do título
+  disciplines: string[]; // lista de tags
   year: string;
   status: 'live' | 'placeholder';
   summary: string;
@@ -52,144 +52,144 @@ export type Project = {
 export const projects: Project[] = [
   {
     slug: 'saas-product-platform',
-    title: 'Product Platform',
-    discipline: 'SaaS / Product Design / Development',
-    disciplines: ['Product Design', 'UI/UX', 'Frontend', 'Design System'],
+    title: 'Plataforma de Produto',
+    discipline: 'SaaS / Design de Produto / Desenvolvimento',
+    disciplines: ['Design de Produto', 'UI/UX', 'Frontend', 'Design System'],
     year: '2026',
     status: 'placeholder',
     summary:
-      'End-to-end design and build of a SaaS platform — from information architecture and design system to a production React front end.',
-    cover: { alt: 'Product Platform — abstract cover', width: 1600, height: 1100, seed: 'saas-product-platform', accent: true },
+      'Design e desenvolvimento ponta a ponta de uma plataforma SaaS — da arquitetura de informação e do design system até um front-end React em produção.',
+    cover: { alt: 'Plataforma de Produto — capa abstrata', width: 1600, height: 1100, seed: 'saas-product-platform', accent: true },
     blocks: [
       {
         type: 'overview',
-        body: 'A full product surface designed and built as one system: a component library, a documented design language, and a front end wired to real data. The goal was a platform that could grow without the UI drifting.',
+        body: 'Uma superfície de produto inteira desenhada e construída como um sistema: uma biblioteca de componentes, uma linguagem de design documentada e um front-end ligado a dados reais. O objetivo era uma plataforma capaz de crescer sem a UI se perder.',
         meta: [
-          { label: 'Scope', value: 'Design system, product UI, frontend build' },
-          { label: 'Role', value: 'Design + Development' },
-          { label: 'Timeline', value: 'Ongoing' },
-          { label: 'Year', value: '2026' },
+          { label: 'Escopo', value: 'Design system, UI de produto, build de frontend' },
+          { label: 'Papel', value: 'Design + Desenvolvimento' },
+          { label: 'Prazo', value: 'Em andamento' },
+          { label: 'Ano', value: '2026' },
         ],
       },
       {
         type: 'challenge',
-        body: 'Most early-stage products accumulate screens faster than they accumulate structure. The brief was to define the structure first — tokens, primitives, patterns — so every new feature slots into a system instead of expanding the surface area of decisions.',
+        body: 'A maioria dos produtos em estágio inicial acumula telas mais rápido do que acumula estrutura. O briefing era definir a estrutura primeiro — tokens, primitivas, padrões — para que cada nova feature encaixe num sistema em vez de expandir a área de decisões.',
       },
       {
         type: 'approach',
-        body: 'Start from the data model and the primary jobs, not the screens. Design the system in the open, in code, so design and implementation never diverge.',
+        body: 'Começar pelo modelo de dados e pelas tarefas principais, não pelas telas. Desenhar o sistema à vista, em código, para que design e implementação nunca divirjam.',
         steps: [
-          'Map the core objects and the three or four jobs that matter most',
-          'Define tokens: color, type, spacing, motion',
-          'Build primitives and patterns as a documented library',
-          'Assemble screens from the library — never bespoke',
+          'Mapear os objetos centrais e as três ou quatro tarefas que mais importam',
+          'Definir tokens: cor, tipografia, espaçamento, movimento',
+          'Construir primitivas e padrões como uma biblioteca documentada',
+          'Montar telas a partir da biblioteca — nunca sob medida',
         ],
       },
       {
         type: 'design',
-        body: 'A restrained interface language: one accent, generous density controls, and a type scale that holds from dense tables to marketing surfaces.',
+        body: 'Uma linguagem de interface contida: um acento, controles de densidade generosos e uma escala tipográfica que se segura de tabelas densas a superfícies de marketing.',
         media: [
-          { alt: 'Interface system — overview', width: 1600, height: 1000, seed: 'saas-design-1' },
-          { alt: 'Component states', width: 1600, height: 1000, seed: 'saas-design-2', accent: true },
+          { alt: 'Sistema de interface — visão geral', width: 1600, height: 1000, seed: 'saas-design-1' },
+          { alt: 'Estados de componente', width: 1600, height: 1000, seed: 'saas-design-2', accent: true },
         ],
       },
       {
         type: 'development',
-        body: 'React and TypeScript, styled with a token layer that maps 1:1 to the design files. The component API is small on purpose — most screens are composition, not configuration.',
-        media: [{ alt: 'Front end architecture', width: 1600, height: 1000, seed: 'saas-dev-1' }],
+        body: 'React e TypeScript, estilizados com uma camada de tokens que mapeia 1:1 com os arquivos de design. A API de componentes é pequena de propósito — a maioria das telas é composição, não configuração.',
+        media: [{ alt: 'Arquitetura de front-end', width: 1600, height: 1000, seed: 'saas-dev-1' }],
       },
       {
         type: 'motion',
-        body: 'Motion is functional here: state transitions, optimistic updates, and focus movement. Nothing loops, nothing decorates.',
+        body: 'Aqui o movimento é funcional: transições de estado, updates otimistas e movimentação de foco. Nada fica em loop, nada decora.',
         clipId: 'typography-reel',
       },
       {
         type: 'result',
-        body: 'Selected screens, metrics and the live product will be added here as this case is published.',
+        body: 'Telas selecionadas, métricas e o produto no ar serão adicionados aqui quando este case for publicado.',
       },
       {
         type: 'technologies',
         groups: [
-          { label: 'Design', items: ['Figma', 'Design tokens', 'Variable type scale'] },
+          { label: 'Design', items: ['Figma', 'Design tokens', 'Escala tipográfica variável'] },
           { label: 'Frontend', items: ['React', 'TypeScript', 'Tailwind', 'Framer Motion'] },
-          { label: 'Tooling', items: ['Storybook', 'Vercel', 'AI-assisted QA'] },
+          { label: 'Ferramentas', items: ['Storybook', 'Vercel', 'QA assistido por IA'] },
         ],
       },
     ],
   },
   {
     slug: 'brand-identity-system',
-    title: 'Identity System',
-    discipline: 'Brand / Art Direction / Web',
-    disciplines: ['Brand Identity', 'Art Direction', 'Web Design', 'Motion'],
+    title: 'Sistema de Identidade',
+    discipline: 'Marca / Direção de Arte / Web',
+    disciplines: ['Identidade Visual', 'Direção de Arte', 'Web Design', 'Motion'],
     year: '2026',
     status: 'placeholder',
     summary:
-      'A visual identity built to live everywhere — wordmark, type system, motion language and a site that ships the brand rather than describing it.',
-    cover: { alt: 'Identity System — abstract cover', width: 1600, height: 1100, seed: 'brand-identity-system' },
+      'Uma identidade visual feita para viver em todo lugar — wordmark, sistema tipográfico, linguagem de movimento e um site que entrega a marca em vez de descrevê-la.',
+    cover: { alt: 'Sistema de Identidade — capa abstrata', width: 1600, height: 1100, seed: 'brand-identity-system' },
     blocks: [
       {
         type: 'overview',
-        body: 'Identity work that treats the website as the primary artifact. The brand is defined by how it moves and composes on screen, then extracted back out into static applications.',
+        body: 'Trabalho de identidade que trata o site como o artefato principal. A marca é definida por como se move e compõe na tela, e depois é extraída de volta em aplicações estáticas.',
         meta: [
-          { label: 'Scope', value: 'Wordmark, type, color, motion, website' },
-          { label: 'Role', value: 'Art Direction + Design + Build' },
-          { label: 'Deliverables', value: 'Guidelines, web build, social kit' },
-          { label: 'Year', value: '2026' },
+          { label: 'Escopo', value: 'Wordmark, tipografia, cor, motion, site' },
+          { label: 'Papel', value: 'Direção de Arte + Design + Build' },
+          { label: 'Entregáveis', value: 'Guidelines, build web, kit de social' },
+          { label: 'Ano', value: '2026' },
         ],
       },
-      { type: 'challenge', body: 'A logo is easy to make and easy to ignore. The harder problem is a system with enough rules to be recognizable and enough room to be used by other people without falling apart.' },
+      { type: 'challenge', body: 'Um logo é fácil de fazer e fácil de ignorar. O problema mais difícil é um sistema com regras suficientes para ser reconhecível e espaço suficiente para ser usado por outras pessoas sem desmontar.' },
       {
         type: 'approach',
-        body: 'Design the smallest set of decisions that make everything downstream feel inevitable.',
-        steps: ['Set the typographic voice', 'Fix the grid and spacing logic', 'Define one motion signature', 'Document with real examples, not swatches'],
+        body: 'Desenhar o menor conjunto de decisões que faz tudo que vem depois parecer inevitável.',
+        steps: ['Definir a voz tipográfica', 'Fixar a lógica de grid e espaçamento', 'Definir uma assinatura de movimento', 'Documentar com exemplos reais, não amostras'],
       },
-      { type: 'design', body: 'A confident grotesque wordmark, a strict editorial grid, and a single motion signature that repeats across every touchpoint.', media: [{ alt: 'Wordmark studies', width: 1600, height: 1000, seed: 'brand-design-1' }, { alt: 'Editorial layouts', width: 1600, height: 1000, seed: 'brand-design-2', accent: true }] },
-      { type: 'motion', body: 'One reveal, one transition, one loop — applied consistently so motion becomes part of the identity rather than an effect.', clipId: 'motion-poster' },
-      { type: 'gallery', media: [{ alt: 'Application — poster', width: 1200, height: 1500, seed: 'brand-gallery-1' }, { alt: 'Application — social', width: 1200, height: 1200, seed: 'brand-gallery-2', accent: true }, { alt: 'Application — web', width: 1600, height: 1000, seed: 'brand-gallery-3' }] },
-      { type: 'result', body: 'Final guidelines, applications and the live site will be added here as this case is published.' },
-      { type: 'technologies', groups: [{ label: 'Design', items: ['Figma', 'Type design tools'] }, { label: 'Motion', items: ['Remotion', 'After Effects'] }, { label: 'Web', items: ['Next.js', 'Framer Motion'] }] },
+      { type: 'design', body: 'Um wordmark grotesco confiante, um grid editorial rígido e uma única assinatura de movimento que se repete em cada ponto de contato.', media: [{ alt: 'Estudos de wordmark', width: 1600, height: 1000, seed: 'brand-design-1' }, { alt: 'Layouts editoriais', width: 1600, height: 1000, seed: 'brand-design-2', accent: true }] },
+      { type: 'motion', body: 'Uma revelação, uma transição, um loop — aplicados de forma consistente para que o movimento vire parte da identidade, não um efeito.', clipId: 'motion-poster' },
+      { type: 'gallery', media: [{ alt: 'Aplicação — pôster', width: 1200, height: 1500, seed: 'brand-gallery-1' }, { alt: 'Aplicação — social', width: 1200, height: 1200, seed: 'brand-gallery-2', accent: true }, { alt: 'Aplicação — web', width: 1600, height: 1000, seed: 'brand-gallery-3' }] },
+      { type: 'result', body: 'Guidelines finais, aplicações e o site no ar serão adicionados aqui quando este case for publicado.' },
+      { type: 'technologies', groups: [{ label: 'Design', items: ['Figma', 'Ferramentas de type design'] }, { label: 'Motion', items: ['Remotion', 'After Effects'] }, { label: 'Web', items: ['Next.js', 'Framer Motion'] }] },
     ],
   },
   {
     slug: 'landing-page-conversion',
-    title: 'Launch Page',
+    title: 'Página de Lançamento',
     discipline: 'Landing Page / Copy / Build',
-    disciplines: ['Landing Page', 'Narrative', 'Frontend', 'Motion'],
+    disciplines: ['Landing Page', 'Narrativa', 'Frontend', 'Motion'],
     year: '2026',
     status: 'placeholder',
     summary:
-      'A single-page launch experience — narrative structure, custom motion and a fast static build engineered for the first ten seconds.',
-    cover: { alt: 'Launch Page — abstract cover', width: 1600, height: 1100, seed: 'landing-page-conversion', accent: true },
+      'Uma experiência de lançamento de página única — estrutura narrativa, motion sob medida e um build estático rápido, projetado para os primeiros dez segundos.',
+    cover: { alt: 'Página de Lançamento — capa abstrata', width: 1600, height: 1100, seed: 'landing-page-conversion', accent: true },
     blocks: [
-      { type: 'overview', body: 'A launch page is a short film with a call to action. This one is built around a single narrative spine, with motion used to control pace rather than decorate sections.', meta: [{ label: 'Scope', value: 'Narrative, design, copy, build' }, { label: 'Role', value: 'Design + Development' }, { label: 'Focus', value: 'First impression, performance, clarity' }, { label: 'Year', value: '2026' }] },
-      { type: 'challenge', body: 'The page has to do three jobs at once in a few seconds: establish quality, explain the offer, and make the next step obvious — on a slow connection, on a phone.' },
-      { type: 'approach', body: 'Write the argument first. Design to the argument. Build it as static HTML that paints instantly.', steps: ['Draft the narrative as plain sentences', 'Storyboard the scroll', 'Design each beat', 'Ship static, measure Core Web Vitals'] },
-      { type: 'design', body: 'Big type, deliberate whitespace, one idea per viewport. The design never competes with the message.', media: [{ alt: 'Scroll storyboard', width: 1600, height: 1000, seed: 'landing-design-1' }] },
-      { type: 'development', body: 'Statically exported, images pre-optimized, motion gated behind reduced-motion. The target is a sub-second first paint and near-zero layout shift.', media: [{ alt: 'Performance profile', width: 1600, height: 1000, seed: 'landing-dev-1', accent: true }] },
-      { type: 'motion', body: 'Scroll-linked reveals that pace the reader through the argument, plus one signature moment at the offer.', clipId: 'case-teaser' },
-      { type: 'result', body: 'Final page, copy and performance numbers will be added here as this case is published.' },
-      { type: 'technologies', groups: [{ label: 'Frontend', items: ['Next.js static export', 'Tailwind', 'Framer Motion'] }, { label: 'Performance', items: ['AVIF/WebP', 'Lazy media', 'Lighthouse budget'] }] },
+      { type: 'overview', body: 'Uma página de lançamento é um curta com uma chamada para ação. Esta foi construída em torno de uma única espinha narrativa, com o movimento usado para controlar o ritmo em vez de decorar seções.', meta: [{ label: 'Escopo', value: 'Narrativa, design, copy, build' }, { label: 'Papel', value: 'Design + Desenvolvimento' }, { label: 'Foco', value: 'Primeira impressão, performance, clareza' }, { label: 'Ano', value: '2026' }] },
+      { type: 'challenge', body: 'A página precisa fazer três coisas ao mesmo tempo em poucos segundos: estabelecer qualidade, explicar a oferta e deixar o próximo passo óbvio — numa conexão lenta, num celular.' },
+      { type: 'approach', body: 'Escrever o argumento primeiro. Desenhar para o argumento. Construir como HTML estático que pinta instantaneamente.', steps: ['Rascunhar a narrativa em frases simples', 'Fazer o storyboard do scroll', 'Desenhar cada momento', 'Publicar estático, medir Core Web Vitals'] },
+      { type: 'design', body: 'Tipografia grande, espaço em branco deliberado, uma ideia por viewport. O design nunca compete com a mensagem.', media: [{ alt: 'Storyboard de scroll', width: 1600, height: 1000, seed: 'landing-design-1' }] },
+      { type: 'development', body: 'Exportado estaticamente, imagens pré-otimizadas, motion atrás de reduced-motion. A meta é um first paint abaixo de um segundo e layout shift próximo de zero.', media: [{ alt: 'Perfil de performance', width: 1600, height: 1000, seed: 'landing-dev-1', accent: true }] },
+      { type: 'motion', body: 'Revelações ligadas ao scroll que dão ritmo à leitura do argumento, mais um momento de assinatura na oferta.', clipId: 'case-teaser' },
+      { type: 'result', body: 'Página final, copy e números de performance serão adicionados aqui quando este case for publicado.' },
+      { type: 'technologies', groups: [{ label: 'Frontend', items: ['Next.js export estático', 'Tailwind', 'Framer Motion'] }, { label: 'Performance', items: ['AVIF/WebP', 'Mídia lazy', 'Budget de Lighthouse'] }] },
     ],
   },
   {
     slug: 'social-creative-system',
-    title: 'Creative System',
+    title: 'Sistema Criativo',
     discipline: 'Social / Motion / Templates',
-    disciplines: ['Social', 'Motion Design', 'Templates', 'Art Direction'],
+    disciplines: ['Social', 'Motion Design', 'Templates', 'Direção de Arte'],
     year: '2026',
     status: 'placeholder',
     summary:
-      'A templated system for social content — programmatic layouts and Remotion-rendered motion that keeps a feed consistent at volume.',
-    cover: { alt: 'Creative System — abstract cover', width: 1600, height: 1100, seed: 'social-creative-system' },
+      'Um sistema templatizado para conteúdo de social — layouts programáticos e motion renderizado com Remotion que mantém o feed consistente em volume.',
+    cover: { alt: 'Sistema Criativo — capa abstrata', width: 1600, height: 1100, seed: 'social-creative-system' },
     blocks: [
-      { type: 'overview', body: 'Producing social content by hand does not scale and drifts off-brand fast. This system turns brand rules into templates and renders motion programmatically.', meta: [{ label: 'Scope', value: 'Template system, motion, render pipeline' }, { label: 'Role', value: 'Design + Motion + Tooling' }, { label: 'Output', value: 'Static posts + rendered video' }, { label: 'Year', value: '2026' }] },
-      { type: 'challenge', body: 'Keep a feed looking like one hand made it while producing enough volume to matter — across formats, in a fraction of the time.' },
-      { type: 'approach', body: 'Codify the layout logic. Feed it content. Render.', steps: ['Define a grid that works at 1:1, 4:5 and 9:16', 'Build layout templates as components', 'Compose motion in Remotion', 'Batch-render from a manifest'] },
-      { type: 'motion', body: 'Every clip is a Remotion composition driven by data — change the copy and the props, re-render the set.', clipId: 'social-creative' },
-      { type: 'gallery', media: [{ alt: 'Template — square', width: 1200, height: 1200, seed: 'social-gallery-1' }, { alt: 'Template — portrait', width: 1200, height: 1500, seed: 'social-gallery-2', accent: true }, { alt: 'Template — story', width: 1080, height: 1920, seed: 'social-gallery-3' }] },
-      { type: 'result', body: 'Rendered sets and the production workflow will be added here as this case is published.' },
-      { type: 'technologies', groups: [{ label: 'Motion', items: ['Remotion', 'React'] }, { label: 'Design', items: ['Figma', 'Programmatic layout'] }, { label: 'Pipeline', items: ['Node render script', 'AI copy drafts'] }] },
+      { type: 'overview', body: 'Produzir conteúdo de social na mão não escala e sai da marca rápido. Este sistema transforma regras de marca em templates e renderiza motion de forma programática.', meta: [{ label: 'Escopo', value: 'Sistema de templates, motion, pipeline de render' }, { label: 'Papel', value: 'Design + Motion + Ferramentas' }, { label: 'Saída', value: 'Posts estáticos + vídeo renderizado' }, { label: 'Ano', value: '2026' }] },
+      { type: 'challenge', body: 'Manter um feed com cara de que uma só mão fez, enquanto produz volume suficiente para importar — entre formatos, numa fração do tempo.' },
+      { type: 'approach', body: 'Codificar a lógica de layout. Alimentar com conteúdo. Renderizar.', steps: ['Definir um grid que funciona em 1:1, 4:5 e 9:16', 'Construir templates de layout como componentes', 'Compor o motion no Remotion', 'Renderizar em lote a partir de um manifesto'] },
+      { type: 'motion', body: 'Cada clipe é uma composição Remotion guiada por dados — muda a copy e as props, re-renderiza o conjunto.', clipId: 'social-creative' },
+      { type: 'gallery', media: [{ alt: 'Template — quadrado', width: 1200, height: 1200, seed: 'social-gallery-1' }, { alt: 'Template — retrato', width: 1200, height: 1500, seed: 'social-gallery-2', accent: true }, { alt: 'Template — story', width: 1080, height: 1920, seed: 'social-gallery-3' }] },
+      { type: 'result', body: 'Conjuntos renderizados e o fluxo de produção serão adicionados aqui quando este case for publicado.' },
+      { type: 'technologies', groups: [{ label: 'Motion', items: ['Remotion', 'React'] }, { label: 'Design', items: ['Figma', 'Layout programático'] }, { label: 'Pipeline', items: ['Script de render em Node', 'Rascunhos de copy com IA'] }] },
     ],
   },
 ];
