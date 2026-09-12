@@ -23,8 +23,6 @@ export function MenuOverlay({
     work: dict.nav.work,
     services: dict.nav.services,
     about: dict.nav.about,
-    capabilities: dict.nav.capabilities,
-    lab: dict.nav.lab,
     contact: dict.nav.contact,
   };
 

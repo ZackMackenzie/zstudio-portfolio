@@ -14,7 +14,7 @@
   --paper: #f3f4f6;
   --ink: #0a0a0b;
   --text: #f5f6f7;
-  --text-dim: #7a7e85;
+  --text-dim: #9aa0a8;
   --accent: #2f6bff;
   --accent-2: #34e1ff;
   /* signature aura — blue -> cyan, anchored bottom-left */
@@ -114,8 +114,9 @@
 
   .label {
     font-family: var(--font-mono), 'IBM Plex Mono', monospace;
-    font-size: 0.6875rem;
-    letter-spacing: 0.14em;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--text-dim);
   }
@@ -140,7 +141,7 @@
   /* inverted editorial section — flips the token roles locally */
   .paper {
     --text: var(--ink);
-    --text-dim: #6b7078;
+    --text-dim: #585d64;
     --line: rgba(10, 10, 11, 0.14);
     background: var(--paper);
     color: var(--ink);

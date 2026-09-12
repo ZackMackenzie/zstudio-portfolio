@@ -44,7 +44,7 @@ const config: Config = {
     },
     fontSize: {
       // fluid scale — min / preferred (vw) / max baked into clamp()
-      '2xs': ['0.6875rem', { lineHeight: '1.4', letterSpacing: '0.08em' }],
+      '2xs': ['0.75rem', { lineHeight: '1.5', letterSpacing: '0.06em' }],
       xs: ['0.75rem', { lineHeight: '1.5', letterSpacing: '0.04em' }],
       sm: ['0.875rem', { lineHeight: '1.6' }],
       base: ['1rem', { lineHeight: '1.65' }],

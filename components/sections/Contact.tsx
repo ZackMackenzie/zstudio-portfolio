@@ -73,19 +73,19 @@ export function Contact() {
     <section id="contact" className="shell scroll-mt-24 py-section">
       <Reveal>
         <span className="label">
-          <span className="text-accent">{formatIndex(6)}</span>
+          <span className="text-accent">{formatIndex(4)}</span>
           <span className="mx-2 opacity-40">/</span>
           {dict.contact.label}
         </span>
       </Reveal>
 
       <div className="mt-10">
+        <p className="font-serif text-xl italic text-dim md:text-2xl">{dict.contact.kicker}</p>
         <MotionText
           as="h2"
           lines={dict.contact.titleLines}
-          className="font-display text-3xl font-medium leading-[0.95] tracking-tightest md:text-4xl"
+          className="mt-3 font-display text-3xl font-medium leading-[0.95] tracking-tightest md:text-4xl"
         />
-        <p className="mt-8 max-w-xl text-lg text-dim">{dict.contact.subcopy}</p>
       </div>
 
       <div className="mt-12 flex flex-wrap items-center gap-4">
@@ -165,19 +165,19 @@ export function Contact() {
 
       <div className="mt-16 grid gap-6 border-t border-line pt-8 font-mono text-2xs uppercase tracking-[0.14em] text-dim sm:grid-cols-2 md:grid-cols-4">
         <div>
-          <p className="text-text/60">{dict.contact.statusLabel}</p>
+          <p className="text-text/75">{dict.contact.statusLabel}</p>
           <p className="mt-1">{dict.contact.availability}</p>
         </div>
         <div>
-          <p className="text-text/60">{dict.contact.baseLabel}</p>
+          <p className="text-text/75">{dict.contact.baseLabel}</p>
           <p className="mt-1">{dict.contact.baseLocation}</p>
         </div>
         <div>
-          <p className="text-text/60">{dict.contact.localTimeLabel}</p>
+          <p className="text-text/75">{dict.contact.localTimeLabel}</p>
           <p className="mt-1">{time || '—'}</p>
         </div>
         <div>
-          <p className="text-text/60">{dict.contact.socialLabel}</p>
+          <p className="text-text/75">{dict.contact.socialLabel}</p>
           <div className="mt-1 flex flex-wrap gap-x-3 gap-y-1">
             {site.socials.slice(2).map((s) => (
               <a

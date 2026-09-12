@@ -7,7 +7,6 @@ import { site } from '@/content/site';
 import { useI18n } from '@/lib/i18n/LanguageProvider';
 import { scrollToId } from './SmoothScroll';
 import { MenuOverlay } from './MenuOverlay';
-import { LanguageSwitcher } from '@/components/ui/LanguageSwitcher';
 import { StartProjectButton } from '@/components/ui/StartProjectButton';
 import { cursorHover } from '@/components/cursor/cursor-store';
 import { cn } from '@/lib/utils';
@@ -23,8 +22,6 @@ export function Navigation() {
     work: dict.nav.work,
     services: dict.nav.services,
     about: dict.nav.about,
-    capabilities: dict.nav.capabilities,
-    lab: dict.nav.lab,
     contact: dict.nav.contact,
   };
 
@@ -75,7 +72,7 @@ export function Navigation() {
           </Link>
 
           <nav className="hidden items-center gap-8 md:flex">
-            {site.nav.slice(0, 4).map((item) => (
+            {site.nav.map((item) => (
               <button
                 key={item.id}
                 onClick={() => goTo(item.id)}
@@ -87,9 +84,9 @@ export function Navigation() {
             ))}
           </nav>
 
-          <div className="flex items-center gap-4 md:gap-6">
-            <StartProjectButton compact className="hidden lg:inline-flex" />
-            <LanguageSwitcher className="hidden sm:flex" />
+          <div className="flex items-center gap-3 md:gap-5">
+            <StartProjectButton iconOnly className="sm:hidden" />
+            <StartProjectButton compact className="hidden sm:inline-flex" />
             <button
               onClick={() => setOpen((v) => !v)}
               className="flex items-center gap-3 font-mono text-xs uppercase tracking-[0.16em]"

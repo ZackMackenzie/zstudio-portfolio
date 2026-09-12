@@ -4,7 +4,6 @@ import Link from 'next/link';
 import { site } from '@/content/site';
 import { useI18n } from '@/lib/i18n/LanguageProvider';
 import { scrollToId } from './SmoothScroll';
-import { StartProjectButton } from '@/components/ui/StartProjectButton';
 import { cursorHover } from '@/components/cursor/cursor-store';
 
 export function Footer() {
@@ -15,8 +14,6 @@ export function Footer() {
     work: dict.nav.work,
     services: dict.nav.services,
     about: dict.nav.about,
-    capabilities: dict.nav.capabilities,
-    lab: dict.nav.lab,
     contact: dict.nav.contact,
   };
 
@@ -27,7 +24,6 @@ export function Footer() {
           <div>
             <p className="font-display text-3xl font-medium tracking-tight">{site.wordmarkFull}</p>
             <p className="mt-4 max-w-xs text-sm text-dim">{dict.meta.description}</p>
-            <StartProjectButton className="mt-6" />
           </div>
 
           <nav className="flex flex-col gap-2">

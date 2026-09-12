@@ -24,8 +24,8 @@ public/media/<id>-poster.jpg   still frame used as the <video> poster
 
 1. Create `remotion/compositions/MyClip.tsx` (see the existing ones — they share
    tokens from `remotion/theme.ts` so motion matches the site).
-2. Register it in `remotion/Root.tsx` with an `id`. That `id` is the `clipId` you
-   reference from `content/projects.ts` or `content/experiments.ts`.
+2. Register it in `remotion/Root.tsx` with an `id`. That `id` is the `clipId` a
+   project block in `content/projects.ts` can reference (see a `motion` block).
 3. `npm run motion:render my-clip`.
 
 Compositions take `defaultProps`, so the same template can render many variants

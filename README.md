@@ -7,6 +7,13 @@ Single-page experience with dedicated `/work/[slug]` case studies, smooth scroll
 motion, real motion assets produced with Remotion, and full **pt-BR / en / es** support with
 automatic browser-language detection.
 
+Page hierarchy is deliberately short (a 2026-09 simplification pass cut a standalone Capabilities
+section and a Lab/experiments section that used to sit between About and Contact): **Hero →
+Selected Work → Services (Applications folded in) → About (the tools/stack strip folded in) →
+Contact.** Nav mirrors that: Work / Services / About / Contact. Every section is only there to
+help a visitor understand the studio, judge the work, or get in touch — see the "Show less" note
+at the bottom of this file before adding a new one.
+
 ## Stack
 
 | | |
@@ -100,21 +107,23 @@ skipped to keep the architecture simple and stable.
 ## Services, Applications, capabilities
 
 - **Services** (`content/services.ts` ids + `dict.services.items`) — 6 services, each with a
-  title, summary, one-paragraph detail and a curated capability list, shown as an accordion.
+  title, one-line summary (always visible) and a small curated capability-chip list behind an
+  accordion. Kept intentionally short per service — no long paragraphs, no giant chip walls.
 - **Applications** (`content/applications.ts` ids + `dict.services.applications`) — 7 business
   segments (SaaS & Startups, Local Businesses, Real Estate, Airbnb & Hospitality, Digital
-  Products, E-commerce, Agencies) the same services get adapted to. Rendered inside the Services
-  section, not a separate nav item. Never claims a real client — copy always reads "For…" /
-  "Ideal for…".
-- **Capabilities** (`dict.capabilities`) is the existing tools/stack section (Design / Frontend /
-  Motion / AI / Delivery) — a different thing from "Applications" on purpose, kept as-is to avoid
-  a redundant near-duplicate section.
-- No pricing table. A one-line note (`dict.cta.pricingNote`) near Services says proposals are
-  scoped per project.
+  Products, E-commerce, Agencies) the same services get adapted to. Rendered as a compact
+  one-line-each list inside the Services section, not a separate nav item. Never claims a real
+  client — copy always reads "For…" / "Ideal for…".
+- **Capabilities** (`dict.capabilities`) — the tools/stack strip (Design / Frontend / Motion / AI),
+  folded into the **About** section (a marquee of disciplines + a short comma-list per group) so
+  the page doesn't carry two near-identical "what we use" sections.
+- No pricing table. A one-line note (`dict.cta.pricingNote`) at the end of Services says proposals
+  are scoped per project.
 
 ## Contact — form + CTAs
 
-`components/sections/Contact.tsx` has the site's one contact system: quick email/WhatsApp
+`components/sections/Contact.tsx` has the site's one contact system: a short kicker + headline
+("Have a project in mind? / Let's build something great, together."), quick email/WhatsApp
 buttons, a proper form (Name, Email, Company/Project, Service of interest, Description, optional
 Budget range), and the status/location/local-time/social block. **The form has no backend** (this
 is a static export) — on submit it validates the required fields client-side and opens the
@@ -124,9 +133,10 @@ serverless function) is a natural follow-up once you have an account for one —
 version needed no external service or credentials.
 
 `components/ui/StartProjectButton.tsx` is the recurring "Start a project" CTA — always scrolls to
-`#contact`, never to an external page. It appears in the header (`lg:` and up — hidden below that
-to avoid crowding, still reachable via the mobile menu), the hero, after Services, after Selected
-Work, and in the footer.
+`#contact`, never to an external page. It's always visible, never tucked into the menu: an
+icon-only round button below the `sm` breakpoint, the full label from `sm:` up, in the header,
+hero and after Selected Work. The Footer and Contact don't repeat it — Contact's own headline
+already is the site's closing CTA.
 
 ## Where things live
 
@@ -134,7 +144,7 @@ Work, and in the footer.
 app/                     routes, layout, metadata, sitemap/robots, OG image
   work/[slug]/            case-study route (static params from content/projects.ts)
 components/
-  sections/              Hero, SelectedWork, Services, About, Capabilities, Experiments, Contact
+  sections/              Hero, SelectedWork, Services, About, Contact
   work/                  ProjectListItem, CaseIntro, CaseBlock, NextProject, CaseStudyView
   layout/                Navigation, MenuOverlay, Footer, SmoothScroll, Grain
   ui/                    MotionText, MagneticButton, StartProjectButton, LanguageSwitcher,
@@ -142,7 +152,7 @@ components/
 content/                 ← structural data only (see "Languages" above for where text lives)
   site.ts                non-translatable config: brand name, url, email, timezone, social hrefs
   projects.ts             project structure + case-block order
-  services.ts  applications.ts  experiments.ts
+  services.ts  applications.ts
 lib/
   i18n/                  locales, LanguageProvider, detect.ts, mergeProject.ts
   motion.ts  hooks/  utils.ts  art (via GeneratedArt)
@@ -163,9 +173,13 @@ three to keep the system in sync.
 
 - Lenis smooth scroll disables itself under `prefers-reduced-motion`; all transform animations
   fall back to opacity/instant.
-- Skip link, semantic landmarks, `:focus-visible` rings, keyboard-operable menu / work list / Lab
-  / language switcher / contact form.
+- Skip link, semantic landmarks, `:focus-visible` rings, keyboard-operable menu / work list /
+  language switcher / contact form.
 - Standard system pointer everywhere (no custom cursor).
+- Legibility over effect on purpose: secondary text uses `--text-dim` (kept bright enough for
+  real contrast, not just a faded tint), mono labels/tags are `text-2xs`/`.label` at 12px with a
+  medium weight rather than the thin, tiny caps that read fine on a design file but not on a
+  screen.
 
 ## Notes
 
@@ -174,3 +188,7 @@ three to keep the system in sync.
 - Placeholder visuals are deterministic generated SVG art (`components/ui/GeneratedArt.tsx`), not
   stock imagery.
 - `favicon`/icons are generated from `public/favicon.svg` via `node scripts/gen-icons.mjs`.
+- **Show less, make it better.** Before adding a new top-level section, ask whether it helps a
+  visitor understand the studio, judge the work, or reach out — if not, it belongs inside an
+  existing section (or not on the page at all). This is why Lab and the standalone Capabilities
+  section were removed rather than kept "just in case."

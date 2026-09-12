@@ -2,7 +2,7 @@
  * es — español profesional y neutro. Debe cumplir la misma forma que pt-BR.ts
  * (ver `Dictionary`).
  */
-import type { Dictionary, ProjectText, ServiceText, ApplicationText, ExperimentText } from './pt-BR';
+import type { Dictionary, ProjectText, ServiceText, ApplicationText } from './pt-BR';
 
 const projects: Record<string, ProjectText> = {
   'saas-product-platform': {
@@ -186,37 +186,37 @@ const services: Record<string, ServiceText> = {
     title: 'Websites & Landing Pages',
     summary: 'Sitios web y landing pages responsivos y de alta calidad, diseñados para comunicar valor, generar confianza y convertir atención en acción.',
     detail: 'Sitios editoriales, guiados por movimiento y construidos alrededor de una única narrativa — hechos para causar la impresión correcta en los primeros segundos y sostenerse en cualquier pantalla después.',
-    capabilities: ['Sitios corporativos', 'Landing pages', 'Sitios para SaaS', 'Sitios para startups', 'Páginas de venta', 'Rediseño de sitios', 'Experiencias responsivas', 'Animaciones a medida'],
+    capabilities: ['Sitios corporativos', 'Landing pages', 'Sitios para SaaS', 'Rediseño de sitios'],
   },
   'saas-product': {
     title: 'SaaS & Product Design',
     summary: 'Productos e interfaces digitales intuitivas, diseñadas para hacer que experiencias complejas sean claras, útiles y fáciles de navegar.',
     detail: 'Arquitectura de información, flujos y sistemas de interfaz. El trabajo empieza en el modelo de datos y en las tareas centrales, para que las pantallas posteriores se sientan inevitables.',
-    capabilities: ['Landing pages de SaaS', 'Interfaces de aplicación web', 'Dashboards', 'Portales de cliente', 'Flujos de onboarding', 'Páginas de precios', 'Design systems', 'Prototipos interactivos'],
+    capabilities: ['Landing pages de SaaS', 'Interfaces web', 'Dashboards', 'Design systems'],
   },
   branding: {
     title: 'Branding & Identidad Visual',
     summary: 'Identidades visuales claras y coherentes, hechas para que los negocios se vean profesionales, memorables y consistentes.',
     detail: 'Identidad pensada primero para pantallas — wordmark, tipografía, color y una firma de movimiento — y luego extraída en guidelines y aplicaciones que un equipo realmente puede usar.',
-    capabilities: ['Diseño de logo', 'Identidad de marca', 'Sistemas de color y tipografía', 'Dirección visual', 'Brand guidelines', 'Identidad para redes sociales', 'Materiales de presentación', 'Branding para startups'],
+    capabilities: ['Diseño de logo', 'Identidad de marca', 'Color y tipografía', 'Brand guidelines'],
   },
   'social-media': {
     title: 'Diseño para Redes Sociales',
     summary: 'Sistemas visuales consistentes, reconocibles y enfocados en conversión, diseñados para que las marcas destaquen en redes sociales.',
     detail: 'Sistemas de contenido con plantillas y creatividad de campaña que se mantienen fieles a la marca en volumen — layouts programáticos y motion renderizado desde un pipeline repetible.',
-    capabilities: ['Identidad visual para redes', 'Posts y carruseles', 'Stories', 'Plantillas editables', 'Creatividades promocionales', 'Campañas de lanzamiento', 'Banners para social', 'Sistemas de contenido recurrente'],
+    capabilities: ['Identidad para redes', 'Posts y carruseles', 'Stories', 'Plantillas editables'],
   },
   'creative-video': {
     title: 'Videos Creativos & Motion Design',
     summary: 'Videos de producto premium y experiencias de motion que hacen que los productos digitales sean más fáciles de entender — y más difíciles de ignorar.',
     detail: 'Motion con propósito: transiciones de estado, demos de producto, aperturas de campaña. Renderizado con Remotion, siempre desde un sistema, nunca suelto.',
-    capabilities: ['Videos de producto', 'Demos de producto SaaS', 'Videos de showcase de app', 'Videos de lanzamiento', 'Motion graphics', 'Animaciones de UI', 'Videos verticales para Reels/TikTok', 'Diseño de sonido'],
+    capabilities: ['Videos de producto', 'Demos de SaaS', 'Motion graphics', 'Videos verticales'],
   },
   advertising: {
     title: 'Advertising & Creatividades de Marketing',
     summary: 'Piezas creativas diseñadas para captar atención, comunicar rápido y sostener campañas de marketing.',
     detail: 'Creatividades enfocadas en conversión — pensadas para el feed, probadas en variaciones, listas para escalar campaña.',
-    capabilities: ['Creatividades para Meta Ads', 'Creatividades para TikTok Ads', 'Creatividades para YouTube Ads', 'Creatividades de lanzamiento', 'Creatividades para e-commerce', 'Banners promocionales', 'Variaciones de anuncio', 'Landing pages de campaña'],
+    capabilities: ['Meta Ads', 'TikTok Ads', 'YouTube Ads', 'Landing pages de campaña'],
   },
 };
 
@@ -235,8 +235,7 @@ const applications: Record<string, ApplicationText> = {
   },
   'airbnb-hospitality': {
     title: 'Airbnb & Hospitality',
-    description: 'Para anfitriones y operaciones de hospedaje que quieren destacar antes de la reserva.',
-    highlights: ['Sitios de presentación de propiedades', 'Videos promocionales', 'Presentaciones digitales de la propiedad', 'Piezas visuales para anuncios', 'Landing pages de contacto directo'],
+    description: 'Sitios, videos y páginas de contacto directo para anfitriones que quieren destacar antes de la reserva.',
   },
   'digital-products': {
     title: 'Productos Digitales',
@@ -249,39 +248,6 @@ const applications: Record<string, ApplicationText> = {
   agencies: {
     title: 'Agencias & Equipos Creativos',
     description: 'Para agencias y equipos creativos que necesitan un socio de producción bajo demanda.',
-  },
-};
-
-const labItems: Record<string, ExperimentText> = {
-  'kinetic-type': {
-    title: 'Tipografía Cinética',
-    kind: 'Tipografía / Motion',
-    note: 'Un reel tipográfico que explora peso, tracking y ritmo en movimiento — renderizado con Remotion.',
-  },
-  'motion-poster': {
-    title: 'Motion Poster',
-    kind: 'Motion / Composición',
-    note: 'Un estudio de póster en loop: grid, una forma, un acento. Una prueba de cuán poco movimiento todavía se siente vivo.',
-  },
-  'generative-grids': {
-    title: 'Grids Generativos',
-    kind: 'Generativo / Código',
-    note: 'Composiciones abstractas determinísticas generadas a partir de un string — el sistema detrás de cada visual placeholder de este sitio.',
-  },
-  'case-teaser': {
-    title: 'Apertura de Case',
-    kind: 'Motion / Editorial',
-    note: 'Un formato corto para abrir un case study con movimiento en vez de un hero estático.',
-  },
-  'reveal-system': {
-    title: 'Sistema de Revelaciones',
-    kind: 'Interacción',
-    note: 'Las animaciones activadas por scroll usadas en este sitio — máscaras de clip, stagger, parallax; todas conscientes de reduced-motion.',
-  },
-  'social-render-pipeline': {
-    title: 'Pipeline de Render',
-    kind: 'Herramientas / Motion',
-    note: 'Renderizado en lote de motion para redes a partir de un manifiesto — se cambia el dato, se vuelve a renderizar el conjunto.',
   },
 };
 
@@ -298,8 +264,6 @@ export const es: Dictionary = {
     work: 'Trabajos',
     services: 'Servicios',
     about: 'Sobre',
-    capabilities: 'Capacidades',
-    lab: 'Lab',
     contact: 'Contacto',
     menu: 'Menú',
     close: 'Cerrar',
@@ -319,17 +283,14 @@ export const es: Dictionary = {
 
   hero: {
     eyebrow: 'Estudio de diseño y tecnología digital',
-    lines: ['Construyo', 'experiencias', 'digitales.'],
-    subcopy: 'Sitios web, marcas y experiencias digitales para empresas, startups y productos digitales — diseñados y desarrollados con tecnología, diseño e IA.',
-    scrollCue: 'Trabajos',
-    disciplines: ['Web Design', 'Desarrollo', 'UI/UX', 'Landing Pages', 'SaaS', 'Marca', 'Social', 'Motion Design', 'Experiencias Digitales'],
+    lines: ['Experiencias digitales', 'hechas para', 'destacar.'],
+    subcopy: 'Sitios web, marcas y experiencias digitales para empresas, startups y productos.',
+    scrollCue: 'Ver trabajos',
   },
 
   work: {
     label: 'Trabajos',
     title: ['Trabajos', 'seleccionados'],
-    intro: 'Los case studies se publican de forma progresiva. Cada entrada lleva a un desglose completo — desafío, enfoque, diseño, build y motion.',
-    openCase: 'Abrir un case →',
     concept: 'Concept project',
     back: '← Trabajos',
     nextProject: 'Próximo proyecto',
@@ -355,54 +316,32 @@ export const es: Dictionary = {
     title: ['Qué', 'hacemos'],
     items: services,
     applicationsLabel: 'Applications',
-    applicationsTitle: ['Aplicaciones', 'por segmento'],
-    applicationsIntro: 'El mismo proceso, adaptado a distintos tipos de negocio. Nunca clientes reales — solo dónde encaja mejor el trabajo.',
-    applicationsIdealFor: 'Ideal para',
+    applicationsIntro: 'El mismo proceso, adaptado a tu tipo de negocio.',
     applications,
   },
 
   capabilities: {
     label: 'Capacidades',
-    title: ['Herramientas', 'y stack'],
-    note: 'El stack es un medio, no el objetivo. Cambia cuando aparece una herramienta mejor — lo constante es entregar trabajo con estándar de estudio.',
+    note: 'El stack cambia cuando aparece una herramienta mejor — el estándar de estudio no.',
+    disciplines: ['Web Design', 'Desarrollo', 'UI/UX', 'Branding', 'Social', 'Motion Design'],
     groups: [
-      { label: 'Diseño', items: ['Figma', 'Design systems', 'Tipografía y layout', 'Dirección de arte', 'Prototipado'] },
-      { label: 'Frontend', items: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'Framer Motion', 'GSAP'] },
-      { label: 'Motion', items: ['Remotion', 'After Effects', 'Animación de scroll', 'Diseño de interacción'] },
-      { label: 'IA', items: ['Workflows de LLM', 'Piezas generativas', 'Investigación y síntesis', 'QA automatizado'] },
-      { label: 'Entrega', items: ['Export estático', 'Vercel', 'Presupuesto de rendimiento', 'Accesibilidad', 'SEO'] },
+      { label: 'Diseño', items: ['Figma', 'Design systems', 'Dirección de arte'] },
+      { label: 'Frontend', items: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS'] },
+      { label: 'Motion', items: ['Remotion', 'After Effects'] },
+      { label: 'IA', items: ['Workflows de LLM', 'QA automatizado'] },
     ],
   },
 
   about: {
     label: 'Sobre',
     quoteLines: ['No solo diseño', 'interfaces —', 'construyo todo.'],
-    serifLine: 'Estrategia, diseño, interfaz, desarrollo y movimiento — bajo un único punto de vista.',
-    pillars: [
-      { label: 'Diseño', body: 'Composición, tipografía y dirección de arte — la parte que la gente siente antes de poder nombrarla.' },
-      { label: 'Tecnología', body: 'React y TypeScript en producción. Entrego el producto, no un handoff.' },
-      { label: 'IA', body: 'Workflows modernos de IA para avanzar más rápido en investigación, exploración y producción.' },
-      { label: 'Dirección', body: 'Un único punto de vista que une estrategia, interfaz, movimiento y lanzamiento.' },
-    ],
-    selfTaught: 'Autodidacta, y obsesionado con serlo. Aprendo construyendo — llevando un proyecto de principio a fin hasta que funciona, y repitiéndolo con un estándar más alto. El resultado es autonomía: dame una idea y la llevo de una frase a una experiencia en producción.',
-    pipelineLabel: 'Cómo fluye el trabajo',
-    pipeline: ['Idea', 'Estrategia', 'Diseño', 'Interfaz', 'Build', 'Motion', 'Lanzamiento'],
-  },
-
-  lab: {
-    label: 'Lab',
-    title: ['Experimentos', 'y estudios'],
-    intro: 'No todo es un proyecto de cliente. El Lab es donde se prueban motion, sistemas generativos e ideas de interfaz — algunos alimentan el trabajo comercial, otros solo existen.',
-    motionTag: 'Motion',
-    openCursor: 'Abrir',
-    close: 'Cerrar ✕',
-    items: labItems,
+    serifLine: 'Diseño, tecnología e IA bajo un único punto de vista.',
   },
 
   contact: {
     label: 'Contacto',
-    titleLines: ['Creemos', 'algo.'],
-    subcopy: '¿Tienes una idea, un producto o una marca que necesita existir de verdad? Envía la versión cruda — vuelvo con una dirección.',
+    kicker: '¿Tienes un proyecto en mente?',
+    titleLines: ['Creemos', 'algo increíble, juntos.'],
     emailCursor: 'Email',
     chatCursor: 'Chatear',
     whatsapp: 'WhatsApp',

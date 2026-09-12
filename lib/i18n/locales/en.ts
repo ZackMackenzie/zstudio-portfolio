@@ -2,7 +2,7 @@
  * en — fallback locale. Used whenever the visitor's browser language isn't
  * pt-BR or es. Must satisfy the same shape as pt-BR.ts (see `Dictionary`).
  */
-import type { Dictionary, ProjectText, ServiceText, ApplicationText, ExperimentText } from './pt-BR';
+import type { Dictionary, ProjectText, ServiceText, ApplicationText } from './pt-BR';
 
 const projects: Record<string, ProjectText> = {
   'saas-product-platform': {
@@ -186,37 +186,37 @@ const services: Record<string, ServiceText> = {
     title: 'Websites & Landing Pages',
     summary: 'High-quality, responsive websites and landing pages designed to communicate value, build trust and turn attention into action.',
     detail: 'Editorial, motion-led websites designed around a single narrative — built to make the right impression in the first few seconds and hold up on every screen after that.',
-    capabilities: ['Business websites', 'Landing pages', 'SaaS websites', 'Startup websites', 'Sales pages', 'Website redesigns', 'Responsive experiences', 'Custom animations'],
+    capabilities: ['Business websites', 'Landing pages', 'SaaS websites', 'Website redesigns'],
   },
   'saas-product': {
     title: 'SaaS & Product Design',
     summary: 'Intuitive digital products and interfaces designed to make complex experiences clear, useful and easy to navigate.',
     detail: 'Information architecture, flows and interface systems. The work starts at the data model and the core jobs, so the screens that follow feel inevitable.',
-    capabilities: ['SaaS landing pages', 'Web application interfaces', 'Dashboards', 'Customer portals', 'Onboarding flows', 'Pricing pages', 'Design systems', 'Interactive prototypes'],
+    capabilities: ['SaaS landing pages', 'Web app interfaces', 'Dashboards', 'Design systems'],
   },
   branding: {
     title: 'Branding & Visual Identity',
     summary: 'Clear and cohesive visual identities built to make businesses look professional, memorable and consistent.',
     detail: 'Identity built for screens first — wordmark, type, color and a motion signature — then extracted into guidelines and applications a team can actually use.',
-    capabilities: ['Logo design', 'Brand identity', 'Color & typography systems', 'Visual direction', 'Brand guidelines', 'Social media identity', 'Presentation materials', 'Startup branding'],
+    capabilities: ['Logo design', 'Brand identity', 'Color & type systems', 'Brand guidelines'],
   },
   'social-media': {
     title: 'Social Media Design',
     summary: 'Consistent, recognizable and conversion-focused visual systems designed to make brands stand out across social platforms.',
     detail: 'Templated content systems and campaign creative that stay on-brand at volume — programmatic layouts plus motion rendered from a repeatable pipeline.',
-    capabilities: ['Social media visual identity', 'Posts & carousels', 'Stories', 'Editable templates', 'Promotional creatives', 'Launch campaigns', 'Social banners', 'Recurring content systems'],
+    capabilities: ['Social visual identity', 'Posts & carousels', 'Stories', 'Editable templates'],
   },
   'creative-video': {
     title: 'Creative Videos & Motion Design',
     summary: 'Premium product videos and motion experiences that make digital products easier to understand — and harder to ignore.',
     detail: 'Motion with a purpose: state transitions, product demos, campaign openers. Rendered with Remotion, always from a system, never one-off.',
-    capabilities: ['Product videos', 'SaaS product demos', 'App showcase videos', 'Launch videos', 'Motion graphics', 'UI animations', 'Vertical videos for Reels/TikTok', 'Sound design'],
+    capabilities: ['Product videos', 'SaaS demos', 'Motion graphics', 'Vertical videos'],
   },
   advertising: {
     title: 'Advertising & Marketing Creatives',
     summary: 'Creative assets designed to capture attention, communicate quickly and support marketing campaigns.',
     detail: 'Conversion-focused creative — built for the feed, tested in variations, ready to scale a campaign.',
-    capabilities: ['Meta Ads creatives', 'TikTok Ads creatives', 'YouTube Ads creatives', 'Launch creatives', 'E-commerce creatives', 'Promotional banners', 'Ad variations', 'Campaign landing pages'],
+    capabilities: ['Meta Ads', 'TikTok Ads', 'YouTube Ads', 'Campaign landing pages'],
   },
 };
 
@@ -235,8 +235,7 @@ const applications: Record<string, ApplicationText> = {
   },
   'airbnb-hospitality': {
     title: 'Airbnb & Hospitality',
-    description: 'For hosts and hospitality operations that want to stand out before the booking.',
-    highlights: ['Property websites', 'Promotional videos', 'Digital property presentations', 'Visual assets for listings', 'Direct inquiry landing pages'],
+    description: 'Sites, videos and direct-inquiry pages for hosts who want to stand out before the booking.',
   },
   'digital-products': {
     title: 'Digital Products',
@@ -252,39 +251,6 @@ const applications: Record<string, ApplicationText> = {
   },
 };
 
-const labItems: Record<string, ExperimentText> = {
-  'kinetic-type': {
-    title: 'Kinetic Type',
-    kind: 'Typography / Motion',
-    note: 'A typographic reel exploring weight, tracking and rhythm in motion — rendered with Remotion.',
-  },
-  'motion-poster': {
-    title: 'Motion Poster',
-    kind: 'Motion / Composition',
-    note: 'A looping poster study: grid, one shape, one accent. A test of how little movement still reads as alive.',
-  },
-  'generative-grids': {
-    title: 'Generative Grids',
-    kind: 'Generative / Code',
-    note: 'Deterministic abstract compositions seeded from a string — the system behind every placeholder visual on this site.',
-  },
-  'case-teaser': {
-    title: 'Case Teaser',
-    kind: 'Motion / Editorial',
-    note: 'A short format for opening a case study with motion instead of a static hero.',
-  },
-  'reveal-system': {
-    title: 'Reveal System',
-    kind: 'Interaction',
-    note: 'The scroll-triggered animations used across this site — clip masks, stagger, parallax; all reduced-motion aware.',
-  },
-  'social-render-pipeline': {
-    title: 'Render Pipeline',
-    kind: 'Tooling / Motion',
-    note: 'Batch-rendering social motion from a manifest — change the data, re-render the set.',
-  },
-};
-
 export const en: Dictionary = {
   meta: {
     role: 'Digital design & technology studio',
@@ -295,11 +261,9 @@ export const en: Dictionary = {
   },
 
   nav: {
-    work: 'Selected Work',
+    work: 'Work',
     services: 'Services',
     about: 'About',
-    capabilities: 'Capabilities',
-    lab: 'Lab',
     contact: 'Contact',
     menu: 'Menu',
     close: 'Close',
@@ -319,17 +283,14 @@ export const en: Dictionary = {
 
   hero: {
     eyebrow: 'Digital design & technology studio',
-    lines: ['I build', 'digital', 'experiences.'],
-    subcopy: 'Websites, brands and digital experiences for businesses, startups and digital products — designed and engineered with technology, design and AI.',
-    scrollCue: 'Selected work',
-    disciplines: ['Web Design', 'Development', 'UI/UX', 'Landing Pages', 'SaaS', 'Brand', 'Social', 'Motion Design', 'Digital Experiences'],
+    lines: ['Digital experiences', 'built to', 'stand out.'],
+    subcopy: 'Websites, brands and digital experiences for businesses, startups and products.',
+    scrollCue: 'View work',
   },
 
   work: {
     label: 'Selected Work',
     title: ['Selected', 'work'],
-    intro: 'Case studies are being published progressively. Each entry links to a full breakdown — challenge, approach, design, build and motion.',
-    openCase: 'Open a case study →',
     concept: 'Concept project',
     back: '← Selected work',
     nextProject: 'Next project',
@@ -355,54 +316,32 @@ export const en: Dictionary = {
     title: ['What', 'we do'],
     items: services,
     applicationsLabel: 'Applications',
-    applicationsTitle: ['Applications', 'by segment'],
-    applicationsIntro: 'Same process, adapted to different kinds of business. Never real clients — just where the work fits best.',
-    applicationsIdealFor: 'Ideal for',
+    applicationsIntro: 'Same process, adapted to your kind of business.',
     applications,
   },
 
   capabilities: {
     label: 'Capabilities',
-    title: ['Tools', '& stack'],
-    note: 'The stack is a means, not the point. It changes when a better tool shows up — the constant is shipping work that holds a studio standard.',
+    note: 'The stack changes when a better tool shows up — the studio standard doesn’t.',
+    disciplines: ['Web Design', 'Development', 'UI/UX', 'Branding', 'Social', 'Motion Design'],
     groups: [
-      { label: 'Design', items: ['Figma', 'Design systems', 'Type & layout', 'Art direction', 'Prototyping'] },
-      { label: 'Frontend', items: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'Framer Motion', 'GSAP'] },
-      { label: 'Motion', items: ['Remotion', 'After Effects', 'Scroll animation', 'Interaction design'] },
-      { label: 'AI', items: ['LLM workflows', 'Generative assets', 'Research & synthesis', 'Automated QA'] },
-      { label: 'Delivery', items: ['Static export', 'Vercel', 'Performance budgets', 'Accessibility', 'SEO'] },
+      { label: 'Design', items: ['Figma', 'Design systems', 'Art direction'] },
+      { label: 'Frontend', items: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS'] },
+      { label: 'Motion', items: ['Remotion', 'After Effects'] },
+      { label: 'AI', items: ['LLM workflows', 'Automated QA'] },
     ],
   },
 
   about: {
     label: 'About',
     quoteLines: ['I don’t just design', 'interfaces —', 'I build the whole thing.'],
-    serifLine: 'Strategy, design, interface, development and motion — held by one point of view.',
-    pillars: [
-      { label: 'Design', body: 'Composition, type and art direction — the part people feel before they can name it.' },
-      { label: 'Technology', body: 'Production React and TypeScript. I ship the thing, not a handoff.' },
-      { label: 'AI', body: 'Modern AI workflows to move faster through research, exploration and production.' },
-      { label: 'Direction', body: 'One point of view holding strategy, interface, motion and launch together.' },
-    ],
-    selfTaught: 'Self-taught, and relentless about it. I learn by building — taking a project end to end until it works, then doing it again with a higher bar. The result is autonomy: hand me an idea and I can carry it from a sentence to a shipped experience.',
-    pipelineLabel: 'How the work moves',
-    pipeline: ['Idea', 'Strategy', 'Design', 'Interface', 'Build', 'Motion', 'Launch'],
-  },
-
-  lab: {
-    label: 'Lab',
-    title: ['Experiments', '& studies'],
-    intro: 'Not everything is a client project. The Lab is where motion, generative systems and interface ideas get tested — some feed the commercial work, some just exist.',
-    motionTag: 'Motion',
-    openCursor: 'Open',
-    close: 'Close ✕',
-    items: labItems,
+    serifLine: 'Design, technology and AI under one point of view.',
   },
 
   contact: {
     label: 'Contact',
-    titleLines: ["Let’s build", 'something.'],
-    subcopy: 'Have an idea, a product, or a brand that needs to exist properly? Send the rough version — I’ll come back with a direction.',
+    kicker: 'Have a project in mind?',
+    titleLines: ['Let’s build', 'something great, together.'],
     emailCursor: 'Email',
     chatCursor: 'Chat',
     whatsapp: 'WhatsApp',

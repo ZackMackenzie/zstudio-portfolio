@@ -43,9 +43,7 @@ export const site = {
     { index: 1, id: 'work' },
     { index: 2, id: 'services' },
     { index: 3, id: 'about' },
-    { index: 4, id: 'capabilities' },
-    { index: 5, id: 'lab' },
-    { index: 6, id: 'contact' },
+    { index: 4, id: 'contact' },
   ],
 } as const;
 
