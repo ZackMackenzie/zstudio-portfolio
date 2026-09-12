@@ -30,7 +30,7 @@ function useMagnetic(strength: number) {
 }
 
 const CLS =
-  'group relative inline-flex items-center justify-center gap-3 rounded-pill border border-line px-7 py-4 font-mono text-xs uppercase tracking-[0.16em] transition-colors duration-400 hover:border-text';
+  'group relative inline-flex items-center justify-center gap-3 whitespace-nowrap rounded-pill border border-line px-7 py-4 font-mono text-xs uppercase tracking-[0.16em] transition-colors duration-400 hover:border-text';
 
 type Props = {
   children: ReactNode;
@@ -40,6 +40,8 @@ type Props = {
   href?: string;
   external?: boolean;
   onClick?: () => void;
+  /** Only applies to the button form (no `href`) — defaults to "button". */
+  type?: 'button' | 'submit';
   'aria-label'?: string;
 };
 
@@ -51,6 +53,7 @@ export function MagneticButton({
   href,
   external,
   onClick,
+  type = 'button',
   ...rest
 }: Props) {
   const { ref, sx, sy, onMouseMove, reset } = useMagnetic(strength);
@@ -93,7 +96,7 @@ export function MagneticButton({
   return (
     <button
       ref={ref as React.Ref<HTMLButtonElement>}
-      type="button"
+      type={type}
       onClick={onClick}
       className={cn(CLS, className)}
       {...handlers}

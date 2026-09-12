@@ -1,8 +1,10 @@
 import { ImageResponse } from 'next/og';
 import { site } from '@/content/site';
+import { ptBR } from '@/lib/i18n/locales/pt-BR';
 
+// Static export bakes a single OG image at build time — pt-BR (base locale).
 export const dynamic = 'force-static';
-export const alt = `${site.name} — ${site.role}`;
+export const alt = `${site.name} — ${ptBR.meta.role}`;
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 
@@ -36,18 +38,18 @@ export default function OpengraphImage() {
           }}
         />
         <div style={{ display: 'flex', fontSize: 26, letterSpacing: 4, color: '#7a7e85' }}>
-          {site.role.toUpperCase()}
+          {ptBR.meta.role.toUpperCase()}
         </div>
         <div style={{ display: 'flex', flexDirection: 'column' }}>
           <div style={{ display: 'flex', fontSize: 150, fontWeight: 500, letterSpacing: -6, lineHeight: 1 }}>
             {site.wordmark}
           </div>
           <div style={{ display: 'flex', fontSize: 40, color: '#7a7e85', marginTop: 20 }}>
-            Eu construo experiências digitais.
+            {ptBR.meta.ogTagline}
           </div>
         </div>
         <div style={{ display: 'flex', fontSize: 24, letterSpacing: 2, color: '#7a7e85' }}>
-          Web · Produto · Marca · Motion · IA
+          {ptBR.meta.ogServices}
         </div>
       </div>
     ),

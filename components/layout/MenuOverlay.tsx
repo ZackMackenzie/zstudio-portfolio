@@ -3,6 +3,9 @@
 import { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { site } from '@/content/site';
+import { useI18n } from '@/lib/i18n/LanguageProvider';
+import { LanguageSwitcher } from '@/components/ui/LanguageSwitcher';
+import { StartProjectButton } from '@/components/ui/StartProjectButton';
 import { formatIndex } from '@/lib/utils';
 import { cursorHover } from '@/components/cursor/cursor-store';
 
@@ -13,7 +16,17 @@ export function MenuOverlay({
   onNavigate: (id: string) => void;
   onClose: () => void;
 }) {
+  const { dict } = useI18n();
   const ref = useRef<HTMLDivElement>(null);
+
+  const navLabels: Record<string, string> = {
+    work: dict.nav.work,
+    services: dict.nav.services,
+    about: dict.nav.about,
+    capabilities: dict.nav.capabilities,
+    lab: dict.nav.lab,
+    contact: dict.nav.contact,
+  };
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -31,7 +44,7 @@ export function MenuOverlay({
       ref={ref}
       role="dialog"
       aria-modal="true"
-      aria-label="Menu de navegação"
+      aria-label={dict.nav.menuAria}
       initial={{ clipPath: 'inset(0 0 100% 0)' }}
       animate={{ clipPath: 'inset(0 0 0% 0)' }}
       exit={{ clipPath: 'inset(0 0 100% 0)' }}
@@ -52,7 +65,7 @@ export function MenuOverlay({
             >
               <span className="label w-8 shrink-0 text-accent">{formatIndex(item.index)}</span>
               <span className="font-display text-2xl font-medium tracking-tighter transition-transform duration-400 ease-expo group-hover:translate-x-3 md:text-3xl">
-                {item.label}
+                {navLabels[item.id]}
               </span>
             </motion.button>
           ))}
@@ -62,20 +75,26 @@ export function MenuOverlay({
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5 }}
-          className="flex flex-wrap items-center gap-x-6 gap-y-2 py-8"
+          className="flex flex-col gap-6 py-8"
         >
-          {site.socials.map((s) => (
-            <a
-              key={s.label}
-              href={s.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="link-underline font-mono text-xs uppercase tracking-[0.14em] text-dim hover:text-text"
-              {...cursorHover('link')}
-            >
-              {s.label}
-            </a>
-          ))}
+          <StartProjectButton className="w-fit" onBeforeNavigate={onClose} />
+          <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-2">
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
+              {site.socials.map((s) => (
+                <a
+                  key={s.label}
+                  href={s.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="link-underline font-mono text-xs uppercase tracking-[0.14em] text-dim hover:text-text"
+                  {...cursorHover('link')}
+                >
+                  {s.label}
+                </a>
+              ))}
+            </div>
+            <LanguageSwitcher />
+          </div>
         </motion.div>
       </div>
     </motion.div>

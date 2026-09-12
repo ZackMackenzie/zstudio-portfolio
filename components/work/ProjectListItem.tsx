@@ -8,7 +8,15 @@ import { Media } from '@/components/ui/Media';
 import { formatIndex } from '@/lib/utils';
 import { cursorHover } from '@/components/cursor/cursor-store';
 
-export function ProjectListItem({ project, index }: { project: Project; index: number }) {
+export function ProjectListItem({
+  project,
+  index,
+  concept,
+}: {
+  project: Project;
+  index: number;
+  concept: string;
+}) {
   const ref = useRef<HTMLDivElement>(null);
   const [hover, setHover] = useState(false);
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] });
@@ -42,9 +50,9 @@ export function ProjectListItem({ project, index }: { project: Project; index: n
         </div>
 
         <div className="flex items-center gap-4">
-          {project.status === 'placeholder' && (
+          {project.status === 'concept' && (
             <span className="hidden rounded-pill border border-line px-3 py-1 font-mono text-2xs uppercase tracking-[0.14em] text-dim sm:inline">
-              Em andamento
+              {concept}
             </span>
           )}
           <span className="font-mono text-2xs text-dim">{project.year}</span>

@@ -3,18 +3,6 @@ import { Media } from '@/components/ui/Media';
 import { MediaPlayer } from '@/components/ui/MediaPlayer';
 import { Reveal } from '@/components/ui/Reveal';
 
-const HEADINGS: Record<Block['type'], string> = {
-  overview: 'Visão geral',
-  challenge: 'Desafio',
-  approach: 'Abordagem',
-  design: 'Design',
-  development: 'Desenvolvimento',
-  motion: 'Motion',
-  result: 'Resultado final',
-  gallery: 'Galeria',
-  technologies: 'Tecnologias',
-};
-
 function BlockShell({
   label,
   children,
@@ -36,8 +24,16 @@ function BlockShell({
   );
 }
 
-export function CaseBlock({ block }: { block: Block }) {
-  const label = HEADINGS[block.type];
+export function CaseBlock({
+  block,
+  headings,
+  motionStudyAlt,
+}: {
+  block: Block;
+  headings: Record<Block['type'], string>;
+  motionStudyAlt: string;
+}) {
+  const label = headings[block.type];
 
   switch (block.type) {
     case 'overview':
@@ -112,9 +108,9 @@ export function CaseBlock({ block }: { block: Block }) {
             <p className="max-w-prose text-lg leading-relaxed md:text-xl">{block.body}</p>
             <div className="mt-8">
               {block.clipId ? (
-                <MediaPlayer id={block.clipId} alt={`${label} — estudo de motion`} seed={block.clipId} />
+                <MediaPlayer id={block.clipId} alt={`${label} — ${motionStudyAlt}`} seed={block.clipId} />
               ) : (
-                <Media alt="Estudo de motion" width={1600} height={900} seed="motion-fallback" accent />
+                <Media alt={motionStudyAlt} width={1600} height={900} seed="motion-fallback" accent />
               )}
             </div>
           </Reveal>

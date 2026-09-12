@@ -7,7 +7,15 @@ import { Media } from '@/components/ui/Media';
 import { MotionText } from '@/components/ui/MotionText';
 import { cursorHover } from '@/components/cursor/cursor-store';
 
-export function CaseIntro({ project }: { project: Project }) {
+export function CaseIntro({
+  project,
+  backLabel,
+  conceptLabel,
+}: {
+  project: Project;
+  backLabel: string;
+  conceptLabel: string;
+}) {
   return (
     <header className="shell pt-32 md:pt-40">
       <Link
@@ -15,7 +23,7 @@ export function CaseIntro({ project }: { project: Project }) {
         className="link-underline font-mono text-xs uppercase tracking-[0.16em] text-dim hover:text-text"
         {...cursorHover('link')}
       >
-        ← Trabalhos
+        {backLabel}
       </Link>
 
       <div className="mt-10 flex flex-wrap items-end justify-between gap-6 border-b border-line pb-8">
@@ -28,8 +36,8 @@ export function CaseIntro({ project }: { project: Project }) {
         <div className="flex flex-col items-start gap-1 font-mono text-2xs uppercase tracking-[0.14em] text-dim md:items-end">
           <span>{project.discipline}</span>
           <span>{project.year}</span>
-          {project.status === 'placeholder' && (
-            <span className="rounded-pill border border-line px-2 py-0.5">Case em andamento</span>
+          {project.status === 'concept' && (
+            <span className="rounded-pill border border-line px-2 py-0.5">{conceptLabel}</span>
           )}
         </div>
       </div>

@@ -2,11 +2,23 @@
 
 import Link from 'next/link';
 import { site } from '@/content/site';
+import { useI18n } from '@/lib/i18n/LanguageProvider';
 import { scrollToId } from './SmoothScroll';
+import { StartProjectButton } from '@/components/ui/StartProjectButton';
 import { cursorHover } from '@/components/cursor/cursor-store';
 
 export function Footer() {
+  const { dict } = useI18n();
   const year = new Date().getFullYear();
+
+  const navLabels: Record<string, string> = {
+    work: dict.nav.work,
+    services: dict.nav.services,
+    about: dict.nav.about,
+    capabilities: dict.nav.capabilities,
+    lab: dict.nav.lab,
+    contact: dict.nav.contact,
+  };
 
   return (
     <footer className="border-t border-line bg-bg">
@@ -14,11 +26,12 @@ export function Footer() {
         <div className="grid gap-12 md:grid-cols-[1.5fr_1fr_1fr]">
           <div>
             <p className="font-display text-3xl font-medium tracking-tight">{site.wordmarkFull}</p>
-            <p className="mt-4 max-w-xs text-sm text-dim">{site.description}</p>
+            <p className="mt-4 max-w-xs text-sm text-dim">{dict.meta.description}</p>
+            <StartProjectButton className="mt-6" />
           </div>
 
           <nav className="flex flex-col gap-2">
-            <p className="label mb-2">Índice</p>
+            <p className="label mb-2">{dict.footer.indexLabel}</p>
             {site.nav.map((item) => (
               <button
                 key={item.id}
@@ -26,13 +39,13 @@ export function Footer() {
                 className="link-underline w-fit text-sm text-dim hover:text-text"
                 {...cursorHover('link')}
               >
-                {item.label}
+                {navLabels[item.id]}
               </button>
             ))}
           </nav>
 
           <nav className="flex flex-col gap-2">
-            <p className="label mb-2">Redes</p>
+            <p className="label mb-2">{dict.footer.networksLabel}</p>
             {site.socials.map((s) => (
               <a
                 key={s.label}
@@ -52,11 +65,9 @@ export function Footer() {
           <span>
             © {year} {site.wordmarkFull}
           </span>
-          <span className="hidden md:inline">
-            Hanken Grotesk · Inter · IBM Plex Mono — Next.js · Remotion
-          </span>
+          <span className="hidden md:inline">{dict.footer.colophon}</span>
           <button onClick={() => scrollToId('top')} className="link-underline w-fit" {...cursorHover('link')}>
-            Voltar ao topo ↑
+            {dict.footer.backToTop}
           </button>
         </div>
       </div>

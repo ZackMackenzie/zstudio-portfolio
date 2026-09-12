@@ -4,16 +4,29 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from 'framer-motion';
 import { site } from '@/content/site';
+import { useI18n } from '@/lib/i18n/LanguageProvider';
 import { scrollToId } from './SmoothScroll';
 import { MenuOverlay } from './MenuOverlay';
+import { LanguageSwitcher } from '@/components/ui/LanguageSwitcher';
+import { StartProjectButton } from '@/components/ui/StartProjectButton';
 import { cursorHover } from '@/components/cursor/cursor-store';
 import { cn } from '@/lib/utils';
 
 export function Navigation() {
+  const { dict } = useI18n();
   const [hidden, setHidden] = useState(false);
   const [atTop, setAtTop] = useState(true);
   const [open, setOpen] = useState(false);
   const { scrollY } = useScroll();
+
+  const navLabels: Record<string, string> = {
+    work: dict.nav.work,
+    services: dict.nav.services,
+    about: dict.nav.about,
+    capabilities: dict.nav.capabilities,
+    lab: dict.nav.lab,
+    contact: dict.nav.contact,
+  };
 
   useMotionValueEvent(scrollY, 'change', (y) => {
     const prev = scrollY.getPrevious() ?? 0;
@@ -69,31 +82,35 @@ export function Navigation() {
                 className="link-underline font-mono text-xs uppercase tracking-[0.14em] text-dim hover:text-text"
                 {...cursorHover('link')}
               >
-                {item.label}
+                {navLabels[item.id]}
               </button>
             ))}
           </nav>
 
-          <button
-            onClick={() => setOpen((v) => !v)}
-            className="flex items-center gap-3 font-mono text-xs uppercase tracking-[0.16em]"
-            aria-expanded={open}
-            aria-controls="menu-overlay"
-            {...cursorHover('link')}
-          >
-            <span className="hidden sm:inline">{open ? 'Fechar' : 'Menu'}</span>
-            <span className="relative flex h-3 w-5 flex-col justify-between">
-              <motion.span
-                animate={{ rotate: open ? 45 : 0, y: open ? 5 : 0 }}
-                className="block h-px w-full bg-current"
-              />
-              <motion.span animate={{ opacity: open ? 0 : 1 }} className="block h-px w-full bg-current" />
-              <motion.span
-                animate={{ rotate: open ? -45 : 0, y: open ? -5 : 0 }}
-                className="block h-px w-full bg-current"
-              />
-            </span>
-          </button>
+          <div className="flex items-center gap-4 md:gap-6">
+            <StartProjectButton compact className="hidden lg:inline-flex" />
+            <LanguageSwitcher className="hidden sm:flex" />
+            <button
+              onClick={() => setOpen((v) => !v)}
+              className="flex items-center gap-3 font-mono text-xs uppercase tracking-[0.16em]"
+              aria-expanded={open}
+              aria-controls="menu-overlay"
+              {...cursorHover('link')}
+            >
+              <span className="hidden sm:inline">{open ? dict.nav.close : dict.nav.menu}</span>
+              <span className="relative flex h-3 w-5 flex-col justify-between">
+                <motion.span
+                  animate={{ rotate: open ? 45 : 0, y: open ? 5 : 0 }}
+                  className="block h-px w-full bg-current"
+                />
+                <motion.span animate={{ opacity: open ? 0 : 1 }} className="block h-px w-full bg-current" />
+                <motion.span
+                  animate={{ rotate: open ? -45 : 0, y: open ? -5 : 0 }}
+                  className="block h-px w-full bg-current"
+                />
+              </span>
+            </button>
+          </div>
         </div>
       </motion.header>
 
