@@ -1,6 +1,5 @@
 'use client';
 
-import Link from 'next/link';
 import { site } from '@/content/site';
 import { useI18n } from '@/lib/i18n/LanguageProvider';
 import { scrollToId } from './SmoothScroll';
@@ -10,45 +9,23 @@ export function Footer() {
   const { dict } = useI18n();
   const year = new Date().getFullYear();
 
-  const navLabels: Record<string, string> = {
-    work: dict.nav.work,
-    services: dict.nav.services,
-    about: dict.nav.about,
-    contact: dict.nav.contact,
-  };
-
   return (
     <footer className="border-t border-line bg-bg">
-      <div className="shell py-16 md:py-24">
-        <div className="grid gap-12 md:grid-cols-[1.5fr_1fr_1fr]">
+      <div className="shell py-16 md:py-20">
+        <div className="flex flex-col gap-10 md:flex-row md:items-end md:justify-between">
           <div>
             <p className="font-display text-3xl font-medium tracking-tight">{site.wordmarkFull}</p>
-            <p className="mt-4 max-w-xs text-sm text-dim">{dict.meta.description}</p>
+            <p className="mt-3 max-w-xs text-sm text-dim">{dict.footer.tagline}</p>
           </div>
 
-          <nav className="flex flex-col gap-2">
-            <p className="label mb-2">{dict.footer.indexLabel}</p>
-            {site.nav.map((item) => (
-              <button
-                key={item.id}
-                onClick={() => scrollToId(item.id)}
-                className="link-underline w-fit text-sm text-dim hover:text-text"
-                {...cursorHover('link')}
-              >
-                {navLabels[item.id]}
-              </button>
-            ))}
-          </nav>
-
-          <nav className="flex flex-col gap-2">
-            <p className="label mb-2">{dict.footer.networksLabel}</p>
+          <nav className="flex flex-wrap gap-x-6 gap-y-2">
             {site.socials.map((s) => (
               <a
                 key={s.label}
                 href={s.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="link-underline w-fit text-sm text-dim hover:text-text"
+                className="link-underline w-fit font-mono text-xs uppercase tracking-[0.14em] text-dim hover:text-text"
                 {...cursorHover('link')}
               >
                 {s.label}
@@ -57,7 +34,7 @@ export function Footer() {
           </nav>
         </div>
 
-        <div className="mt-16 flex flex-col gap-4 border-t border-line pt-6 font-mono text-2xs uppercase tracking-[0.14em] text-dim md:flex-row md:items-center md:justify-between">
+        <div className="mt-12 flex flex-col gap-4 border-t border-line pt-6 font-mono text-2xs uppercase tracking-[0.14em] text-dim md:flex-row md:items-center md:justify-between">
           <span>
             © {year} {site.wordmarkFull}
           </span>

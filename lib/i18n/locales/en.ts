@@ -2,7 +2,7 @@
  * en — fallback locale. Used whenever the visitor's browser language isn't
  * pt-BR or es. Must satisfy the same shape as pt-BR.ts (see `Dictionary`).
  */
-import type { Dictionary, ProjectText, ServiceText, ApplicationText } from './pt-BR';
+import type { Dictionary, ProjectText, ServiceText } from './pt-BR';
 
 const projects: Record<string, ProjectText> = {
   'saas-product-platform': {
@@ -183,71 +183,32 @@ const projects: Record<string, ProjectText> = {
 
 const services: Record<string, ServiceText> = {
   websites: {
-    title: 'Websites & Landing Pages',
-    summary: 'High-quality, responsive websites and landing pages designed to communicate value, build trust and turn attention into action.',
-    detail: 'Editorial, motion-led websites designed around a single narrative — built to make the right impression in the first few seconds and hold up on every screen after that.',
-    capabilities: ['Business websites', 'Landing pages', 'SaaS websites', 'Website redesigns'],
+    title: 'Websites',
+    summary: 'Fast, focused sites built to make the right first impression.',
+  },
+  'landing-pages': {
+    title: 'Landing Pages',
+    summary: 'Conversion pages built around a single, clear message.',
   },
   'saas-product': {
     title: 'SaaS & Product Design',
-    summary: 'Intuitive digital products and interfaces designed to make complex experiences clear, useful and easy to navigate.',
-    detail: 'Information architecture, flows and interface systems. The work starts at the data model and the core jobs, so the screens that follow feel inevitable.',
-    capabilities: ['SaaS landing pages', 'Web app interfaces', 'Dashboards', 'Design systems'],
+    summary: 'Digital product design and development, from flow to interface.',
   },
   branding: {
-    title: 'Branding & Visual Identity',
-    summary: 'Clear and cohesive visual identities built to make businesses look professional, memorable and consistent.',
-    detail: 'Identity built for screens first — wordmark, type, color and a motion signature — then extracted into guidelines and applications a team can actually use.',
-    capabilities: ['Logo design', 'Brand identity', 'Color & type systems', 'Brand guidelines'],
+    title: 'Branding',
+    summary: 'Visual and verbal identity for brands that need to be remembered.',
   },
   'social-media': {
-    title: 'Social Media Design',
-    summary: 'Consistent, recognizable and conversion-focused visual systems designed to make brands stand out across social platforms.',
-    detail: 'Templated content systems and campaign creative that stay on-brand at volume — programmatic layouts plus motion rendered from a repeatable pipeline.',
-    capabilities: ['Social visual identity', 'Posts & carousels', 'Stories', 'Editable templates'],
+    title: 'Social Media',
+    summary: 'Creatives and templates that keep a feed consistent at volume.',
   },
-  'creative-video': {
-    title: 'Creative Videos & Motion Design',
-    summary: 'Premium product videos and motion experiences that make digital products easier to understand — and harder to ignore.',
-    detail: 'Motion with a purpose: state transitions, product demos, campaign openers. Rendered with Remotion, always from a system, never one-off.',
-    capabilities: ['Product videos', 'SaaS demos', 'Motion graphics', 'Vertical videos'],
+  'motion-video': {
+    title: 'Motion & Video',
+    summary: 'Video and motion that make products easier to understand.',
   },
   advertising: {
-    title: 'Advertising & Marketing Creatives',
-    summary: 'Creative assets designed to capture attention, communicate quickly and support marketing campaigns.',
-    detail: 'Conversion-focused creative — built for the feed, tested in variations, ready to scale a campaign.',
-    capabilities: ['Meta Ads', 'TikTok Ads', 'YouTube Ads', 'Campaign landing pages'],
-  },
-};
-
-const applications: Record<string, ApplicationText> = {
-  'saas-startups': {
-    title: 'SaaS & Startups',
-    description: 'For digital products that need to communicate value fast and scale without losing visual consistency.',
-  },
-  'local-business': {
-    title: 'Local Businesses',
-    description: 'For local businesses that want an online presence as good as what they offer in person.',
-  },
-  'real-estate': {
-    title: 'Real Estate',
-    description: 'For agencies and agents who need to present properties with the visual quality they deserve.',
-  },
-  'airbnb-hospitality': {
-    title: 'Airbnb & Hospitality',
-    description: 'Sites, videos and direct-inquiry pages for hosts who want to stand out before the booking.',
-  },
-  'digital-products': {
-    title: 'Digital Products',
-    description: 'For digital products — from MVP to mature platform — that need an interface as good as the idea.',
-  },
-  ecommerce: {
-    title: 'E-commerce',
-    description: 'For e-commerce operations that need creatives and pages that turn visits into sales.',
-  },
-  agencies: {
-    title: 'Agencies & Creative Teams',
-    description: 'For agencies and creative teams that need an on-demand production partner.',
+    title: 'Advertising',
+    summary: 'Campaign creative built for performance, tested in variations.',
   },
 };
 
@@ -284,8 +245,7 @@ export const en: Dictionary = {
   hero: {
     eyebrow: 'Digital design & technology studio',
     lines: ['Digital experiences', 'built to', 'stand out.'],
-    subcopy: 'Websites, brands and digital experiences for businesses, startups and products.',
-    scrollCue: 'View work',
+    subcopy: 'Websites, products, brands and digital experiences — built for whatever your project needs.',
   },
 
   work: {
@@ -315,27 +275,15 @@ export const en: Dictionary = {
     label: 'Services',
     title: ['What', 'we do'],
     items: services,
-    applicationsLabel: 'Applications',
-    applicationsIntro: 'Same process, adapted to your kind of business.',
-    applications,
-  },
-
-  capabilities: {
-    label: 'Capabilities',
-    note: 'The stack changes when a better tool shows up — the studio standard doesn’t.',
-    disciplines: ['Web Design', 'Development', 'UI/UX', 'Branding', 'Social', 'Motion Design'],
-    groups: [
-      { label: 'Design', items: ['Figma', 'Design systems', 'Art direction'] },
-      { label: 'Frontend', items: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS'] },
-      { label: 'Motion', items: ['Remotion', 'After Effects'] },
-      { label: 'AI', items: ['LLM workflows', 'Automated QA'] },
-    ],
+    combineNote: 'One project can combine design, development, branding, motion and whatever else it needs.',
   },
 
   about: {
     label: 'About',
     quoteLines: ['I don’t just design', 'interfaces —', 'I build the whole thing.'],
-    serifLine: 'Design, technology and AI under one point of view.',
+    serifLine: 'Every project asks for a different mix of disciplines — Zstudio puts it together.',
+    capabilities: ['Design', 'Development', 'Motion', 'AI'],
+    note: 'The stack changes when a better tool shows up — the studio standard doesn’t.',
   },
 
   contact: {
@@ -376,7 +324,7 @@ export const en: Dictionary = {
   },
 
   footer: {
-    indexLabel: 'Index',
+    tagline: 'Independent digital design and technology studio.',
     networksLabel: 'Elsewhere',
     backToTop: 'Back to top ↑',
     colophon: 'Hanken Grotesk · Inter · IBM Plex Mono — Next.js · Remotion',

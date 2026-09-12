@@ -3,11 +3,8 @@
 import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { MotionText } from '@/components/ui/MotionText';
-import { StartProjectButton } from '@/components/ui/StartProjectButton';
 import { HeroField } from './HeroField';
 import { useI18n } from '@/lib/i18n/LanguageProvider';
-import { scrollToId } from '@/components/layout/SmoothScroll';
-import { cursorHover } from '@/components/cursor/cursor-store';
 
 export function Hero() {
   const { dict } = useI18n();
@@ -24,7 +21,7 @@ export function Hero() {
 
       <motion.div
         style={{ y, opacity }}
-        className="shell relative z-10 flex flex-1 flex-col justify-center pb-16 pt-28"
+        className="shell relative z-10 flex flex-1 flex-col justify-center pb-24 pt-28"
       >
         <p className="label mb-6 flex items-center gap-3">
           <span className="inline-block h-1.5 w-1.5 rounded-pill bg-accent2" />
@@ -54,22 +51,6 @@ export function Hero() {
         >
           {dict.hero.subcopy}
         </motion.p>
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.1 }}
-          className="mt-10 flex flex-wrap items-center gap-6"
-        >
-          <StartProjectButton />
-          <button
-            onClick={() => scrollToId('work')}
-            className="link-underline font-mono text-xs uppercase tracking-[0.16em] text-dim hover:text-text"
-            {...cursorHover('link')}
-          >
-            {dict.hero.scrollCue}
-          </button>
-        </motion.div>
       </motion.div>
     </section>
   );

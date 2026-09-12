@@ -2,28 +2,27 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { AnimatePresence, motion, useMotionValueEvent, useScroll } from 'framer-motion';
+import { motion, useMotionValueEvent, useScroll } from 'framer-motion';
 import { site } from '@/content/site';
 import { useI18n } from '@/lib/i18n/LanguageProvider';
 import { scrollToId } from './SmoothScroll';
 import { MenuOverlay } from './MenuOverlay';
-import { StartProjectButton } from '@/components/ui/StartProjectButton';
+import { LanguageSwitcher } from '@/components/ui/LanguageSwitcher';
 import { cursorHover } from '@/components/cursor/cursor-store';
 import { cn } from '@/lib/utils';
 
+/**
+ * Deliberately just three things: the wordmark, the language switcher
+ * (kept outside any menu on purpose — see lib/i18n), and Menu. Work / Services
+ * / About / Contact and the "Start a project" CTA live inside MenuOverlay —
+ * the portfolio is one click away, not competing for header space.
+ */
 export function Navigation() {
   const { dict } = useI18n();
   const [hidden, setHidden] = useState(false);
   const [atTop, setAtTop] = useState(true);
   const [open, setOpen] = useState(false);
   const { scrollY } = useScroll();
-
-  const navLabels: Record<string, string> = {
-    work: dict.nav.work,
-    services: dict.nav.services,
-    about: dict.nav.about,
-    contact: dict.nav.contact,
-  };
 
   useMotionValueEvent(scrollY, 'change', (y) => {
     const prev = scrollY.getPrevious() ?? 0;
@@ -71,22 +70,8 @@ export function Navigation() {
             {site.wordmark}
           </Link>
 
-          <nav className="hidden items-center gap-8 md:flex">
-            {site.nav.map((item) => (
-              <button
-                key={item.id}
-                onClick={() => goTo(item.id)}
-                className="link-underline font-mono text-xs uppercase tracking-[0.14em] text-dim hover:text-text"
-                {...cursorHover('link')}
-              >
-                {navLabels[item.id]}
-              </button>
-            ))}
-          </nav>
-
-          <div className="flex items-center gap-3 md:gap-5">
-            <StartProjectButton iconOnly className="sm:hidden" />
-            <StartProjectButton compact className="hidden sm:inline-flex" />
+          <div className="flex items-center gap-5 md:gap-6">
+            <LanguageSwitcher />
             <button
               onClick={() => setOpen((v) => !v)}
               className="flex items-center gap-3 font-mono text-xs uppercase tracking-[0.16em]"
@@ -111,7 +96,7 @@ export function Navigation() {
         </div>
       </motion.header>
 
-      <AnimatePresence>{open && <MenuOverlay onNavigate={goTo} onClose={() => setOpen(false)} />}</AnimatePresence>
+      <MenuOverlay open={open} onNavigate={goTo} onClose={() => setOpen(false)} />
     </>
   );
 }

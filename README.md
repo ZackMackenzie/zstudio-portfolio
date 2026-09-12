@@ -8,11 +8,15 @@ motion, real motion assets produced with Remotion, and full **pt-BR / en / es** 
 automatic browser-language detection.
 
 Page hierarchy is deliberately short (a 2026-09 simplification pass cut a standalone Capabilities
-section and a Lab/experiments section that used to sit between About and Contact): **Hero →
-Selected Work → Services (Applications folded in) → About (the tools/stack strip folded in) →
-Contact.** Nav mirrors that: Work / Services / About / Contact. Every section is only there to
-help a visitor understand the studio, judge the work, or get in touch — see the "Show less" note
-at the bottom of this file before adding a new one.
+section, a Lab/experiments section, and later the Applications sub-section too): **Hero →
+Selected Work → Services (a flat, combinable tool list — Zstudio isn't a fixed catalog) → About
+(the tools/stack strip folded in) → Contact.** Every section is only there to help a visitor
+understand the studio, judge the work, or get in touch — see the "Show less" note at the bottom
+of this file before adding a new one.
+
+The **header carries only the wordmark, the language switcher and Menu** — Work / Services /
+About / Contact and the "Start a project" CTA live inside the menu overlay, not scattered across
+the top bar. This was an explicit, later request: portfolio-first, minimal chrome.
 
 ## Stack
 
@@ -104,21 +108,23 @@ re-localizes correctly client-side in all three languages; only the SEO/social-p
 stays pt-BR. Real per-language SEO would need locale-prefixed routes, which was intentionally
 skipped to keep the architecture simple and stable.
 
-## Services, Applications, capabilities
+## Services & positioning
 
-- **Services** (`content/services.ts` ids + `dict.services.items`) — 6 services, each with a
-  title, one-line summary (always visible) and a small curated capability-chip list behind an
-  accordion. Kept intentionally short per service — no long paragraphs, no giant chip walls.
-- **Applications** (`content/applications.ts` ids + `dict.services.applications`) — 7 business
-  segments (SaaS & Startups, Local Businesses, Real Estate, Airbnb & Hospitality, Digital
-  Products, E-commerce, Agencies) the same services get adapted to. Rendered as a compact
-  one-line-each list inside the Services section, not a separate nav item. Never claims a real
-  client — copy always reads "For…" / "Ideal for…".
-- **Capabilities** (`dict.capabilities`) — the tools/stack strip (Design / Frontend / Motion / AI),
-  folded into the **About** section (a marquee of disciplines + a short comma-list per group) so
-  the page doesn't carry two near-identical "what we use" sections.
-- No pricing table. A one-line note (`dict.cta.pricingNote`) at the end of Services says proposals
-  are scoped per project.
+Zstudio isn't sold as a fixed catalog of six things — it's a studio that solves whatever a
+project needs, and the services are the tools it has for that. That shapes the Services section:
+
+- **Services** (`content/services.ts` ids + `dict.services.items`) — 7 short entries (Websites,
+  Landing Pages, SaaS & Product Design, Branding, Social Media, Motion & Video, Advertising), each
+  just a title + one line. No accordion, no capability-chip walls, no per-service paragraph —
+  index + name + one line, full stop.
+- `dict.services.combineNote` — one sentence making the "not a catalog" positioning explicit
+  ("One project can combine design, development, branding, motion and whatever else it needs").
+  There's no separate "Applications"/industries section any more — client-type breadth is implied
+  by the portfolio, not spelled out in a second list.
+- **Capabilities** (`dict.about.capabilities`) — just four words (Design / Development / Motion /
+  AI) inside **About**, not its own section or a tool-name shopping list.
+- No pricing table. One line (`dict.cta.pricingNote`) at the end of Services says proposals are
+  scoped per project.
 
 ## Contact — form + CTAs
 
@@ -133,10 +139,28 @@ serverless function) is a natural follow-up once you have an account for one —
 version needed no external service or credentials.
 
 `components/ui/StartProjectButton.tsx` is the recurring "Start a project" CTA — always scrolls to
-`#contact`, never to an external page. It's always visible, never tucked into the menu: an
-icon-only round button below the `sm` breakpoint, the full label from `sm:` up, in the header,
-hero and after Selected Work. The Footer and Contact don't repeat it — Contact's own headline
-already is the site's closing CTA.
+`#contact`, never to an external page. It lives in the menu overlay (always reachable, one tap
+from anywhere) and after Selected Work. The header and Hero deliberately don't have their own
+CTA or nav links any more — see "Header & menu" below — and Footer/Contact don't repeat it either
+(Contact's own headline is the site's closing CTA).
+
+## Header & menu
+
+The header is just the wordmark, `LanguageSwitcher`, and the Menu toggle — nothing else competes
+for that space. `components/layout/MenuOverlay.tsx` carries Work / Services / About / Contact,
+the "Start a project" CTA and the social links.
+
+**Technical note:** `MenuOverlay` is always mounted (never `{open && <MenuOverlay/>}` +
+`AnimatePresence`) and animates via plain CSS transition classes driven by an `open` boolean prop
+— not Framer Motion's `animate` prop. A Framer-driven version of this (tried both as a
+conditionally-mounted `motion.div` inside `AnimatePresence`, and later as an always-mounted one
+with a state-driven `animate` target) was found to never actually reach its target values, in dev
+*and* in the static production build, even though the underlying React state updated correctly —
+CSS transitions don't have that problem. If you touch this component, keep the CSS-transition
+approach; don't reintroduce a Framer `animate`/`AnimatePresence` show/hide here without verifying
+it actually reaches its end state in a real, focused browser window (not just checking that state
+toggled — `aria-expanded`/text can update correctly while the animated styles stay stuck).
+`inert={!open}` (not just opacity/pointer-events) keeps it out of the tab order while closed.
 
 ## Where things live
 
@@ -152,7 +176,7 @@ components/
 content/                 ← structural data only (see "Languages" above for where text lives)
   site.ts                non-translatable config: brand name, url, email, timezone, social hrefs
   projects.ts             project structure + case-block order
-  services.ts  applications.ts
+  services.ts             service id order (7 entries — title/summary live in the dictionaries)
 lib/
   i18n/                  locales, LanguageProvider, detect.ts, mergeProject.ts
   motion.ts  hooks/  utils.ts  art (via GeneratedArt)
