@@ -3,8 +3,11 @@
 import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { MotionText } from '@/components/ui/MotionText';
+import { StartProjectButton } from '@/components/ui/StartProjectButton';
+import { MagneticButton } from '@/components/ui/MagneticButton';
 import { HeroField } from './HeroField';
 import { useI18n } from '@/lib/i18n/LanguageProvider';
+import { site } from '@/content/site';
 
 export function Hero() {
   const { dict } = useI18n();
@@ -51,6 +54,19 @@ export function Hero() {
         >
           {dict.hero.subcopy}
         </motion.p>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.05, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          className="mt-10 flex flex-wrap items-center gap-4"
+        >
+          <StartProjectButton variant="solid" />
+          <MagneticButton href={site.contact.calLink} cursorLabel={dict.cta.bookCall} className="text-dim">
+            {dict.cta.bookCall}
+            <span aria-hidden>↗</span>
+          </MagneticButton>
+        </motion.div>
       </motion.div>
     </section>
   );

@@ -18,7 +18,7 @@ export function LanguageSwitcher({ className }: { className?: string }) {
     >
       {LOCALES.map((l, i) => (
         <span key={l} className="flex items-center gap-1.5">
-          {i > 0 && <span className="text-dim/40">/</span>}
+          {i > 0 && <span className="text-dim">/</span>}
           <button
             type="button"
             onClick={() => setLocale(l)}

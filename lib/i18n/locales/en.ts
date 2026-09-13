@@ -12,7 +12,7 @@ const projects: Record<string, ProjectText> = {
     summary:
       'End-to-end design and build of a SaaS platform — from information architecture and design system to a production React front end.',
     overview: {
-      body: 'A full product surface designed and built as one system: a component library, a documented design language, and a front end wired to real data. The goal was a platform that could grow without the UI drifting.',
+      body: 'A full product surface designed and built as one system: a component library, a documented design language, and a front end wired to real data. The goal was a platform that could grow without the UI drifting. Design system and interface architecture for a cloud data platform, focused on information density and response time.',
       meta: [
         { label: 'Scope', value: 'Design system, product UI, frontend build' },
         { label: 'Role', value: 'Design + Development' },
@@ -44,7 +44,7 @@ const projects: Record<string, ProjectText> = {
       body: 'Motion is functional here: state transitions, optimistic updates, and focus movement. Nothing loops, nothing decorates.',
     },
     result: {
-      body: 'This is a concept project, not real client work — built to show process and level of execution. Screens, motion and code keep expanding.',
+      body: 'A studio-owned project — built to demonstrate design architecture, production-grade code and typographic rigor.',
     },
     technologies: {
       groups: [
@@ -61,7 +61,7 @@ const projects: Record<string, ProjectText> = {
     summary:
       'A visual identity built to live everywhere — wordmark, type system, motion language and a site that ships the brand rather than describing it.',
     overview: {
-      body: 'Identity work that treats the website as the primary artifact. The brand is defined by how it moves and composes on screen, then extracted back out into static applications.',
+      body: 'Identity work that treats the website as the primary artifact. The brand is defined by how it moves and composes on screen, then extracted back out into static applications. A scalable visual and verbal identity for a technology brand, covering design guidelines, typography and asset directories.',
       meta: [
         { label: 'Scope', value: 'Wordmark, type, color, motion, website' },
         { label: 'Role', value: 'Art Direction + Design + Build' },
@@ -87,7 +87,7 @@ const projects: Record<string, ProjectText> = {
       media: [{ alt: 'Application — poster' }, { alt: 'Application — social' }, { alt: 'Application — web' }],
     },
     result: {
-      body: 'This is a concept project, not real client work — built to show process and level of execution. Guidelines and applications keep expanding.',
+      body: 'A studio-owned project — built to demonstrate design architecture, production-grade code and typographic rigor.',
     },
     technologies: {
       groups: [
@@ -104,7 +104,7 @@ const projects: Record<string, ProjectText> = {
     summary:
       'A single-page launch experience — narrative structure, custom motion and a fast static build engineered for the first ten seconds.',
     overview: {
-      body: 'A launch page is a short film with a call to action. This one is built around a single narrative spine, with motion used to control pace rather than decorate sections.',
+      body: 'A launch page is a short film with a call to action. This one is built around a single narrative spine, with motion used to control pace rather than decorate sections. A high-converting landing page structured around product-led copywriting and a sub-1-second load time.',
       meta: [
         { label: 'Scope', value: 'Narrative, design, copy, build' },
         { label: 'Role', value: 'Design + Development' },
@@ -131,7 +131,7 @@ const projects: Record<string, ProjectText> = {
       body: 'Scroll-linked reveals that pace the reader through the argument, plus one signature moment at the offer.',
     },
     result: {
-      body: 'This is a concept project, not real client work — built to show process and level of execution. Final copy and performance numbers keep being refined.',
+      body: 'A studio-owned project — built to demonstrate design architecture, production-grade code and typographic rigor.',
     },
     technologies: {
       groups: [
@@ -147,7 +147,7 @@ const projects: Record<string, ProjectText> = {
     summary:
       'A templated system for social content — programmatic layouts and Remotion-rendered motion that keeps a feed consistent at volume.',
     overview: {
-      body: 'Producing social content by hand does not scale and drifts off-brand fast. This system turns brand rules into templates and renders motion programmatically.',
+      body: 'Producing social content by hand does not scale and drifts off-brand fast. This system turns brand rules into templates and renders motion programmatically. A modular creative and motion system built to scale across social channels and performance media.',
       meta: [
         { label: 'Scope', value: 'Template system, motion, render pipeline' },
         { label: 'Role', value: 'Design + Motion + Tooling' },
@@ -169,7 +169,7 @@ const projects: Record<string, ProjectText> = {
       media: [{ alt: 'Template — square' }, { alt: 'Template — portrait' }, { alt: 'Template — story' }],
     },
     result: {
-      body: 'This is a concept project, not real client work — built to show process and level of execution. Rendered sets keep being expanded.',
+      body: 'A studio-owned project — built to demonstrate design architecture, production-grade code and typographic rigor.',
     },
     technologies: {
       groups: [
@@ -239,6 +239,7 @@ export const en: Dictionary = {
 
   cta: {
     startProject: 'Start a project',
+    bookCall: 'Book a call (15 min)',
     pricingNote: 'Every project is tailored to its goals, scope and complexity. Contact us to discuss the right approach.',
   },
 
@@ -284,6 +285,22 @@ export const en: Dictionary = {
     serifLine: 'Every project asks for a different mix of disciplines — Zstudio puts it together.',
     capabilities: ['Design', 'Development', 'Motion', 'AI'],
     note: 'The stack changes when a better tool shows up — the studio standard doesn’t.',
+    pillars: [
+      {
+        title: 'Product & SaaS Design',
+        body: 'From information architecture and Figma prototypes to production-ready front-end code (React/Next.js/Tailwind).',
+      },
+      {
+        title: 'High-Converting Websites',
+        body: 'Landing pages and institutional sites with a modern look, functional animation and technical SEO.',
+      },
+      {
+        title: 'Brand & Visual Systems',
+        body: 'Visual identities, design tokens and component libraries built to scale.',
+      },
+    ],
+    timezoneNote:
+      'Based in Brazil (UTC-3) — Full daily business hours overlap with US East Coast (EST) and European afternoons. High-velocity design engineering with zero timezone friction.',
   },
 
   contact: {
@@ -298,8 +315,13 @@ export const en: Dictionary = {
     localTimeLabel: 'Local time',
     socialLabel: 'Social',
     availability: 'Available for select projects — 2026',
-    baseLocation: 'Remote / Brazil',
+    baseLocation: 'Based in Brazil (UTC-3) · Business hours aligned with the US and Europe',
     linktreeLabel: 'Linktree',
+    calBanner: {
+      title: 'Prefer to talk it through directly?',
+      body: 'Book 15 minutes on my calendar to align on scope and timeline.',
+      button: 'View available times',
+    },
     form: {
       intro: 'Or fill in the form — I’ll reply by email.',
       name: 'Name',
@@ -316,10 +338,14 @@ export const en: Dictionary = {
       budgetOptional: 'Optional',
       budgetPlaceholder: 'e.g. to be defined, or a rough range',
       submit: 'Send message',
-      submitting: 'Opening your email…',
+      submitting: 'Sending…',
       successTitle: 'Almost there.',
       successBody: 'Your email client should open with the message ready — just review and send. If it doesn’t open, write directly to',
+      successFollowup: 'Once you send it, you’ll hear back within 24 business hours.',
+      urgentLabel: 'Urgent?',
+      urgentLink: 'Message me directly on WhatsApp',
       requiredError: 'Please fill in your name, email and a project description.',
+      errorHelp: 'You can also write directly to',
     },
   },
 

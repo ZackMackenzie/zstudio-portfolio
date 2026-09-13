@@ -54,8 +54,9 @@ breaks (500s). Stop the dev server, build, then restart it.
 npm run build          # static export to ./out
 ```
 
-Deploy `out/` to any static host (Vercel, Netlify, Cloudflare Pages, S3…). Set the real domain
-in `content/site.ts` (`site.url`) first — it drives canonical URLs, OG tags, sitemap and robots.
+Deploy `out/` to any static host (Vercel, Netlify, Cloudflare Pages, S3…). `content/site.ts`
+(`site.url`) resolves from `NEXT_PUBLIC_SITE_URL` and falls back to the live Vercel URL — set
+that env var once a custom domain is live; it drives canonical URLs, OG tags, sitemap and robots.
 
 ## Motion assets (Remotion)
 
@@ -125,30 +126,41 @@ project needs, and the services are the tools it has for that. That shapes the S
   AI) inside **About**, not its own section or a tool-name shopping list.
 - No pricing table. One line (`dict.cta.pricingNote`) at the end of Services says proposals are
   scoped per project.
+- **Positioning pillars** (`dict.about.pillars`, 3 entries) — the international-facing pitch
+  inside About: Product & SaaS Design / High-Converting Websites / Brand & Visual Systems. This
+  sits alongside the flat Services list, not instead of it: pillars are the narrative, Services is
+  the tool list. `dict.about.timezoneNote` is EN/ES-only (empty string in pt-BR) — the Brazil/UTC-3
+  overlap-with-US/Europe argument only makes sense for the international audience.
 
 ## Contact — form + CTAs
 
-`components/sections/Contact.tsx` has the site's one contact system: a short kicker + headline
+`components/sections/Contact.tsx` has the site's contact system: a short kicker + headline
 ("Have a project in mind? / Let's build something great, together."), quick email/WhatsApp
-buttons, a proper form (Name, Email, Company/Project, Service of interest, Description, optional
-Budget range), and the status/location/local-time/social block. **The form has no backend** (this
-is a static export) — on submit it validates the required fields client-side and opens the
-visitor's email client via a `mailto:` link pre-filled with the message (subject + all fields in
-the body), then shows a short confirmation. Wiring a real form service (Formspree, Resend, a
-serverless function) is a natural follow-up once you have an account for one — the current
-version needed no external service or credentials.
+buttons, a Cal.com booking banner, a proper form (Name, Email, Company/Project, Service of
+interest, Description, optional Budget range) and the status/location/local-time/social block.
+
+The form has full `idle` → `submitting` → `success` / `error` states: submit shows a brief
+loading spinner, then either a warm confirmation panel (replacing the form entirely, with a
+direct "message me on WhatsApp" shortcut for urgent requests) or an inline error pointing at the
+missing fields plus a direct email fallback. A hidden honeypot field (`name="website"`, visually
+off-screen, never seen by real visitors) silently drops bot submissions. **The form still has no
+real backend** (this is a static export, zero external cost) — on success it opens the visitor's
+email client via a `mailto:` link pre-filled with the message. Wiring a real delivery service
+(Formspree, Resend, a serverless function) is a drop-in follow-up once there's an account for
+one — the validation, anti-spam and UI states are already in place; only the final `mailto:` call
+in `Contact.tsx`'s `handleSubmit` needs to become a `fetch()`.
 
 `components/ui/StartProjectButton.tsx` is the recurring "Start a project" CTA — always scrolls to
-`#contact`, never to an external page. It lives in the menu overlay (always reachable, one tap
-from anywhere) and after Selected Work. The header and Hero deliberately don't have their own
-CTA or nav links any more — see "Header & menu" below — and Footer/Contact don't repeat it either
-(Contact's own headline is the site's closing CTA).
+`#contact`, never to an external page. `dict.cta.bookCall` ("Book a call (15 min)") is the second
+recurring CTA, opening `site.contact.calLink` (Cal.com/Calendly) in a new tab — both appear
+together in the Hero, in the menu overlay, and Contact additionally has its own booking banner
+above the form.
 
 ## Header & menu
 
 The header is just the wordmark, `LanguageSwitcher`, and the Menu toggle — nothing else competes
 for that space. `components/layout/MenuOverlay.tsx` carries Work / Services / About / Contact,
-the "Start a project" CTA and the social links.
+the "Start a project" + "Book a call" CTAs and the social links.
 
 **Technical note:** `MenuOverlay` is always mounted (never `{open && <MenuOverlay/>}` +
 `AnimatePresence`) and animates via plain CSS transition classes driven by an `open` boolean prop
@@ -208,9 +220,17 @@ three to keep the system in sync.
 ## Notes
 
 - All project entries are **concept projects** (`status: 'concept'`) — no invented clients,
-  metrics or testimonials. The case pages say so plainly.
-- Placeholder visuals are deterministic generated SVG art (`components/ui/GeneratedArt.tsx`), not
-  stock imagery.
+  metrics or testimonials. The case pages still show the discreet "Concept project" badge, but
+  the closing "result" text now reads as a positioning statement ("A studio-owned project — built
+  to demonstrate design architecture, production-grade code and typographic rigor") rather than
+  an apology.
+- Each of the 4 cases has a real, code-rendered UI mockup (`components/work/mockups/`) instead of
+  abstract wireframe art: `DashboardMockup` (SaaS dashboard — overview/table/metric variants),
+  `BrandSystemMockup` (color palette/type scale/brand application), `BrowserLandingMockup`
+  (browser-frame landing page — hero/pricing/social-proof) and `SocialGridMockup` (carousel/story
+  creative grid). `content/projects.ts` media entries carry an optional `mockup: {kind, variant}`
+  that `components/ui/Media.tsx` renders in place of the `GeneratedArt` fallback. Anything without
+  a `mockup` still falls back to the deterministic generated art.
 - `favicon`/icons are generated from `public/favicon.svg` via `node scripts/gen-icons.mjs`.
 - **Show less, make it better.** Before adding a new top-level section, ask whether it helps a
   visitor understand the studio, judge the work, or reach out — if not, it belongs inside an

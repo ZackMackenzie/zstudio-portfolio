@@ -1,5 +1,10 @@
 import { cn } from '@/lib/utils';
 import { GeneratedArt } from './GeneratedArt';
+import { DashboardMockup } from '@/components/work/mockups/DashboardMockup';
+import { BrandSystemMockup } from '@/components/work/mockups/BrandSystemMockup';
+import { BrowserLandingMockup } from '@/components/work/mockups/BrowserLandingMockup';
+import { SocialGridMockup } from '@/components/work/mockups/SocialGridMockup';
+import type { MockupRef } from '@/content/projects';
 
 export type MediaSource = {
   /** Path under /public, e.g. "/media/case-hero". Provide without extension when
@@ -13,6 +18,15 @@ export type MediaSource = {
   /** Fallback abstract art seed when no real asset exists yet. */
   seed?: string;
   accent?: boolean;
+  /** Code-rendered UI mockup — takes priority over the abstract GeneratedArt fallback. */
+  mockup?: MockupRef;
+};
+
+const mockupComponents = {
+  dashboard: DashboardMockup,
+  brand: BrandSystemMockup,
+  browser: BrowserLandingMockup,
+  social: SocialGridMockup,
 };
 
 /**
@@ -28,10 +42,20 @@ export function Media({
   height,
   seed,
   accent,
+  mockup,
   className,
   priority,
 }: MediaSource & { className?: string; priority?: boolean }) {
   const ratio = `${width} / ${height}`;
+
+  if (!src && !sources && mockup) {
+    const MockupComponent = mockupComponents[mockup.kind];
+    return (
+      <div className={cn('relative overflow-hidden bg-raised', className)} style={{ aspectRatio: ratio }} role="img" aria-label={alt}>
+        <MockupComponent variant={mockup.variant} />
+      </div>
+    );
+  }
 
   if (!src && !sources) {
     return (

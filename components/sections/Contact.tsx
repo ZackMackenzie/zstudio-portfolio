@@ -28,17 +28,21 @@ function useLocalTime(timeZone: string, locale: string) {
 }
 
 const inputCls =
-  'w-full border-b border-line bg-transparent py-3 text-sm text-text placeholder:text-dim/50 outline-none transition-colors duration-300 focus:border-text';
+  'w-full border-b border-line bg-transparent py-3 text-sm text-text placeholder:text-dim/80 transition-colors duration-300 focus:border-text focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2';
 
 export function Contact() {
   const { locale, dict } = useI18n();
   const time = useLocalTime(site.contact.timezone, locale);
-  const [status, setStatus] = useState<'idle' | 'error' | 'success'>('idle');
+  const [status, setStatus] = useState<'idle' | 'submitting' | 'error' | 'success'>('idle');
   const f = dict.contact.form;
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const data = new FormData(e.currentTarget);
+
+    // honeypot — invisible to real visitors; bots that fill it get silently dropped
+    if (String(data.get('website') ?? '').trim()) return;
+
     const name = String(data.get('name') ?? '').trim();
     const email = String(data.get('email') ?? '').trim();
     const description = String(data.get('description') ?? '').trim();
@@ -65,8 +69,11 @@ export function Contact() {
       .filter(Boolean)
       .join('\n');
 
-    window.location.href = `mailto:${site.contact.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    setStatus('success');
+    setStatus('submitting');
+    window.setTimeout(() => {
+      window.location.href = `mailto:${site.contact.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      setStatus('success');
+    }, 550);
   }
 
   return (
@@ -98,9 +105,52 @@ export function Contact() {
         </MagneticButton>
       </div>
 
-      <Reveal className="mt-16 max-w-2xl border-t border-line pt-10">
+      <Reveal className="mt-16 max-w-2xl">
+        <div className="flex flex-col gap-4 rounded-md border border-line p-6 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <p className="font-display text-lg font-medium tracking-tight">{dict.contact.calBanner.title}</p>
+            <p className="mt-1 text-sm text-dim">{dict.contact.calBanner.body}</p>
+          </div>
+          <MagneticButton href={site.contact.calLink} cursorLabel={dict.contact.calBanner.button} className="w-fit shrink-0">
+            {dict.contact.calBanner.button}
+            <span aria-hidden>↗</span>
+          </MagneticButton>
+        </div>
+      </Reveal>
+
+      <Reveal className="mt-10 max-w-2xl border-t border-line pt-10">
+        {status === 'success' ? (
+          <div className="flex flex-col gap-3">
+            <p className="text-lg">
+              <span className="text-text">{f.successTitle}</span>{' '}
+              <span className="text-dim">
+                {f.successBody}{' '}
+                <a href={`mailto:${site.contact.email}`} className="link-underline text-text">
+                  {site.contact.email}
+                </a>
+                .
+              </span>
+            </p>
+            <p className="text-sm text-dim">{f.successFollowup}</p>
+            <p className="mt-2 text-sm text-dim">
+              {f.urgentLabel}{' '}
+              <a href={site.contact.whatsappUrl} target="_blank" rel="noopener noreferrer" className="link-underline text-text">
+                {f.urgentLink}
+              </a>
+            </p>
+          </div>
+        ) : (
+        <>
         <p className="label mb-6">{f.intro}</p>
         <form onSubmit={handleSubmit} noValidate className="grid gap-6 sm:grid-cols-2">
+          <input
+            type="text"
+            name="website"
+            tabIndex={-1}
+            autoComplete="off"
+            aria-hidden="true"
+            className="absolute -left-[9999px] h-0 w-0 opacity-0"
+          />
           <label className="flex flex-col gap-2 text-xs">
             <span className="label !p-0">{f.name}</span>
             <input name="name" type="text" required placeholder={f.namePlaceholder} className={inputCls} />
@@ -138,29 +188,32 @@ export function Contact() {
           </label>
           <label className="flex flex-col gap-2 text-xs sm:col-span-2">
             <span className="label !p-0">
-              {f.budget} <span className="normal-case text-dim/60">— {f.budgetOptional}</span>
+              {f.budget} <span className="normal-case text-dim">— {f.budgetOptional}</span>
             </span>
             <input name="budget" type="text" placeholder={f.budgetPlaceholder} className={inputCls} />
           </label>
 
           <div className="flex flex-col gap-4 sm:col-span-2 sm:flex-row sm:items-center sm:justify-between">
-            <MagneticButton type="submit" cursorLabel={f.submit} className="w-fit">
-              {f.submit}
+            <MagneticButton type="submit" cursorLabel={f.submit} className="w-fit" disabled={status === 'submitting'}>
+              {status === 'submitting' && (
+                <span aria-hidden className="h-3 w-3 animate-spin rounded-full border-2 border-current border-t-transparent" />
+              )}
+              {status === 'submitting' ? f.submitting : f.submit}
             </MagneticButton>
 
-            {status === 'error' && <p className="text-xs text-accent2/90">{f.requiredError}</p>}
+            {status === 'error' && (
+              <p className="text-xs text-accent2">
+                {f.requiredError} {f.errorHelp}{' '}
+                <a href={`mailto:${site.contact.email}`} className="link-underline text-text">
+                  {site.contact.email}
+                </a>
+                .
+              </p>
+            )}
           </div>
-
-          {status === 'success' && (
-            <p className="text-sm text-dim sm:col-span-2">
-              <span className="text-text">{f.successTitle}</span> {f.successBody}{' '}
-              <a href={`mailto:${site.contact.email}`} className="link-underline text-text">
-                {site.contact.email}
-              </a>
-              .
-            </p>
-          )}
         </form>
+        </>
+        )}
       </Reveal>
 
       <div className="mt-16 grid gap-6 border-t border-line pt-8 font-mono text-2xs uppercase tracking-[0.14em] text-dim sm:grid-cols-2 md:grid-cols-4">

@@ -34,6 +34,9 @@ export type CaseBlock =
   | { type: 'gallery'; media: MediaRef[] }
   | { type: 'technologies'; groups: { label: string; items: string[] }[] };
 
+export type MockupKind = 'dashboard' | 'brand' | 'browser' | 'social';
+export type MockupRef = { kind: MockupKind; variant: string };
+
 export type MediaRef = {
   src?: string; // nome-base do arquivo em /public/media, sem extensão
   alt: string;
@@ -41,6 +44,9 @@ export type MediaRef = {
   height: number;
   seed?: string; // seed do fallback de arte gerada
   accent?: boolean;
+  /** Mockup de UI renderizado em código (ver components/work/mockups) — tem
+   * prioridade sobre a arte gerada abstrata quando presente. */
+  mockup?: MockupRef;
 };
 
 export type Project = {
@@ -60,7 +66,7 @@ export type Project = {
 // chaves de bloco na entrada correspondente de cada dicionário.
 // ---------------------------------------------------------------------------
 
-type MediaSeed = { width: number; height: number; seed: string; accent?: boolean };
+type MediaSeed = { width: number; height: number; seed: string; accent?: boolean; mockup?: MockupRef };
 
 export type ProjectStructure = {
   slug: string;
@@ -80,13 +86,22 @@ export const projectStructures: ProjectStructure[] = [
     slug: 'saas-product-platform',
     year: '2026',
     status: 'concept',
-    cover: { width: 1600, height: 1100, seed: 'saas-product-platform', accent: true },
+    cover: { width: 1600, height: 1100, seed: 'saas-product-platform', accent: true, mockup: { kind: 'dashboard', variant: 'overview' } },
     blocks: [
       { type: 'overview' },
       { type: 'challenge' },
       { type: 'approach' },
-      { type: 'design', media: [{ width: 1600, height: 1000, seed: 'saas-design-1' }, { width: 1600, height: 1000, seed: 'saas-design-2', accent: true }] },
-      { type: 'development', media: [{ width: 1600, height: 1000, seed: 'saas-dev-1' }] },
+      {
+        type: 'design',
+        media: [
+          { width: 1600, height: 1000, seed: 'saas-design-1', mockup: { kind: 'dashboard', variant: 'table' } },
+          { width: 1600, height: 1000, seed: 'saas-design-2', accent: true, mockup: { kind: 'dashboard', variant: 'metric' } },
+        ],
+      },
+      {
+        type: 'development',
+        media: [{ width: 1600, height: 1000, seed: 'saas-dev-1', mockup: { kind: 'dashboard', variant: 'overview' } }],
+      },
       { type: 'motion', clipId: 'typography-reel' },
       { type: 'result' },
       { type: 'technologies' },
@@ -96,14 +111,27 @@ export const projectStructures: ProjectStructure[] = [
     slug: 'brand-identity-system',
     year: '2026',
     status: 'concept',
-    cover: { width: 1600, height: 1100, seed: 'brand-identity-system' },
+    cover: { width: 1600, height: 1100, seed: 'brand-identity-system', mockup: { kind: 'brand', variant: 'palette' } },
     blocks: [
       { type: 'overview' },
       { type: 'challenge' },
       { type: 'approach' },
-      { type: 'design', media: [{ width: 1600, height: 1000, seed: 'brand-design-1' }, { width: 1600, height: 1000, seed: 'brand-design-2', accent: true }] },
+      {
+        type: 'design',
+        media: [
+          { width: 1600, height: 1000, seed: 'brand-design-1', mockup: { kind: 'brand', variant: 'type' } },
+          { width: 1600, height: 1000, seed: 'brand-design-2', accent: true, mockup: { kind: 'brand', variant: 'apply' } },
+        ],
+      },
       { type: 'motion', clipId: 'motion-poster' },
-      { type: 'gallery', media: [{ width: 1200, height: 1500, seed: 'brand-gallery-1' }, { width: 1200, height: 1200, seed: 'brand-gallery-2', accent: true }, { width: 1600, height: 1000, seed: 'brand-gallery-3' }] },
+      {
+        type: 'gallery',
+        media: [
+          { width: 1200, height: 1500, seed: 'brand-gallery-1', mockup: { kind: 'brand', variant: 'apply' } },
+          { width: 1200, height: 1200, seed: 'brand-gallery-2', accent: true, mockup: { kind: 'brand', variant: 'palette' } },
+          { width: 1600, height: 1000, seed: 'brand-gallery-3', mockup: { kind: 'brand', variant: 'type' } },
+        ],
+      },
       { type: 'result' },
       { type: 'technologies' },
     ],
@@ -112,13 +140,19 @@ export const projectStructures: ProjectStructure[] = [
     slug: 'landing-page-conversion',
     year: '2026',
     status: 'concept',
-    cover: { width: 1600, height: 1100, seed: 'landing-page-conversion', accent: true },
+    cover: { width: 1600, height: 1100, seed: 'landing-page-conversion', accent: true, mockup: { kind: 'browser', variant: 'hero' } },
     blocks: [
       { type: 'overview' },
       { type: 'challenge' },
       { type: 'approach' },
-      { type: 'design', media: [{ width: 1600, height: 1000, seed: 'landing-design-1' }] },
-      { type: 'development', media: [{ width: 1600, height: 1000, seed: 'landing-dev-1', accent: true }] },
+      {
+        type: 'design',
+        media: [{ width: 1600, height: 1000, seed: 'landing-design-1', mockup: { kind: 'browser', variant: 'proof' } }],
+      },
+      {
+        type: 'development',
+        media: [{ width: 1600, height: 1000, seed: 'landing-dev-1', accent: true, mockup: { kind: 'browser', variant: 'pricing' } }],
+      },
       { type: 'motion', clipId: 'case-teaser' },
       { type: 'result' },
       { type: 'technologies' },
@@ -128,13 +162,20 @@ export const projectStructures: ProjectStructure[] = [
     slug: 'social-creative-system',
     year: '2026',
     status: 'concept',
-    cover: { width: 1600, height: 1100, seed: 'social-creative-system' },
+    cover: { width: 1600, height: 1100, seed: 'social-creative-system', mockup: { kind: 'social', variant: 'grid' } },
     blocks: [
       { type: 'overview' },
       { type: 'challenge' },
       { type: 'approach' },
       { type: 'motion', clipId: 'social-creative' },
-      { type: 'gallery', media: [{ width: 1200, height: 1200, seed: 'social-gallery-1' }, { width: 1200, height: 1500, seed: 'social-gallery-2', accent: true }, { width: 1080, height: 1920, seed: 'social-gallery-3' }] },
+      {
+        type: 'gallery',
+        media: [
+          { width: 1200, height: 1200, seed: 'social-gallery-1', mockup: { kind: 'social', variant: 'square' } },
+          { width: 1200, height: 1500, seed: 'social-gallery-2', accent: true, mockup: { kind: 'social', variant: 'story' } },
+          { width: 1080, height: 1920, seed: 'social-gallery-3', mockup: { kind: 'social', variant: 'story' } },
+        ],
+      },
       { type: 'result' },
       { type: 'technologies' },
     ],

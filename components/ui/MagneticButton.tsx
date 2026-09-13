@@ -42,6 +42,8 @@ type Props = {
   onClick?: () => void;
   /** Only applies to the button form (no `href`) — defaults to "button". */
   type?: 'button' | 'submit';
+  /** Only applies to the button form (no `href`). */
+  disabled?: boolean;
   'aria-label'?: string;
 };
 
@@ -54,6 +56,7 @@ export function MagneticButton({
   external,
   onClick,
   type = 'button',
+  disabled,
   ...rest
 }: Props) {
   const { ref, sx, sy, onMouseMove, reset } = useMagnetic(strength);
@@ -98,7 +101,8 @@ export function MagneticButton({
       ref={ref as React.Ref<HTMLButtonElement>}
       type={type}
       onClick={onClick}
-      className={cn(CLS, className)}
+      disabled={disabled}
+      className={cn(CLS, 'disabled:cursor-not-allowed disabled:opacity-60', className)}
       {...handlers}
       {...rest}
     >

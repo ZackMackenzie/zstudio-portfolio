@@ -4,6 +4,7 @@ import { useEffect, useRef } from 'react';
 import { site } from '@/content/site';
 import { useI18n } from '@/lib/i18n/LanguageProvider';
 import { StartProjectButton } from '@/components/ui/StartProjectButton';
+import { MagneticButton } from '@/components/ui/MagneticButton';
 import { formatIndex } from '@/lib/utils';
 import { cursorHover } from '@/components/cursor/cursor-store';
 import { cn } from '@/lib/utils';
@@ -97,7 +98,13 @@ export function MenuOverlay({
             open ? 'opacity-100' : 'opacity-0',
           )}
         >
-          <StartProjectButton className="w-fit" onBeforeNavigate={onClose} />
+          <div className="flex flex-wrap items-center gap-3">
+            <StartProjectButton className="w-fit" onBeforeNavigate={onClose} />
+            <MagneticButton href={site.contact.calLink} cursorLabel={dict.cta.bookCall} className="w-fit text-dim">
+              {dict.cta.bookCall}
+              <span aria-hidden>↗</span>
+            </MagneticButton>
+          </div>
           <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
             {site.socials.map((s) => (
               <a

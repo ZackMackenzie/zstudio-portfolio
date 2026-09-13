@@ -28,16 +28,31 @@ export function About() {
           <p className="mt-6 max-w-xl text-lg font-medium text-ink/80 md:text-xl">{dict.about.serifLine}</p>
         </div>
 
-        <Reveal className="mt-10 flex flex-wrap items-center gap-x-3 gap-y-2 border-t border-line pt-8">
+        <Reveal className="mt-14 grid gap-8 border-t border-line pt-10 sm:grid-cols-3">
+          {dict.about.pillars.map((p) => (
+            <div key={p.title}>
+              <h3 className="font-display text-lg font-medium tracking-tight md:text-xl">{p.title}</h3>
+              <p className="mt-2 text-sm text-dim">{p.body}</p>
+            </div>
+          ))}
+        </Reveal>
+
+        {dict.about.timezoneNote && (
+          <Reveal delay={0.05} className="mt-8">
+            <p className="max-w-prose text-sm text-dim">{dict.about.timezoneNote}</p>
+          </Reveal>
+        )}
+
+        <Reveal delay={0.05} className="mt-10 flex flex-wrap items-center gap-x-3 gap-y-2 border-t border-line pt-8">
           {dict.about.capabilities.map((c, i) => (
             <span key={c} className="flex items-center gap-3">
-              {i > 0 && <span className="text-dim/50">/</span>}
+              {i > 0 && <span className="text-dim">/</span>}
               <span className="font-display text-lg tracking-tight md:text-xl">{c}</span>
             </span>
           ))}
         </Reveal>
 
-        <Reveal delay={0.05} className="mt-6">
+        <Reveal delay={0.1} className="mt-6">
           <p className="max-w-prose text-sm text-dim">{dict.about.note}</p>
         </Reveal>
       </div>

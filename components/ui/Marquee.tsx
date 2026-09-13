@@ -26,7 +26,7 @@ export function Marquee({
       {children.map((child, i) => (
         <span key={i} className="flex items-center gap-10">
           {child}
-          <span className="text-dim/60">{separator}</span>
+          <span className="text-dim">{separator}</span>
         </span>
       ))}
     </div>
@@ -46,7 +46,7 @@ export function Marquee({
           {children.map((child, i) => (
             <span key={i} className="flex items-center gap-10">
               {child}
-              <span className="text-dim/60">{separator}</span>
+              <span className="text-dim">{separator}</span>
             </span>
           ))}
         </div>

@@ -1,7 +1,9 @@
 import type { CaseBlock, MediaRef, Project, ProjectStructure } from '@/content/projects';
 import type { Dictionary } from './locales/pt-BR';
 
-type SeedList = { width: number; height: number; seed: string; accent?: boolean }[] | undefined;
+type SeedList =
+  | { width: number; height: number; seed: string; accent?: boolean; mockup?: MediaRef['mockup'] }[]
+  | undefined;
 type AltList = { alt: string }[] | undefined;
 
 function mergeMedia(seeds: SeedList, texts: AltList): MediaRef[] {
@@ -11,6 +13,7 @@ function mergeMedia(seeds: SeedList, texts: AltList): MediaRef[] {
     height: s.height,
     seed: s.seed,
     accent: s.accent,
+    mockup: s.mockup,
     alt: texts?.[i]?.alt ?? '',
   }));
 }

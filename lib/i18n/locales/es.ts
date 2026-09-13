@@ -12,7 +12,7 @@ const projects: Record<string, ProjectText> = {
     summary:
       'Diseño y desarrollo de extremo a extremo de una plataforma SaaS — desde la arquitectura de información y el design system hasta un frontend React en producción.',
     overview: {
-      body: 'Una superficie de producto completa diseñada y construida como un sistema: una librería de componentes, un lenguaje de diseño documentado y un frontend conectado a datos reales. El objetivo era una plataforma capaz de crecer sin que la UI se descontrole.',
+      body: 'Una superficie de producto completa diseñada y construida como un sistema: una librería de componentes, un lenguaje de diseño documentado y un frontend conectado a datos reales. El objetivo era una plataforma capaz de crecer sin que la UI se descontrole. Design system y arquitectura de interfaz para una plataforma de datos en la nube, enfocada en densidad de información y tiempo de respuesta.',
       meta: [
         { label: 'Alcance', value: 'Design system, UI de producto, frontend' },
         { label: 'Rol', value: 'Diseño + Desarrollo' },
@@ -44,7 +44,7 @@ const projects: Record<string, ProjectText> = {
       body: 'Aquí el movimiento es funcional: transiciones de estado, actualizaciones optimistas y movimiento de foco. Nada se repite en loop, nada decora.',
     },
     result: {
-      body: 'Este es un concept project, sin cliente real — pensado para mostrar el proceso y el nivel de ejecución. Pantallas, motion y código siguen ampliándose.',
+      body: 'Proyecto propio del estudio — desarrollado para demostrar arquitectura de diseño, código de producción y rigor tipográfico.',
     },
     technologies: {
       groups: [
@@ -61,7 +61,7 @@ const projects: Record<string, ProjectText> = {
     summary:
       'Una identidad visual hecha para vivir en todas partes — wordmark, sistema tipográfico, lenguaje de movimiento y un sitio que entrega la marca en vez de describirla.',
     overview: {
-      body: 'Trabajo de identidad que trata el sitio web como el artefacto principal. La marca se define por cómo se mueve y compone en pantalla, y luego se extrae en aplicaciones estáticas.',
+      body: 'Trabajo de identidad que trata el sitio web como el artefacto principal. La marca se define por cómo se mueve y compone en pantalla, y luego se extrae en aplicaciones estáticas. Identidad visual y verbal escalable para una marca de tecnología, que cubre lineamientos de diseño, tipografía y directorios de assets.',
       meta: [
         { label: 'Alcance', value: 'Wordmark, tipografía, color, motion, sitio' },
         { label: 'Rol', value: 'Dirección de Arte + Diseño + Build' },
@@ -87,7 +87,7 @@ const projects: Record<string, ProjectText> = {
       media: [{ alt: 'Aplicación — póster' }, { alt: 'Aplicación — social' }, { alt: 'Aplicación — web' }],
     },
     result: {
-      body: 'Este es un concept project, sin cliente real — pensado para mostrar el proceso y el nivel de ejecución. Guidelines y aplicaciones siguen ampliándose.',
+      body: 'Proyecto propio del estudio — desarrollado para demostrar arquitectura de diseño, código de producción y rigor tipográfico.',
     },
     technologies: {
       groups: [
@@ -104,7 +104,7 @@ const projects: Record<string, ProjectText> = {
     summary:
       'Una experiencia de lanzamiento de página única — estructura narrativa, motion a medida y un build estático rápido, diseñado para los primeros diez segundos.',
     overview: {
-      body: 'Una landing de lanzamiento es un cortometraje con una llamada a la acción. Esta se construyó alrededor de una única columna narrativa, usando el movimiento para controlar el ritmo en vez de decorar secciones.',
+      body: 'Una landing de lanzamiento es un cortometraje con una llamada a la acción. Esta se construyó alrededor de una única columna narrativa, usando el movimiento para controlar el ritmo en vez de decorar secciones. Landing page de alta conversión estructurada con copywriting orientado a producto y un tiempo de carga inferior a 1 segundo.',
       meta: [
         { label: 'Alcance', value: 'Narrativa, diseño, copy, build' },
         { label: 'Rol', value: 'Diseño + Desarrollo' },
@@ -131,7 +131,7 @@ const projects: Record<string, ProjectText> = {
       body: 'Revelaciones ligadas al scroll que marcan el ritmo del argumento, más un momento de firma en la oferta.',
     },
     result: {
-      body: 'Este es un concept project, sin cliente real — pensado para mostrar el proceso y el nivel de ejecución. El copy final y los números de rendimiento se siguen refinando.',
+      body: 'Proyecto propio del estudio — desarrollado para demostrar arquitectura de diseño, código de producción y rigor tipográfico.',
     },
     technologies: {
       groups: [
@@ -147,7 +147,7 @@ const projects: Record<string, ProjectText> = {
     summary:
       'Un sistema con plantillas para contenido de redes sociales — layouts programáticos y motion renderizado con Remotion que mantiene el feed consistente en volumen.',
     overview: {
-      body: 'Producir contenido de social a mano no escala y se desvía de la marca rápido. Este sistema convierte las reglas de marca en plantillas y renderiza motion de forma programática.',
+      body: 'Producir contenido de social a mano no escala y se desvía de la marca rápido. Este sistema convierte las reglas de marca en plantillas y renderiza motion de forma programática. Sistema modular de creatividades y motion para escalar en canales sociales y medios de performance.',
       meta: [
         { label: 'Alcance', value: 'Sistema de plantillas, motion, pipeline de render' },
         { label: 'Rol', value: 'Diseño + Motion + Herramientas' },
@@ -169,7 +169,7 @@ const projects: Record<string, ProjectText> = {
       media: [{ alt: 'Plantilla — cuadrada' }, { alt: 'Plantilla — retrato' }, { alt: 'Plantilla — story' }],
     },
     result: {
-      body: 'Este es un concept project, sin cliente real — pensado para mostrar el proceso y el nivel de ejecución. Los conjuntos renderizados se siguen ampliando.',
+      body: 'Proyecto propio del estudio — desarrollado para demostrar arquitectura de diseño, código de producción y rigor tipográfico.',
     },
     technologies: {
       groups: [
@@ -239,6 +239,7 @@ export const es: Dictionary = {
 
   cta: {
     startProject: 'Iniciar un proyecto',
+    bookCall: 'Agendar una llamada (15 min)',
     pricingNote: 'Cada proyecto se adapta a sus objetivos, alcance y complejidad. Contáctanos para definir el enfoque ideal.',
   },
 
@@ -284,6 +285,22 @@ export const es: Dictionary = {
     serifLine: 'Cada proyecto pide una combinación distinta de disciplinas — Zstudio la arma.',
     capabilities: ['Diseño', 'Desarrollo', 'Motion', 'IA'],
     note: 'El stack cambia cuando aparece una herramienta mejor — el estándar de estudio no.',
+    pillars: [
+      {
+        title: 'Product & SaaS Design',
+        body: 'De la arquitectura de información y el prototipo en Figma al frontend listo para producción (React/Next.js/Tailwind).',
+      },
+      {
+        title: 'High-Converting Websites',
+        body: 'Landing pages y sitios institucionales con estética moderna, animaciones funcionales y SEO técnico.',
+      },
+      {
+        title: 'Brand & Visual Systems',
+        body: 'Identidades visuales, design tokens y librerías de componentes preparadas para escalar.',
+      },
+    ],
+    timezoneNote:
+      'Con base en Brasil (UTC-3) — Superposición horaria completa con la costa este de EE. UU. (EST) y las tardes europeas. Ingeniería de diseño de alta velocidad, sin fricción de husos horarios.',
   },
 
   contact: {
@@ -298,8 +315,13 @@ export const es: Dictionary = {
     localTimeLabel: 'Hora local',
     socialLabel: 'Redes',
     availability: 'Disponible para proyectos seleccionados — 2026',
-    baseLocation: 'Remoto / Brasil',
+    baseLocation: 'Con base en Brasil (UTC-3) · Horario comercial alineado con EE. UU. y Europa',
     linktreeLabel: 'Linktree',
+    calBanner: {
+      title: '¿Prefieres hablarlo directamente?',
+      body: 'Reserva 15 minutos en mi agenda para alinear alcance y plazos.',
+      button: 'Ver horarios disponibles',
+    },
     form: {
       intro: 'O completa el formulario — respondo por email.',
       name: 'Nombre',
@@ -316,10 +338,14 @@ export const es: Dictionary = {
       budgetOptional: 'Opcional',
       budgetPlaceholder: 'Ej.: a definir, o un rango aproximado',
       submit: 'Enviar mensaje',
-      submitting: 'Abriendo tu email…',
+      submitting: 'Enviando…',
       successTitle: 'Casi listo.',
       successBody: 'Tu cliente de email debería abrirse con el mensaje listo — solo revisa y envía. Si no se abre, escribe directamente a',
+      successFollowup: 'En cuanto lo envíes, tendrás respuesta en un máximo de 24 horas hábiles.',
+      urgentLabel: '¿Urgente?',
+      urgentLink: 'Escríbeme directo por WhatsApp',
       requiredError: 'Completa nombre, email y una descripción del proyecto.',
+      errorHelp: 'Si prefieres, escribe directamente a',
     },
   },
 

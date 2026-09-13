@@ -44,7 +44,7 @@ const projects: Record<string, ProjectText> = {
     summary:
       'Design e desenvolvimento ponta a ponta de uma plataforma SaaS — da arquitetura de informação e do design system até um front-end React em produção.',
     overview: {
-      body: 'Uma superfície de produto inteira desenhada e construída como um sistema: uma biblioteca de componentes, uma linguagem de design documentada e um front-end ligado a dados reais. O objetivo era uma plataforma capaz de crescer sem a UI se perder.',
+      body: 'Uma superfície de produto inteira desenhada e construída como um sistema: uma biblioteca de componentes, uma linguagem de design documentada e um front-end ligado a dados reais. O objetivo era uma plataforma capaz de crescer sem a UI se perder. Design system e arquitetura de interface para plataforma de dados em nuvem, focada em densidade de informação e tempo de resposta.',
       meta: [
         { label: 'Escopo', value: 'Design system, UI de produto, build de frontend' },
         { label: 'Papel', value: 'Design + Desenvolvimento' },
@@ -76,7 +76,7 @@ const projects: Record<string, ProjectText> = {
       body: 'Aqui o movimento é funcional: transições de estado, updates otimistas e movimentação de foco. Nada fica em loop, nada decora.',
     },
     result: {
-      body: 'Este é um concept project, sem cliente real — pensado para demonstrar processo e nível de execução. Telas, motion e código seguem sendo expandidos.',
+      body: 'Projeto proprietário do estúdio — desenvolvido para demonstrar arquitetura de design, código de produção e rigor tipográfico.',
     },
     technologies: {
       groups: [
@@ -93,7 +93,7 @@ const projects: Record<string, ProjectText> = {
     summary:
       'Uma identidade visual feita para viver em todo lugar — wordmark, sistema tipográfico, linguagem de movimento e um site que entrega a marca em vez de descrevê-la.',
     overview: {
-      body: 'Trabalho de identidade que trata o site como o artefato principal. A marca é definida por como se move e compõe na tela, e depois é extraída de volta em aplicações estáticas.',
+      body: 'Trabalho de identidade que trata o site como o artefato principal. A marca é definida por como se move e compõe na tela, e depois é extraída de volta em aplicações estáticas. Identidade visual e verbal escalável para marca de tecnologia, cobrindo diretrizes de design, tipografia e diretórios de assets.',
       meta: [
         { label: 'Escopo', value: 'Wordmark, tipografia, cor, motion, site' },
         { label: 'Papel', value: 'Direção de Arte + Design + Build' },
@@ -119,7 +119,7 @@ const projects: Record<string, ProjectText> = {
       media: [{ alt: 'Aplicação — pôster' }, { alt: 'Aplicação — social' }, { alt: 'Aplicação — web' }],
     },
     result: {
-      body: 'Este é um concept project, sem cliente real — pensado para demonstrar processo e nível de execução. Guidelines e aplicações seguem sendo expandidas.',
+      body: 'Projeto proprietário do estúdio — desenvolvido para demonstrar arquitetura de design, código de produção e rigor tipográfico.',
     },
     technologies: {
       groups: [
@@ -136,7 +136,7 @@ const projects: Record<string, ProjectText> = {
     summary:
       'Uma experiência de lançamento de página única — estrutura narrativa, motion sob medida e um build estático rápido, projetado para os primeiros dez segundos.',
     overview: {
-      body: 'Uma página de lançamento é um curta com uma chamada para ação. Esta foi construída em torno de uma única espinha narrativa, com o movimento usado para controlar o ritmo em vez de decorar seções.',
+      body: 'Uma página de lançamento é um curta com uma chamada para ação. Esta foi construída em torno de uma única espinha narrativa, com o movimento usado para controlar o ritmo em vez de decorar seções. Landing page de alta conversão estruturada com copywriting orientado a produto e tempo de carregamento inferior a 1 segundo.',
       meta: [
         { label: 'Escopo', value: 'Narrativa, design, copy, build' },
         { label: 'Papel', value: 'Design + Desenvolvimento' },
@@ -163,7 +163,7 @@ const projects: Record<string, ProjectText> = {
       body: 'Revelações ligadas ao scroll que dão ritmo à leitura do argumento, mais um momento de assinatura na oferta.',
     },
     result: {
-      body: 'Este é um concept project, sem cliente real — pensado para demonstrar processo e nível de execução. Copy final e números de performance seguem sendo refinados.',
+      body: 'Projeto proprietário do estúdio — desenvolvido para demonstrar arquitetura de design, código de produção e rigor tipográfico.',
     },
     technologies: {
       groups: [
@@ -179,7 +179,7 @@ const projects: Record<string, ProjectText> = {
     summary:
       'Um sistema templatizado para conteúdo de social — layouts programáticos e motion renderizado com Remotion que mantém o feed consistente em volume.',
     overview: {
-      body: 'Produzir conteúdo de social na mão não escala e sai da marca rápido. Este sistema transforma regras de marca em templates e renderiza motion de forma programática.',
+      body: 'Produzir conteúdo de social na mão não escala e sai da marca rápido. Este sistema transforma regras de marca em templates e renderiza motion de forma programática. Sistema modular de criativos e motion para escala em canais sociais e mídia de performance.',
       meta: [
         { label: 'Escopo', value: 'Sistema de templates, motion, pipeline de render' },
         { label: 'Papel', value: 'Design + Motion + Ferramentas' },
@@ -201,7 +201,7 @@ const projects: Record<string, ProjectText> = {
       media: [{ alt: 'Template — quadrado' }, { alt: 'Template — retrato' }, { alt: 'Template — story' }],
     },
     result: {
-      body: 'Este é um concept project, sem cliente real — pensado para demonstrar processo e nível de execução. Conjuntos renderizados seguem sendo ampliados.',
+      body: 'Projeto proprietário do estúdio — desenvolvido para demonstrar arquitetura de design, código de produção e rigor tipográfico.',
     },
     technologies: {
       groups: [
@@ -271,6 +271,7 @@ export const ptBR = {
 
   cta: {
     startProject: 'Iniciar um projeto',
+    bookCall: 'Agendar conversa (15 min)',
     pricingNote: 'Cada projeto é adaptado aos seus objetivos, escopo e complexidade. Entre em contato para encontrarmos a melhor abordagem.',
   },
 
@@ -316,6 +317,22 @@ export const ptBR = {
     serifLine: 'Cada projeto pede uma combinação diferente de disciplinas — a Zstudio monta essa combinação.',
     capabilities: ['Design', 'Desenvolvimento', 'Motion', 'IA'],
     note: 'A stack muda quando aparece uma ferramenta melhor — o padrão de estúdio não.',
+    pillars: [
+      {
+        title: 'Product & SaaS Design',
+        body: 'Da arquitetura de informação e protótipo no Figma ao front-end pronto para produção (React/Next.js/Tailwind).',
+      },
+      {
+        title: 'High-Converting Websites',
+        body: 'Landing pages e sites institucionais com estética moderna, animações funcionais e SEO técnico.',
+      },
+      {
+        title: 'Brand & Visual Systems',
+        body: 'Identidades visuais, design tokens e bibliotecas de componentes preparadas para escala.',
+      },
+    ],
+    /** Vantagem de fuso horário — só faz sentido em EN/ES (mercado internacional). */
+    timezoneNote: '',
   },
 
   contact: {
@@ -330,8 +347,13 @@ export const ptBR = {
     localTimeLabel: 'Horário local',
     socialLabel: 'Redes',
     availability: 'Disponível para projetos selecionados — 2026',
-    baseLocation: 'Remoto / Brasil',
+    baseLocation: 'Base: Brasil (UTC-3) · Horário comercial alinhado aos EUA e Europa',
     linktreeLabel: 'Linktree',
+    calBanner: {
+      title: 'Prefere um alinhamento direto?',
+      body: 'Reserve 15 minutos na minha agenda para conversarmos sobre escopo e prazos.',
+      button: 'Ver horários disponíveis',
+    },
     form: {
       intro: 'Ou preencha o formulário — eu respondo por e-mail.',
       name: 'Nome',
@@ -348,10 +370,14 @@ export const ptBR = {
       budgetOptional: 'Opcional',
       budgetPlaceholder: 'Ex.: a definir, ou uma faixa aproximada',
       submit: 'Enviar mensagem',
-      submitting: 'Abrindo seu e-mail…',
+      submitting: 'Enviando…',
       successTitle: 'Quase lá.',
       successBody: 'Seu cliente de e-mail deve abrir com a mensagem pronta — é só revisar e enviar. Se não abrir, escreva direto para',
+      successFollowup: 'Assim que você enviar, a resposta chega em até 24 horas úteis.',
+      urgentLabel: 'Urgência?',
+      urgentLink: 'Chame direto no WhatsApp',
       requiredError: 'Preencha nome, e-mail e uma descrição do projeto.',
+      errorHelp: 'Se preferir, escreva direto para',
     },
   },
 
