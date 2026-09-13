@@ -28,7 +28,7 @@ export function NextProject({ project, label }: { project: Project; label: strin
           {project.title}
         </h2>
         <span className="mt-4 font-mono text-2xs uppercase tracking-[0.14em] text-dim">
-          {project.discipline}
+          {project.category}
         </span>
       </div>
     </Link>

@@ -1,7 +1,7 @@
 import { cn } from '@/lib/utils';
 import { GeneratedArt } from './GeneratedArt';
 import { DashboardMockup } from '@/components/work/mockups/DashboardMockup';
-import { BrandSystemMockup } from '@/components/work/mockups/BrandSystemMockup';
+import { AirbnbShowcaseMockup } from '@/components/work/mockups/AirbnbShowcaseMockup';
 import { BrowserLandingMockup } from '@/components/work/mockups/BrowserLandingMockup';
 import { SocialGridMockup } from '@/components/work/mockups/SocialGridMockup';
 import type { MockupRef } from '@/content/projects';
@@ -24,7 +24,7 @@ export type MediaSource = {
 
 const mockupComponents = {
   dashboard: DashboardMockup,
-  brand: BrandSystemMockup,
+  airbnb: AirbnbShowcaseMockup,
   browser: BrowserLandingMockup,
   social: SocialGridMockup,
 };

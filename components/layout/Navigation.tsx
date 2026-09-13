@@ -1,102 +1,74 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
 import { motion, useMotionValueEvent, useScroll } from 'framer-motion';
 import { site } from '@/content/site';
 import { useI18n } from '@/lib/i18n/LanguageProvider';
 import { scrollToId } from './SmoothScroll';
-import { MenuOverlay } from './MenuOverlay';
 import { LanguageSwitcher } from '@/components/ui/LanguageSwitcher';
+import { MagneticButton } from '@/components/ui/MagneticButton';
 import { cursorHover } from '@/components/cursor/cursor-store';
 import { cn } from '@/lib/utils';
 
 /**
- * Deliberately just three things: the wordmark, the language switcher
- * (kept outside any menu on purpose — see lib/i18n), and Menu. Work / Services
- * / About / Contact and the "Start a project" CTA live inside MenuOverlay —
- * the portfolio is one click away, not competing for header space.
+ * Minimalist sticky header: wordmark, a live "available for work" status
+ * pill, the language toggle, and a single direct CTA. No hamburger / nav
+ * links — this is a one-page, scroll-driven flow (see app/page.tsx).
  */
 export function Navigation() {
   const { dict } = useI18n();
   const [hidden, setHidden] = useState(false);
   const [atTop, setAtTop] = useState(true);
-  const [open, setOpen] = useState(false);
   const { scrollY } = useScroll();
 
   useMotionValueEvent(scrollY, 'change', (y) => {
     const prev = scrollY.getPrevious() ?? 0;
     setAtTop(y < 24);
-    if (open) return;
     setHidden(y > prev && y > 240);
   });
 
-  useEffect(() => {
-    document.body.style.overflow = open ? 'hidden' : '';
-    return () => {
-      document.body.style.overflow = '';
-    };
-  }, [open]);
-
-  function goTo(id: string) {
-    setOpen(false);
-    // let the overlay begin closing before scrolling
-    requestAnimationFrame(() => scrollToId(id));
-  }
-
   return (
-    <>
-      <motion.header
-        initial={{ y: 0 }}
-        animate={{ y: hidden ? '-110%' : '0%' }}
-        transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-        className={cn(
-          'fixed inset-x-0 top-0 z-[80] transition-colors duration-500',
-          !atTop && !open && 'bg-bg/70 backdrop-blur-md',
-        )}
-      >
-        <div className="shell flex items-center justify-between py-5">
-          <Link
-            href="/"
-            onClick={(e) => {
-              if (window.location.pathname === '/') {
-                e.preventDefault();
-                scrollToId('top');
-              }
-            }}
-            className="font-display text-xl font-medium tracking-tight"
-            {...cursorHover('link')}
-          >
-            {site.wordmark}
-          </Link>
+    <motion.header
+      initial={{ y: 0 }}
+      animate={{ y: hidden ? '-110%' : '0%' }}
+      transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+      className={cn(
+        'fixed inset-x-0 top-0 z-[80] transition-colors duration-500',
+        !atTop && 'bg-bg/70 backdrop-blur-md',
+      )}
+    >
+      <div className="shell flex items-center justify-between gap-4 py-5">
+        <Link
+          href="/"
+          onClick={(e) => {
+            if (window.location.pathname === '/') {
+              e.preventDefault();
+              scrollToId('top');
+            }
+          }}
+          className="font-display text-xl font-medium tracking-tight"
+          {...cursorHover('link')}
+        >
+          {site.wordmark}
+        </Link>
 
-          <div className="flex items-center gap-5 md:gap-6">
-            <LanguageSwitcher />
-            <button
-              onClick={() => setOpen((v) => !v)}
-              className="flex items-center gap-3 font-mono text-xs uppercase tracking-[0.16em]"
-              aria-expanded={open}
-              aria-controls="menu-overlay"
-              {...cursorHover('link')}
-            >
-              <span className="hidden sm:inline">{open ? dict.nav.close : dict.nav.menu}</span>
-              <span className="relative flex h-3 w-5 flex-col justify-between">
-                <motion.span
-                  animate={{ rotate: open ? 45 : 0, y: open ? 5 : 0 }}
-                  className="block h-px w-full bg-current"
-                />
-                <motion.span animate={{ opacity: open ? 0 : 1 }} className="block h-px w-full bg-current" />
-                <motion.span
-                  animate={{ rotate: open ? -45 : 0, y: open ? -5 : 0 }}
-                  className="block h-px w-full bg-current"
-                />
-              </span>
-            </button>
-          </div>
+        <div className="hidden items-center gap-2 sm:flex">
+          <span className="relative flex h-2 w-2">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent2 opacity-75" />
+            <span className="relative inline-flex h-2 w-2 rounded-full bg-accent2" />
+          </span>
+          <span className="font-mono text-2xs uppercase tracking-[0.14em] text-dim">{dict.header.status}</span>
         </div>
-      </motion.header>
 
-      <MenuOverlay open={open} onNavigate={goTo} onClose={() => setOpen(false)} />
-    </>
+        <div className="flex items-center gap-5 md:gap-6">
+          <LanguageSwitcher />
+          <MagneticButton href={site.contact.whatsappUrl} cursorLabel={dict.header.bookProject} className="px-4 py-2.5 text-2xs sm:px-5 sm:py-3 sm:text-xs">
+            {dict.header.bookProject}
+            <span aria-hidden>↗</span>
+          </MagneticButton>
+        </div>
+      </div>
+    </motion.header>
   );
 }

@@ -34,12 +34,23 @@ export function CaseIntro({
           className="font-display text-3xl font-medium tracking-tightest md:text-4xl"
         />
         <div className="flex flex-col items-start gap-1 font-mono text-2xs uppercase tracking-[0.14em] text-dim md:items-end">
-          <span>{project.discipline}</span>
+          <span>{project.category}</span>
           <span>{project.year}</span>
           {project.status === 'concept' && (
             <span className="rounded-pill border border-line px-2 py-0.5">{conceptLabel}</span>
           )}
         </div>
+      </div>
+
+      <div className="mt-6 flex flex-wrap gap-2">
+        {project.tags.map((t) => (
+          <span
+            key={t}
+            className="rounded-pill border border-line px-3 py-1 font-mono text-2xs uppercase tracking-[0.1em] text-dim"
+          >
+            {t}
+          </span>
+        ))}
       </div>
 
       <motion.div

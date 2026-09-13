@@ -34,8 +34,8 @@ export function CaseStudyView({ slug }: { slug: string }) {
     '@context': 'https://schema.org',
     '@type': 'CreativeWork',
     name: project.title,
-    about: project.disciplines.join(', '),
-    creator: { '@type': 'Person', name: site.name },
+    about: project.tags.join(', '),
+    creator: { '@type': 'Organization', name: site.name },
     dateCreated: project.year,
     description: project.summary,
     url: `${site.url}/work/${project.slug}/`,
@@ -51,12 +51,7 @@ export function CaseStudyView({ slug }: { slug: string }) {
 
       <div className="mt-14 md:mt-24">
         {project.blocks.map((block, i) => (
-          <CaseBlock
-            key={`${block.type}-${i}`}
-            block={block}
-            headings={dict.work.headings}
-            motionStudyAlt={dict.work.motionStudyAlt}
-          />
+          <CaseBlock key={`${block.type}-${i}`} block={block} headings={dict.work.headings} />
         ))}
       </div>
 

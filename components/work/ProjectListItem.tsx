@@ -28,7 +28,7 @@ export function ProjectListItem({
       className="group block border-t border-line py-6 md:py-10"
       onMouseEnter={() => {
         setHover(true);
-        cursorHover('view', 'Ver').onMouseEnter();
+        cursorHover('view', 'View').onMouseEnter();
       }}
       onMouseLeave={() => {
         setHover(false);
@@ -45,8 +45,18 @@ export function ProjectListItem({
             {project.title}
           </h3>
           <p className="mt-3 font-mono text-2xs uppercase tracking-[0.14em] text-dim">
-            {project.discipline}
+            {project.category}
           </p>
+          <div className="mt-3 flex flex-wrap gap-2">
+            {project.tags.map((t) => (
+              <span
+                key={t}
+                className="rounded-pill border border-line px-2.5 py-0.5 font-mono text-2xs uppercase tracking-[0.1em] text-dim"
+              >
+                {t}
+              </span>
+            ))}
+          </div>
         </div>
 
         <div className="flex items-center gap-4">

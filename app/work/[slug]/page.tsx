@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { projectSlugs, getProjectStructure } from '@/content/projects';
 import { site } from '@/content/site';
-import { ptBR } from '@/lib/i18n/locales/pt-BR';
+import { en } from '@/lib/i18n/locales/en';
 import { mergeProject } from '@/lib/i18n/mergeProject';
 import { CaseStudyView } from '@/components/work/CaseStudyView';
 
@@ -12,7 +12,7 @@ export function generateStaticParams() {
 export const dynamicParams = false;
 
 // Metadata is baked at build time (static export) in the base locale
-// (pt-BR) — see app/layout.tsx for why. The page itself re-localizes
+// (English) — see app/layout.tsx for why. The page itself re-localizes
 // client-side once mounted.
 export async function generateMetadata({
   params,
@@ -22,8 +22,8 @@ export async function generateMetadata({
   const { slug } = await params;
   const structure = getProjectStructure(slug);
   if (!structure) return {};
-  const project = mergeProject(ptBR, structure);
-  const title = `${project.title} — ${project.discipline}`;
+  const project = mergeProject(en, structure);
+  const title = `${project.title} — ${project.category}`;
   return {
     title: project.title,
     description: project.summary,

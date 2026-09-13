@@ -50,10 +50,28 @@ function Story() {
   );
 }
 
+function WhatsAppBanner() {
+  return (
+    <div className="flex h-full w-full flex-col justify-between bg-gradient-to-br from-[#0c0d10] to-black p-5">
+      <div className="flex items-center gap-2">
+        <span className="flex h-6 w-6 items-center justify-center rounded-full bg-accent2 text-[10px] text-black">✓</span>
+        <span className="font-mono text-[8px] uppercase tracking-[0.12em] text-white/50">WhatsApp Business</span>
+      </div>
+      <div>
+        <span className="font-display text-lg font-medium leading-tight text-white">We just launched. 🚀</span>
+        <p className="mt-1 max-w-[80%] text-[9px] text-white/50">Tap to see the full offer before it&apos;s gone.</p>
+      </div>
+      <span className="self-start rounded-full bg-accent2 px-4 py-1.5 font-mono text-[8px] font-medium uppercase tracking-[0.1em] text-black">
+        Chat now
+      </span>
+    </div>
+  );
+}
+
 export function SocialGridMockup({ variant, className }: { variant: string; className?: string }) {
   return (
     <div className={cn('h-full w-full overflow-hidden', className)}>
-      {variant === 'square' ? <Square /> : variant === 'story' ? <Story /> : <Grid />}
+      {variant === 'square' ? <Square /> : variant === 'story' ? <Story /> : variant === 'whatsapp' ? <WhatsAppBanner /> : <Grid />}
     </div>
   );
 }

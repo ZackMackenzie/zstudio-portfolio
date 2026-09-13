@@ -3,11 +3,11 @@
 import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { MotionText } from '@/components/ui/MotionText';
-import { StartProjectButton } from '@/components/ui/StartProjectButton';
 import { MagneticButton } from '@/components/ui/MagneticButton';
 import { HeroField } from './HeroField';
 import { useI18n } from '@/lib/i18n/LanguageProvider';
 import { site } from '@/content/site';
+import { scrollToId } from '@/components/layout/SmoothScroll';
 
 export function Hero() {
   const { dict } = useI18n();
@@ -26,11 +26,6 @@ export function Hero() {
         style={{ y, opacity }}
         className="shell relative z-10 flex flex-1 flex-col justify-center pb-24 pt-28"
       >
-        <p className="label mb-6 flex items-center gap-3">
-          <span className="inline-block h-1.5 w-1.5 rounded-pill bg-accent2" />
-          {dict.hero.eyebrow}
-        </p>
-
         <h1 className="font-display text-3xl font-medium leading-[0.95] tracking-tightest md:text-4xl">
           <MotionText
             as="span"
@@ -50,7 +45,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.9, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="mt-8 max-w-md text-base text-dim md:text-lg"
+          className="mt-8 max-w-lg text-base text-dim md:text-lg"
         >
           {dict.hero.subcopy}
         </motion.p>
@@ -61,9 +56,12 @@ export function Hero() {
           transition={{ delay: 1.05, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           className="mt-10 flex flex-wrap items-center gap-4"
         >
-          <StartProjectButton variant="solid" />
-          <MagneticButton href={site.contact.calLink} cursorLabel={dict.cta.bookCall} className="text-dim">
-            {dict.cta.bookCall}
+          <MagneticButton onClick={() => scrollToId('work')} cursorLabel={dict.hero.ctaPrimary} className="text-text">
+            {dict.hero.ctaPrimary}
+            <span aria-hidden>↓</span>
+          </MagneticButton>
+          <MagneticButton href={site.contact.whatsappUrl} cursorLabel={dict.hero.ctaSecondary} className="text-dim">
+            {dict.hero.ctaSecondary}
             <span aria-hidden>↗</span>
           </MagneticButton>
         </motion.div>

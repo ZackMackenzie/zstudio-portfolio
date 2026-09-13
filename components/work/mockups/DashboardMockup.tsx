@@ -82,14 +82,61 @@ const rows: { name: string; status: 'Active' | 'Pending'; value: string }[] = [
   { name: 'Umbrella', status: 'Pending', value: '$690' },
 ];
 
+function CommandPalette() {
+  const items = [
+    { label: 'Go to Dashboard', kbd: 'G D' },
+    { label: 'View Analytics', kbd: 'G A' },
+    { label: 'Invite teammate', kbd: '⌘ I' },
+    { label: 'Launch teaser video', kbd: '⌘ ↵' },
+  ];
+  return (
+    <div className="absolute inset-0 flex items-start justify-center bg-black/60 pt-10 backdrop-blur-sm sm:pt-16">
+      <div className="w-[85%] max-w-xs overflow-hidden rounded-lg border border-white/15 bg-[#111214] shadow-2xl">
+        <div className="flex items-center gap-2 border-b border-white/10 px-3 py-2.5">
+          <span className="text-white/30">⌘K</span>
+          <span className="font-mono text-[10px] text-white/40">Type a command…</span>
+        </div>
+        <div className="flex flex-col py-1">
+          {items.map((it, i) => (
+            <div
+              key={it.label}
+              className={cn('flex items-center justify-between px-3 py-2', i === 0 && 'bg-white/[0.06]')}
+            >
+              <span className="font-mono text-[10px] text-white/75">{it.label}</span>
+              <span className="rounded border border-white/10 px-1.5 py-0.5 font-mono text-[8px] text-white/40">{it.kbd}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function VideoTeaserBadge() {
+  return (
+    <div className="absolute bottom-3 right-3 flex items-center gap-2 rounded-full border border-white/15 bg-black/70 py-1 pl-1 pr-3 backdrop-blur-sm">
+      <span className="flex h-6 w-6 items-center justify-center rounded-full bg-accent2 text-[9px] text-black">▶</span>
+      <span className="font-mono text-[8px] uppercase tracking-[0.08em] text-white/70">Watch Launch Teaser 0:30</span>
+    </div>
+  );
+}
+
 export function DashboardMockup({ variant, className }: { variant: string; className?: string }) {
   return (
-    <div className={cn('flex h-full w-full bg-[#08090b] font-sans', className)}>
+    <div className={cn('relative flex h-full w-full bg-[#08090b] font-sans', className)}>
       <Sidebar />
       <div className="flex min-w-0 flex-1 flex-col">
         <TopBar />
 
-        {variant === 'table' ? (
+        {variant === 'cmdk' ? (
+          <div className="flex-1 overflow-hidden p-4 sm:p-6">
+            <div className="grid grid-cols-3 gap-3 opacity-50">
+              <MetricCard label="MRR" value="$48.2k" delta="+12.4%" seed={1.3} />
+              <MetricCard label="Conversion" value="3.8%" delta="+0.6%" seed={3.7} />
+              <MetricCard label="Active users" value="1,204" delta="+81" seed={5.2} />
+            </div>
+          </div>
+        ) : variant === 'table' ? (
           <div className="flex-1 overflow-hidden p-4 sm:p-6">
             <div className="mb-3 flex items-center justify-between">
               <span className="font-display text-sm font-medium text-white sm:text-base">Customers</span>
@@ -153,6 +200,12 @@ export function DashboardMockup({ variant, className }: { variant: string; class
           </div>
         )}
       </div>
+      {variant === 'cmdk' && (
+        <>
+          <CommandPalette />
+          <VideoTeaserBadge />
+        </>
+      )}
     </div>
   );
 }

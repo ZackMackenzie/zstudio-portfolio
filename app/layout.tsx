@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import { fontVars } from './fonts';
 import { site } from '@/content/site';
-import { ptBR } from '@/lib/i18n/locales/pt-BR';
+import { en } from '@/lib/i18n/locales/en';
 import { INLINE_DETECT_SCRIPT } from '@/lib/i18n/detect';
 import { LanguageProvider } from '@/lib/i18n/LanguageProvider';
 import { SmoothScroll } from '@/components/layout/SmoothScroll';
@@ -11,43 +11,43 @@ import { Footer } from '@/components/layout/Footer';
 import './globals.css';
 
 // Metadata is statically generated at build time (static export — no
-// per-request rendering), so it is baked in the base locale (pt-BR). The
+// per-request rendering), so it is baked in the base locale (English). The
 // page itself re-localizes client-side; see lib/i18n/.
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `${site.name} — ${ptBR.meta.role}`,
+    default: `${site.name} — ${en.meta.role}`,
     template: `%s — ${site.name}`,
   },
-  description: ptBR.meta.description,
+  description: en.meta.description,
   applicationName: site.name,
   authors: [{ name: site.name }],
   creator: site.name,
   keywords: [
     'web design',
-    'desenvolvimento web',
+    'web development',
     'UI/UX',
-    'design de produto',
-    'identidade visual',
-    'landing page',
-    'SaaS',
+    'SaaS design',
+    'landing pages',
     'motion design',
-    'estúdio digital',
-    'experiências digitais',
+    'Apple-style product video',
+    'Airbnb direct booking',
+    'ad creatives',
+    'digital studio',
   ],
   alternates: { canonical: '/' },
   openGraph: {
     type: 'website',
     url: site.url,
     siteName: site.name,
-    title: `${site.name} — ${ptBR.meta.role}`,
-    description: ptBR.meta.description,
-    locale: 'pt_BR',
+    title: `${site.name} — ${en.meta.role}`,
+    description: en.meta.description,
+    locale: 'en_US',
   },
   twitter: {
     card: 'summary_large_image',
-    title: `${site.name} — ${ptBR.meta.role}`,
-    description: ptBR.meta.description,
+    title: `${site.name} — ${en.meta.role}`,
+    description: en.meta.description,
   },
   robots: { index: true, follow: true },
   icons: {
@@ -61,7 +61,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: '#000000',
+  themeColor: '#09090b',
   colorScheme: 'dark',
   width: 'device-width',
   initialScale: 1,
@@ -69,25 +69,23 @@ export const viewport: Viewport = {
 
 const jsonLd = {
   '@context': 'https://schema.org',
-  '@type': 'Person',
+  '@type': 'Organization',
   name: site.name,
   url: site.url,
-  jobTitle: ptBR.meta.role,
-  description: ptBR.meta.description,
+  description: en.meta.description,
   knowsAbout: [
     'Web Design',
-    'Desenvolvimento Web',
+    'Web Development',
     'UI/UX Design',
-    'Identidade Visual',
     'Motion Design',
-    'Tecnologia Criativa',
+    'Product Video',
+    'Social Ad Creatives',
   ],
-  sameAs: site.socials.filter((s) => !s.href.startsWith('mailto')).map((s) => s.href),
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="pt-BR" className={fontVars}>
+    <html lang="en" className={fontVars}>
       <body>
         {/* Resolves the real locale (saved choice, else browser language) and
             sets <html lang> + window.__Z_LANG__ before hydration, so the
@@ -101,7 +99,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           href="#main"
           className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[200] focus:bg-accent focus:px-4 focus:py-2 focus:font-mono focus:text-xs focus:uppercase focus:tracking-widest focus:text-white"
         >
-          Pular para o conteúdo / Skip to content / Saltar al contenido
+          Skip to content
         </a>
 
         <LanguageProvider>

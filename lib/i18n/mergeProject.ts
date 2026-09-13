@@ -1,5 +1,5 @@
 import type { CaseBlock, MediaRef, Project, ProjectStructure } from '@/content/projects';
-import type { Dictionary } from './locales/pt-BR';
+import type { Dictionary } from './locales/en';
 
 type SeedList =
   | { width: number; height: number; seed: string; accent?: boolean; mockup?: MediaRef['mockup'] }[]
@@ -31,28 +31,14 @@ export function mergeProject(dict: Dictionary, structure: ProjectStructure): Pro
     switch (b.type) {
       case 'overview':
         return { type: 'overview', body: text.overview.body, meta: text.overview.meta };
-      case 'challenge':
-        return { type: 'challenge', body: text.challenge.body };
-      case 'approach':
-        return { type: 'approach', body: text.approach.body, steps: text.approach.steps };
       case 'design':
         return {
           type: 'design',
           body: text.design?.body ?? '',
           media: mergeMedia(b.media, text.design?.media),
         };
-      case 'development':
-        return {
-          type: 'development',
-          body: text.development?.body ?? '',
-          media: mergeMedia(b.media, text.development?.media),
-        };
-      case 'motion':
-        return { type: 'motion', body: text.motion.body, clipId: b.clipId };
       case 'result':
         return { type: 'result', body: text.result.body };
-      case 'gallery':
-        return { type: 'gallery', media: mergeMedia(b.media, text.gallery?.media) };
       case 'technologies':
         return { type: 'technologies', groups: text.technologies.groups };
       default:
@@ -64,8 +50,8 @@ export function mergeProject(dict: Dictionary, structure: ProjectStructure): Pro
   return {
     slug: structure.slug,
     title: text.title,
-    discipline: text.discipline,
-    disciplines: text.tags,
+    category: text.category,
+    tags: text.tags,
     year: structure.year,
     status: structure.status,
     summary: text.summary,

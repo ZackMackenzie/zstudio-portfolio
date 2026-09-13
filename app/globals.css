@@ -8,12 +8,12 @@
    ============================================================ */
 :root {
   /* color */
-  --bg: #000000;
-  --bg-raised: #0c0d0f;
-  --line: #1b1c1f;
+  --bg: #09090b;
+  --bg-raised: #0f1012;
+  --line: #1e1f22;
   --paper: #f3f4f6;
   --ink: #0a0a0b;
-  --text: #f5f6f7;
+  --text: #fafafa;
   --text-dim: #9aa0a8;
   --accent: #2f6bff;
   --accent-2: #34e1ff;

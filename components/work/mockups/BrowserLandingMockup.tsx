@@ -92,11 +92,52 @@ function Pricing() {
   );
 }
 
+function Funnel() {
+  const rows = [
+    { label: 'Setup time', basic: '—', pro: '2 min' },
+    { label: 'Priority support', basic: '—', pro: '✓' },
+    { label: 'Bonus kit', basic: '—', pro: '✓' },
+  ];
+  return (
+    <div className="flex flex-1 flex-col gap-3 px-5 py-5">
+      <div className="flex items-center justify-center gap-2 rounded-full bg-accent2/15 px-3 py-1.5 text-accent2">
+        <span className="h-1.5 w-1.5 rounded-full bg-accent2" />
+        <span className="font-mono text-[9px] uppercase tracking-[0.1em]">Offer ends in 12:59</span>
+      </div>
+      <div className="flex items-center justify-center gap-1 text-accent2">
+        {'★★★★★'.split('').map((s, i) => (
+          <span key={i} className="text-[10px]">
+            {s}
+          </span>
+        ))}
+        <span className="ml-1 font-mono text-[9px] text-white/40">2,400+ users</span>
+      </div>
+      <div className="overflow-hidden rounded-md border border-white/10">
+        <div className="grid grid-cols-3 gap-2 border-b border-white/10 bg-white/[0.03] px-3 py-2 font-mono text-[8px] uppercase tracking-[0.1em] text-white/40">
+          <span />
+          <span className="text-center">Basic</span>
+          <span className="text-center text-accent2">Pro</span>
+        </div>
+        {rows.map((r) => (
+          <div key={r.label} className="grid grid-cols-3 gap-2 border-b border-white/[0.06] px-3 py-2 text-[9px] text-white/70 last:border-0">
+            <span className="truncate">{r.label}</span>
+            <span className="text-center text-white/30">{r.basic}</span>
+            <span className="text-center text-accent2">{r.pro}</span>
+          </div>
+        ))}
+      </div>
+      <span className="mt-auto self-center rounded-full bg-accent2 px-6 py-2 font-mono text-[10px] font-medium uppercase tracking-[0.1em] text-black shadow-[0_0_24px_rgba(52,225,255,0.5)]">
+        Claim your spot →
+      </span>
+    </div>
+  );
+}
+
 export function BrowserLandingMockup({ variant, className }: { variant: string; className?: string }) {
   return (
     <div className={cn('flex h-full w-full flex-col bg-[#08090b]', className)}>
       <BrowserChrome />
-      {variant === 'pricing' ? <Pricing /> : variant === 'proof' ? <Proof /> : <Hero />}
+      {variant === 'funnel' ? <Funnel /> : variant === 'pricing' ? <Pricing /> : variant === 'proof' ? <Proof /> : <Hero />}
     </div>
   );
 }

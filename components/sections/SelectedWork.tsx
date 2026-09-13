@@ -4,8 +4,6 @@ import { useMemo } from 'react';
 import { projectStructures } from '@/content/projects';
 import { ProjectListItem } from '@/components/work/ProjectListItem';
 import { SectionHeader } from '@/components/ui/SectionHeader';
-import { StartProjectButton } from '@/components/ui/StartProjectButton';
-import { Reveal } from '@/components/ui/Reveal';
 import { useI18n } from '@/lib/i18n/LanguageProvider';
 import { mergeProject } from '@/lib/i18n/mergeProject';
 
@@ -26,10 +24,6 @@ export function SelectedWork() {
         ))}
         <div className="border-t border-line" />
       </div>
-
-      <Reveal className="mt-10 flex justify-center">
-        <StartProjectButton />
-      </Reveal>
     </section>
   );
 }

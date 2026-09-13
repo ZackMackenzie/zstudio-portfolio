@@ -2,12 +2,11 @@
 
 import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
 import type { Locale } from './types';
-import { ptBR, type Dictionary } from './locales/pt-BR';
-import { en } from './locales/en';
-import { es } from './locales/es';
+import { en, type Dictionary } from './locales/en';
+import { ptBR } from './locales/pt-BR';
 import { STORAGE_KEY, detectLocale } from './detect';
 
-const dictionaries: Record<Locale, Dictionary> = { 'pt-BR': ptBR, en, es };
+const dictionaries: Record<Locale, Dictionary> = { en, 'pt-BR': ptBR };
 
 type LanguageContextValue = {
   locale: Locale;
@@ -24,16 +23,16 @@ declare global {
 }
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  // Always starts as pt-BR — matches the statically-rendered HTML exactly,
+  // Always starts as English — matches the statically-rendered HTML exactly,
   // so React's hydration pass never sees a text mismatch. The real locale
   // (saved choice, else browser language) is applied right after mount, in
   // the effect below — a normal post-hydration state update, not part of
   // the hydration diff.
-  const [locale, setLocaleState] = useState<Locale>('pt-BR');
+  const [locale, setLocaleState] = useState<Locale>('en');
 
   useEffect(() => {
     const resolved = window.__Z_LANG__ ?? detectLocale();
-    if (resolved !== 'pt-BR') setLocaleState(resolved);
+    if (resolved !== 'en') setLocaleState(resolved);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

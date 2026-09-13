@@ -1,6 +1,5 @@
 import type { CaseBlock as Block } from '@/content/projects';
 import { Media } from '@/components/ui/Media';
-import { MediaPlayer } from '@/components/ui/MediaPlayer';
 import { Reveal } from '@/components/ui/Reveal';
 
 function BlockShell({
@@ -27,11 +26,9 @@ function BlockShell({
 export function CaseBlock({
   block,
   headings,
-  motionStudyAlt,
 }: {
   block: Block;
   headings: Record<Block['type'], string>;
-  motionStudyAlt: string;
 }) {
   const label = headings[block.type];
 
@@ -53,7 +50,6 @@ export function CaseBlock({
         </BlockShell>
       );
 
-    case 'challenge':
     case 'result':
       return (
         <BlockShell label={label}>
@@ -63,29 +59,9 @@ export function CaseBlock({
         </BlockShell>
       );
 
-    case 'approach':
-      return (
-        <BlockShell label={label}>
-          <Reveal>
-            <p className="max-w-prose text-lg leading-relaxed md:text-xl">{block.body}</p>
-            {block.steps && (
-              <ol className="mt-8 flex flex-col border-t border-line">
-                {block.steps.map((s, i) => (
-                  <li key={i} className="flex gap-5 border-b border-line py-4">
-                    <span className="font-mono text-2xs text-dim">{String(i + 1).padStart(2, '0')}</span>
-                    <span className="text-sm md:text-base">{s}</span>
-                  </li>
-                ))}
-              </ol>
-            )}
-          </Reveal>
-        </BlockShell>
-      );
-
     case 'design':
-    case 'development':
       return (
-        <BlockShell label={label}>
+        <BlockShell label={label} wide>
           <Reveal>
             <p className="max-w-prose text-lg leading-relaxed md:text-xl">{block.body}</p>
           </Reveal>
@@ -98,35 +74,6 @@ export function CaseBlock({
               ))}
             </div>
           )}
-        </BlockShell>
-      );
-
-    case 'motion':
-      return (
-        <BlockShell label={label} wide>
-          <Reveal>
-            <p className="max-w-prose text-lg leading-relaxed md:text-xl">{block.body}</p>
-            <div className="mt-8">
-              {block.clipId ? (
-                <MediaPlayer id={block.clipId} alt={`${label} — ${motionStudyAlt}`} seed={block.clipId} />
-              ) : (
-                <Media alt={motionStudyAlt} width={1600} height={900} seed="motion-fallback" accent />
-              )}
-            </div>
-          </Reveal>
-        </BlockShell>
-      );
-
-    case 'gallery':
-      return (
-        <BlockShell label={label} wide>
-          <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {block.media.map((m, i) => (
-              <Reveal key={i} delay={(i % 3) * 0.05}>
-                <Media {...m} className="w-full" />
-              </Reveal>
-            ))}
-          </div>
         </BlockShell>
       );
 
