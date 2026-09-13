@@ -8,11 +8,10 @@
  */
 
 const whatsappNumber = '5511999999999'; // PLACEHOLDER — troque pelo número real com DDI+DDD
-const whatsappMessage = "Hi, I'm interested in working with Zstudio on a project.";
 
 export const site = {
   name: 'Zstudio',
-  wordmark: 'Zstudio®',
+  wordmark: 'ZSTUDIO®',
 
   /** Usado em <title>, OG, URLs canônicas e metadataBase. */
   url: process.env.NEXT_PUBLIC_SITE_URL || 'https://zstudio-lake.vercel.app',
@@ -21,9 +20,13 @@ export const site = {
   contact: {
     email: 'contact@zstudio.design', // PLACEHOLDER — troque pelo e-mail ativo
     whatsapp: whatsappNumber,
-    whatsappUrl: `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`,
     /** Link do Cal.com/Calendly — mantido como opção secundária. */
     calLink: 'https://cal.com/seu-usuario/15min', // PLACEHOLDER
     timezone: 'America/Sao_Paulo',
   },
 } as const;
+
+/** Monta o link do WhatsApp com uma mensagem pré-preenchida (varia por idioma — ver dict.whatsappMessage). */
+export function whatsappHref(message: string) {
+  return `https://wa.me/${site.contact.whatsapp}?text=${encodeURIComponent(message)}`;
+}

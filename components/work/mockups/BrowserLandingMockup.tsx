@@ -100,9 +100,15 @@ function Funnel() {
   ];
   return (
     <div className="flex flex-1 flex-col gap-3 px-5 py-5">
-      <div className="flex items-center justify-center gap-2 rounded-full bg-accent2/15 px-3 py-1.5 text-accent2">
-        <span className="h-1.5 w-1.5 rounded-full bg-accent2" />
-        <span className="font-mono text-[9px] uppercase tracking-[0.1em]">Offer ends in 12:59</span>
+      <div className="flex items-center justify-between gap-2">
+        <div className="flex items-center gap-2 rounded-full bg-accent2/15 px-3 py-1.5 text-accent2">
+          <span className="h-1.5 w-1.5 rounded-full bg-accent2" />
+          <span className="font-mono text-[9px] uppercase tracking-[0.1em]">Offer ends in 12:59</span>
+        </div>
+        <div className="flex items-center gap-1 rounded-full border border-white/10 px-2.5 py-1.5">
+          <span className="font-mono text-[9px] font-medium text-accent2">99</span>
+          <span className="font-mono text-[7px] uppercase tracking-[0.08em] text-white/40">Lighthouse</span>
+        </div>
       </div>
       <div className="flex items-center justify-center gap-1 text-accent2">
         {'★★★★★'.split('').map((s, i) => (

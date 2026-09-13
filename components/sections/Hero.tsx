@@ -6,7 +6,7 @@ import { MotionText } from '@/components/ui/MotionText';
 import { MagneticButton } from '@/components/ui/MagneticButton';
 import { HeroField } from './HeroField';
 import { useI18n } from '@/lib/i18n/LanguageProvider';
-import { site } from '@/content/site';
+import { whatsappHref } from '@/content/site';
 import { scrollToId } from '@/components/layout/SmoothScroll';
 
 export function Hero() {
@@ -26,6 +26,11 @@ export function Hero() {
         style={{ y, opacity }}
         className="shell relative z-10 flex flex-1 flex-col justify-center pb-24 pt-28"
       >
+        <p className="label mb-6 flex items-center gap-3">
+          <span className="inline-block h-1.5 w-1.5 rounded-pill bg-accent2" />
+          {dict.hero.eyebrow}
+        </p>
+
         <h1 className="font-display text-3xl font-medium leading-[0.95] tracking-tightest md:text-4xl">
           <MotionText
             as="span"
@@ -60,10 +65,23 @@ export function Hero() {
             {dict.hero.ctaPrimary}
             <span aria-hidden>↓</span>
           </MagneticButton>
-          <MagneticButton href={site.contact.whatsappUrl} cursorLabel={dict.hero.ctaSecondary} className="text-dim">
+          <MagneticButton href={whatsappHref(dict.whatsappMessage)} cursorLabel={dict.hero.ctaSecondary} className="text-dim">
             {dict.hero.ctaSecondary}
             <span aria-hidden>↗</span>
           </MagneticButton>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.2, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          className="mt-14 flex flex-wrap gap-x-8 gap-y-3 border-t border-white/[0.08] pt-6"
+        >
+          {dict.hero.metrics.map((m, i) => (
+            <span key={m} className="font-mono text-2xs uppercase tracking-[0.14em] text-dim">
+              <span className="text-accent2">{String(i + 1).padStart(2, '0')}.</span> {m}
+            </span>
+          ))}
         </motion.div>
       </motion.div>
     </section>

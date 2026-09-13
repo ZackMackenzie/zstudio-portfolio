@@ -8,15 +8,16 @@
    ============================================================ */
 :root {
   /* color */
-  --bg: #09090b;
-  --bg-raised: #0f1012;
-  --line: #1e1f22;
+  --bg: #08090a;
+  --bg-raised: #12151a;
+  --line: #1e2126;
   --paper: #f3f4f6;
   --ink: #0a0a0b;
   --text: #fafafa;
   --text-dim: #9aa0a8;
-  --accent: #2f6bff;
-  --accent-2: #34e1ff;
+  --accent: #0284c7;
+  --accent-2: #38bdf8;
+  --accent-tint: #e0f2fe;
   /* signature aura — blue -> cyan, anchored bottom-left */
   --aura: radial-gradient(
     120% 120% at 0% 100%,

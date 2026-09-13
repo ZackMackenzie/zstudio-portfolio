@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { motion, useMotionValueEvent, useScroll } from 'framer-motion';
-import { site } from '@/content/site';
+import { site, whatsappHref } from '@/content/site';
 import { useI18n } from '@/lib/i18n/LanguageProvider';
 import { scrollToId } from './SmoothScroll';
 import { LanguageSwitcher } from '@/components/ui/LanguageSwitcher';
@@ -63,7 +63,7 @@ export function Navigation() {
 
         <div className="flex items-center gap-5 md:gap-6">
           <LanguageSwitcher />
-          <MagneticButton href={site.contact.whatsappUrl} cursorLabel={dict.header.bookProject} className="px-4 py-2.5 text-2xs sm:px-5 sm:py-3 sm:text-xs">
+          <MagneticButton href={whatsappHref(dict.whatsappMessage)} cursorLabel={dict.header.bookProject} className="px-4 py-2.5 text-2xs sm:px-5 sm:py-3 sm:text-xs">
             {dict.header.bookProject}
             <span aria-hidden>↗</span>
           </MagneticButton>

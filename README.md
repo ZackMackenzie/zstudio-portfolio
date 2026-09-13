@@ -1,14 +1,15 @@
 # Zstudio
 
-Portfolio site for **Zstudio** — an independent creative studio building high-converting
-websites, Apple-style product motion videos, and paid social creatives for startups,
-hospitality brands, and performance marketers, in Brazil and internationally.
+Portfolio site for **ZSTUDIO®** — an independent studio building high-converting websites,
+Apple-style product motion, and performance creative systems for global brands, founders, and
+Brazilian clients alike.
 
-A single-page, visual-first flow: **Header → Hero → Curated Work (4 turnkey showcase projects,
-each rendered as real code UI, not stock imagery) → Capabilities → Guarantees → Footer
-(the conversion hub)**. No About section, no long contact form — every section exists to help a
-visitor understand the studio, judge the work, or get in touch in one click; see "Show less" at
-the bottom of this file.
+A single-page, visual-first flow, Sui-inspired (Swiss grid, geometric type, dark obsidian +
+electric cyan): **Header → Hero (headline + quick-metrics bar) → Curated Showcase (4 self-contained
+project cards, no subpages) → Capabilities Matrix**. Footer (global, in `layout.tsx`) is the
+conversion hub. No About section, no multi-field contact form, no case-study subroutes — every
+case is fully readable in its own card, in under 5 seconds; see "Show less" at the bottom of this
+file.
 
 ## Stack
 
@@ -55,133 +56,123 @@ env var once a custom domain is live — it drives canonical URLs, OG tags, site
 ```bash
 npm run motion:studio                 # preview / tweak compositions
 npm run motion:render                 # render all → public/media/<id>.{webm,mp4} + poster
-npm run motion:render typography-reel  # render a subset
 ```
 
-See [`remotion/README.md`](remotion/README.md) for how compositions map to the site. The site
-plays rendered files via `components/ui/MediaPlayer.tsx`; it never bundles Remotion itself.
+See [`remotion/README.md`](remotion/README.md) for how compositions map to the site.
 
 ## Languages (English default / Portuguese toggle)
 
 Client-side i18n — no `/en`, `/pt` routes (the site stays a single static export). Resolution
-order:
-
-1. A language the visitor picked before (`localStorage["zstudio-lang"]`).
-2. The browser's language (`navigator.languages`) — `pt*` → pt-BR, anything else → English.
-3. English, if nothing above matched.
+order: a saved choice (`localStorage["zstudio-lang"]`) → the browser's language (`pt*` → pt-BR,
+anything else → English) → English.
 
 The exported HTML is always English (the base locale); `app/layout.tsx` injects a tiny inline
 script that resolves the real language into `window.__Z_LANG__` before the app loads. React
-still hydrates as English (required — anything else throws a hydration mismatch), then
+hydrates as English (required — anything else throws a hydration mismatch), then
 `lib/i18n/LanguageProvider.tsx` swaps to the resolved language right after mount. The `EN | PT`
-switcher in the header (`components/ui/LanguageSwitcher.tsx`) saves the choice to `localStorage`
-and it wins on every later visit.
+switcher in the header (`components/ui/LanguageSwitcher.tsx`) saves the choice to `localStorage`.
 
 **Where the text lives:**
 
-- `lib/i18n/locales/en.ts` — the base locale and the `Dictionary` type every other locale must
-  satisfy (TypeScript errors if `pt-BR.ts` is missing a field).
+- `lib/i18n/locales/en.ts` — base locale + the `Dictionary` type `pt-BR.ts` must satisfy.
 - `lib/i18n/locales/pt-BR.ts` — full, natural (not literal) translation.
-- `content/*.ts` holds only **structural, non-text** data (slugs, ids, order, Remotion `clipId`s,
-  UI-mockup refs, media dimensions) — see the header comment in each file.
-  `lib/i18n/mergeProject.ts` joins a project's structure with its dictionary text into the
-  `Project` shape the case-study components render.
+- `content/*.ts` holds only **structural, non-text** data (slugs, ids, order, mockup refs).
 
-**To add a 3rd language:** copy `lib/i18n/locales/en.ts` → `lib/i18n/locales/<locale>.ts`,
-translate every value (type it as `en`'s `Dictionary`), add the locale to `LOCALES`/
-`LOCALE_LABELS` in `lib/i18n/types.ts`, register it in `LanguageProvider.tsx`'s `dictionaries`
-map, and add a match rule in `detect.ts` (`matchLocale` + the inline script string, kept in
-sync).
+**To add a 3rd language:** copy `en.ts` → `lib/i18n/locales/<locale>.ts`, translate every value,
+add it to `LOCALES`/`LOCALE_LABELS` in `lib/i18n/types.ts`, register it in
+`LanguageProvider.tsx`'s `dictionaries` map, and add a match rule in `detect.ts`.
 
 **Known limitation:** `<title>`/meta description/OG image/JSON-LD are baked at build time in
-English only (static export has no per-request rendering to branch on). Page content re-localizes
-correctly client-side in both languages; only the SEO/social-preview layer stays English.
+English only (static export, no per-request rendering). Page content re-localizes correctly
+client-side in both languages; only the SEO/social-preview layer stays English.
 
-## Capabilities (Services)
+**WhatsApp messages are locale-aware**: `dict.whatsappMessage` holds the pre-filled text per
+language; `whatsappHref(message)` in `content/site.ts` builds the `wa.me` link from it. Every
+WhatsApp CTA on the site (header, hero, footer) calls this with the current `dict.whatsappMessage`
+— never a hardcoded link.
 
-`content/services.ts` (4 ids, order only) + `dict.services.items` — four scannable cards, no
-accordion, no paragraph walls:
+## Capabilities Matrix
 
-1. **Web Development & Landing Pages** — Next.js/React sites, SaaS marketing pages, Airbnb
-   direct-booking pages, affiliate presell funnels.
-2. **Apple-Style Motion & Videos** — kinetic typography reels, 3D UI product teasers,
-   keynote-style launch videos.
-3. **Social & Paid Ad Creatives** — Meta/LinkedIn ad creatives, carousel systems, story motion
-   ads.
-4. **Brand Assets & Messaging Kits** — WhatsApp promo banners, sales decks, launch identity
-   systems.
+`content/services.ts` (4 ids, order only) + `dict.services.items` — a bordered, Sui-style
+technical grid (`components/sections/Services.tsx`), **not** cards or an accordion: each row is
+`01 / LABEL` on the left and a `·`-separated capability list on the right.
 
-`components/sections/Guarantees.tsx` renders the short turnaround/guarantee strip
-(`dict.guarantees.items`) right below — 7-day sprint delivery, timezone-friendly collaboration,
-99+ performance. No pricing table; `dict.cta.pricingNote` says proposals are scoped per project.
+1. **Web Architecture** — SaaS websites, Airbnb direct-booking, affiliate engines, custom
+   React/Next.js.
+2. **Motion & Video** — Apple-style keynote motion, UI feature teasers, kinetic typography reels.
+3. **Performance Creative** — Meta & LinkedIn ads, high-retention carousels, WhatsApp promo kits.
+4. **Brand & Strategy** — visual identity, design tokens, design systems in Figma.
 
-## Selected Work — 4 turnkey showcase projects
+No pricing table; `dict.cta.pricingNote` says proposals are scoped per project.
 
-All 4 case studies are **concept projects** (`status: 'concept'`, a discreet badge on every card
-and case page) — self-directed studio work, not real-client claims. No invented clients, metrics,
-or testimonials.
+## Selected Work — 4 self-contained showcase cards
 
-| Slug | What it shows |
+**There are no `/work/[slug]` subpages.** Every case study is a single, complete card rendered
+directly on the home page (`components/work/ProjectCard.tsx`, listed by
+`components/sections/SelectedWork.tsx`) — mockup, title, discipline, a one-paragraph pitch, and
+tech tags, all visible without a click. All 4 are **concept projects** (a discreet badge on every
+card) — self-directed studio work, not real-client claims. No invented clients, metrics, or
+testimonials.
+
+| Slug | Card |
 |---|---|
-| `aura-stays` | Luxury Airbnb direct-booking page + an Apple-style video teaser |
+| `aura-villa` | Airbnb direct-booking listing split with an Apple-style video teaser |
 | `kroma-ai` | Dark SaaS dashboard with a ⌘K command palette + launch-teaser badge |
-| `apex-flow` | High-contrast affiliate bridge page — countdown, trust badges, comparison table |
-| `studio-creatives` | Paid-social creative pack — carousel slide, WhatsApp promo banner |
+| `apex-flow` | Affiliate bridge page — countdown, Lighthouse-99 badge, trust stars, comparison table |
+| `studio-system` | Paid-social bento: WhatsApp banner + carousel slide + story ad |
 
-Every case's cover/design media is a **real, code-rendered UI mockup** (`components/work/
-mockups/`), not stock imagery or abstract wireframe art:
+`content/projects.ts` defines each project's `mockup: {kind, variant}`; `components/ui/Media.tsx`
+renders the matching component from `components/work/mockups/` (falling back to the abstract
+`GeneratedArt` SVG wherever no mockup is set — unused today, kept for future placeholder cases):
 
-- `DashboardMockup` — SaaS dashboard; `overview` / `table` / `metric` / `cmdk` (⌘K palette +
-  video-teaser badge) variants.
-- `AirbnbShowcaseMockup` — `listing` (booking card) / `video` (teaser player) variants.
+- `DashboardMockup` — `overview` / `table` / `metric` / `cmdk` (⌘K palette + video-teaser badge).
+- `AirbnbShowcaseMockup` — `listing` / `video` / `split` (both side-by-side).
 - `BrowserLandingMockup` — browser-chrome wrapper; `hero` / `pricing` / `proof` / `funnel`
-  (countdown + trust badges + comparison table) variants.
-- `SocialGridMockup` — `grid` / `square` / `story` / `whatsapp` (promo banner) variants.
-
-`content/projects.ts` media entries carry an optional `mockup: {kind, variant}`, rendered by
-`components/ui/Media.tsx` in place of the `GeneratedArt` abstract-art fallback (still used
-wherever no mockup is set). Case pages are short by design: Overview → Design (mockup showcase) →
-Result (one line, no apology — "a studio-owned project built to demonstrate design architecture,
-production-grade code and typographic rigor") → Stack.
+  (countdown + Lighthouse badge + trust stars + comparison table).
+- `SocialGridMockup` — `grid` / `square` / `story` / `whatsapp` / `bento` (3-tile composite).
 
 **⚠️ `Math.sin`/`Math.cos` gotcha:** transcendental math isn't guaranteed bit-identical between
-Node's SSR pass and the browser's V8, which caused a real hydration mismatch on `DashboardMockup`'s
-SVG sparkline (`.toFixed(2)` on the computed points fixed it). Round any `Math.sin/cos/tan`-derived
-value before interpolating it into SSR'd markup.
+Node's SSR pass and the browser's V8 — round any such value (e.g. `.toFixed(2)`) before
+interpolating it into SSR'd markup, or it produces a real hydration mismatch (hit once on
+`DashboardMockup`'s SVG sparkline).
+
+**Mockup copy stays in English regardless of site locale** — decorative product-UI text ("MRR",
+"Get started", "Claim your spot") reads as a normal SaaS/ad-creative convention in any language
+context; it is not wired to the dictionary on purpose.
 
 ## Header & Footer — the conversion hub
 
-The header is a wordmark, a live "available for new projects" status pill (pulsing dot), the
-`EN | PT` toggle, and a single `Book a Project` CTA straight to WhatsApp. No hamburger, no nav
-links — the page is scroll-driven (Hero's primary CTA scrolls to `#work`).
+The header is a wordmark (`ZSTUDIO®`), a live "available for new projects" status pill (pulsing
+cyan dot), the `EN | PT` toggle, and a single `Start a Project` CTA straight to WhatsApp. No
+hamburger, no nav links — the page is scroll-driven (Hero's primary CTA scrolls to `#work`).
 
-`components/layout/Footer.tsx` is the **entire** contact system — frictionless by design, no
-multi-field form:
+`components/layout/Footer.tsx` is the **entire** contact system — frictionless by design:
 
-- A direct WhatsApp link (`site.contact.whatsappUrl`, pre-filled message).
+- A direct WhatsApp link (`whatsappHref(dict.whatsappMessage)`, locale-aware pre-filled text).
 - Click-to-copy email (`site.contact.email`) with a "Copied!" tooltip (`navigator.clipboard`,
   gracefully no-ops if permission is denied — the email stays visible/selectable either way).
-- A live São Paulo/UTC-3 clock (`Intl.DateTimeFormat`) next to an "Online now" pulsing-dot badge.
+- Two live clocks side by side — São Paulo/UTC-3 and New York/UTC-5 (`Intl.DateTimeFormat`) —
+  next to an "Online now" pulsing-dot badge.
 
 ## Where things live
 
 ```
 app/                     routes, layout, metadata, sitemap/robots, OG image
-  work/[slug]/            case-study route (static params from content/projects.ts)
 components/
-  sections/              Hero, SelectedWork, Services, Guarantees
-  work/                  ProjectListItem, CaseIntro, CaseBlock, NextProject, CaseStudyView
+  sections/              Hero, SelectedWork, Services
+  work/                  ProjectCard
     mockups/               DashboardMockup, AirbnbShowcaseMockup, BrowserLandingMockup,
                            SocialGridMockup — code-rendered case-study UI previews
   layout/                Navigation, Footer, SmoothScroll, Grain
   ui/                    MotionText, MagneticButton, LanguageSwitcher, Reveal, Media,
                          MediaPlayer, GeneratedArt, SectionHeader
 content/                 ← structural data only (see "Languages" above for where text lives)
-  site.ts                non-translatable config: brand name, url, email, WhatsApp, timezone
-  projects.ts             project structure + case-block order + mockup refs
+  site.ts                non-translatable config: brand name, url, email, WhatsApp, timezone,
+                         whatsappHref() helper
+  projects.ts             project order + mockup refs (4 entries)
   services.ts             capability id order (4 entries — copy lives in the dictionaries)
 lib/
-  i18n/                  locales (en base / pt-BR), LanguageProvider, detect.ts, mergeProject.ts
+  i18n/                  locales (en base / pt-BR), LanguageProvider, detect.ts
   motion.ts  hooks/  utils.ts  art (via GeneratedArt)
 remotion/                motion compositions + shared theme
 ```
@@ -192,9 +183,11 @@ Canonical values are CSS custom properties in `app/globals.css` (`:root`). They 
 `tailwind.config.ts` (utilities) and `remotion/theme.ts` (video). Change a value in all three to
 keep the system in sync.
 
-- Background: `--bg: #09090b` (deep obsidian); text: `--text: #fafafa`; hairlines:
-  `--line: #1e1f22` (`border-white/10`-equivalent)
-- Accent: `--accent: #2f6bff` (electric blue); `--accent-2: #34e1ff` (cyan, signature aura)
+- Background: `--bg: #08090a` (technical black); card surface: `--bg-raised: #12151a`
+  (`border-white/[0.08]` on cards, not the flatter `--line` hairline used for section rules)
+- Text: `--text: #fafafa`; secondary: `--text-dim: #9aa0a8`
+- Accent: `--accent: #0284c7` (deep cyan); `--accent-2: #38bdf8` (electric cyan — status dots, the
+  signature bottom-left aura, active states); `--accent-tint: #e0f2fe` (rarely used ice tint)
 
 ## Accessibility & motion
 
@@ -202,19 +195,18 @@ keep the system in sync.
   back to opacity/instant.
 - Skip link, semantic landmarks, `:focus-visible` rings, keyboard-operable language switcher.
 - Standard system pointer everywhere (no custom cursor).
-- Secondary text uses `--text-dim` at full opacity (kept bright enough for real contrast — avoid
-  reintroducing low-opacity `text-dim/40`-`/60` modifiers, they read fine on a design file but
-  fail contrast on a real screen).
+- Secondary text uses `--text-dim` at full opacity — avoid reintroducing low-opacity
+  `text-dim/40`-`/60` modifiers, they read fine on a design file but fail contrast on a real
+  screen.
 
 ## Notes
 
-- All 4 case studies are self-directed **concept projects** — see "Selected Work" above. Never
+- All 4 case cards are self-directed **concept projects** — see "Selected Work" above. Never
   invent real clients, metrics, or testimonials.
 - Placeholder contact data (`content/site.ts`) — email, WhatsApp number, Cal.com link — needs
-  real values before this goes in front of paying clients; everything is marked PLACEHOLDER in
-  the file.
+  real values before this goes in front of paying clients; everything is marked PLACEHOLDER.
 - `favicon`/icons are generated from `public/favicon.svg` via `node scripts/gen-icons.mjs`.
 - **Show less, make it better.** Before adding a new top-level section, ask whether it helps a
-  visitor understand the studio, judge the work, or reach out — if not, it belongs inside an
-  existing section or not on the page at all. This is why there's no About section and no
-  multi-field contact form: the Footer's one-click actions do that job with less friction.
+  visitor understand the studio, judge the work, or reach out in one click — if not, it doesn't
+  belong on the page. This is why there's no About section, no contact form, and no case-study
+  subroutes: the cards + footer already do that job, faster.

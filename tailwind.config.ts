@@ -33,6 +33,7 @@ const config: Config = {
       dim: 'var(--text-dim)',
       accent: 'var(--accent)',
       accent2: 'var(--accent-2)',
+      'accent-tint': 'var(--accent-tint)',
       white: '#ffffff',
       black: '#000000',
     },
