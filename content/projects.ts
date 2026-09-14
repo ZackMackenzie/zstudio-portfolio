@@ -14,7 +14,7 @@
  * ============================================================================
  */
 
-export type MockupKind = 'dashboard' | 'browser' | 'social' | 'airbnb';
+export type MockupKind = 'dashboard' | 'browser' | 'social' | 'airbnb' | 'brand';
 export type MockupRef = { kind: MockupKind; variant: string };
 
 export type ProjectStructure = {
@@ -24,11 +24,19 @@ export type ProjectStructure = {
   mockup: MockupRef;
 };
 
+/**
+ * 6 full-width editorial spreads. `acompanhai` and `zstudio` are real,
+ * self-directed products (no external client, so still no invented
+ * results); the rest are concept showcases (`status: 'concept'` renders a
+ * discreet label — see components/work/ProjectCard.tsx).
+ */
 export const projectStructures: ProjectStructure[] = [
-  { slug: 'aura-villa', year: '2026', status: 'concept', mockup: { kind: 'airbnb', variant: 'split' } },
   { slug: 'kroma-ai', year: '2026', status: 'concept', mockup: { kind: 'dashboard', variant: 'cmdk' } },
+  { slug: 'acompanhai', year: '2026', status: 'live', mockup: { kind: 'dashboard', variant: 'overview' } },
+  { slug: 'aura-villa', year: '2026', status: 'concept', mockup: { kind: 'airbnb', variant: 'split' } },
   { slug: 'apex-flow', year: '2026', status: 'concept', mockup: { kind: 'browser', variant: 'funnel' } },
   { slug: 'studio-system', year: '2026', status: 'concept', mockup: { kind: 'social', variant: 'bento' } },
+  { slug: 'zstudio', year: '2026', status: 'live', mockup: { kind: 'brand', variant: 'system' } },
 ];
 
 export const projectSlugs = projectStructures.map((p) => p.slug);

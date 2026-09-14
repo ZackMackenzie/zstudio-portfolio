@@ -31,7 +31,7 @@ export function Hero() {
           {dict.hero.eyebrow}
         </p>
 
-        <h1 className="font-display text-3xl font-medium leading-[0.95] tracking-tightest md:text-4xl">
+        <h1 className="font-display text-4xl font-extrabold leading-[0.92] tracking-tightest md:text-5xl">
           <MotionText
             as="span"
             trigger="mount"

@@ -5,47 +5,60 @@ import { formatIndex } from '@/lib/utils';
 import type { ProjectStructure } from '@/content/projects';
 import type { ProjectText } from '@/lib/i18n/locales/en';
 
+/**
+ * Full-width editorial spread, not a bordered card — the mockup is left
+ * to breathe with no frame/background, and a huge faint index numeral sits
+ * behind the copy. Alternates image/text sides per row (see SelectedWork).
+ */
 export function ProjectCard({
   structure,
   text,
   index,
   concept,
+  reversed,
 }: {
   structure: ProjectStructure;
   text: ProjectText;
   index: number;
   concept: string;
+  reversed?: boolean;
 }) {
   return (
-    <article className="overflow-hidden rounded-md border border-white/[0.08] bg-raised backdrop-blur-sm">
-      <Media alt={text.title} width={1200} height={800} mockup={structure.mockup} className="w-full" />
+    <article className="relative grid gap-10 md:grid-cols-12 md:gap-8 lg:gap-12">
+      <span
+        aria-hidden
+        className="pointer-events-none absolute -top-6 select-none font-display text-[7rem] font-extrabold leading-none text-white/[0.03] md:-top-10 md:text-[11rem]"
+        style={{ [reversed ? 'right' : 'left']: 0 } as React.CSSProperties}
+      >
+        {formatIndex(index)}
+      </span>
 
-      <div className="flex flex-col gap-4 p-6 md:p-7">
-        <div className="flex items-start justify-between gap-4">
-          <div>
-            <span className="label text-accent2">{formatIndex(index)}</span>
-            <h3 className="mt-2 font-display text-xl font-medium tracking-tighter md:text-2xl">{text.title}</h3>
-            <p className="mt-1 font-mono text-2xs uppercase tracking-[0.12em] text-dim">{text.discipline}</p>
-          </div>
+      <div className={reversed ? 'md:order-2 md:col-span-7' : 'md:col-span-7'}>
+        <Media
+          alt={text.title}
+          width={1400}
+          height={933}
+          mockup={structure.mockup}
+          className="w-full rounded-sm"
+        />
+      </div>
+
+      <div className={reversed ? 'relative md:order-1 md:col-span-5 md:self-center' : 'relative md:col-span-5 md:self-center'}>
+        <div className="flex items-center gap-3">
+          <span className="font-mono text-2xs uppercase tracking-[0.14em] text-accent2">{formatIndex(index)}</span>
           {structure.status === 'concept' && (
-            <span className="shrink-0 rounded-pill border border-white/[0.08] px-2.5 py-1 font-mono text-2xs uppercase tracking-[0.1em] text-dim">
-              {concept}
-            </span>
+            <span className="font-mono text-2xs uppercase tracking-[0.14em] text-dim">{concept}</span>
           )}
         </div>
 
-        <p className="text-sm leading-relaxed text-dim">{text.pitch}</p>
+        <h3 className="mt-4 font-display text-4xl font-extrabold leading-[0.98] tracking-tightest md:text-5xl">
+          {text.title}
+        </h3>
+        <p className="mt-3 font-mono text-2xs uppercase tracking-[0.12em] text-dim">{text.discipline}</p>
 
-        <div className="flex flex-wrap gap-2 border-t border-white/[0.08] pt-4">
-          {text.tags.map((t) => (
-            <span
-              key={t}
-              className="rounded-pill border border-white/[0.08] px-2.5 py-1 font-mono text-2xs uppercase tracking-[0.1em] text-accent2"
-            >
-              {t}
-            </span>
-          ))}
-        </div>
+        <p className="mt-6 max-w-md font-serif text-lg italic leading-snug text-text/90 md:text-xl">{text.pitch}</p>
+
+        <p className="mt-6 text-sm text-dim">{text.tags.join(' · ')}</p>
       </div>
     </article>
   );

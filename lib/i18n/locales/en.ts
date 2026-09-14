@@ -23,66 +23,82 @@ export type ServiceText = {
 };
 
 const projects: Record<string, ProjectText> = {
-  'aura-villa': {
-    title: 'Aura Villa',
-    discipline: 'Hospitality Web · Direct Booking · Motion Ad',
-    pitch:
-      'Direct-booking website and viral social video for an architectural Airbnb property, cutting platform commissions.',
-    tags: ['Next.js', 'Direct Checkout', 'Motion Trailer'],
-  },
   'kroma-ai': {
     title: 'Kroma AI',
     discipline: 'SaaS Product Design · Kinetic Video · Performance Ads',
-    pitch:
-      'High-ticket SaaS launch experience featuring an interactive dark-mode dashboard and a 30s keynote-style product teaser video.',
+    pitch: "A command palette isn't a gimmick here — for a technical buyer, speed is the whole pitch.",
     tags: ['Next.js 15', 'Framer Motion', 'Ad Creatives'],
+  },
+  acompanhai: {
+    title: 'AcompanhaAí',
+    discipline: 'SaaS Product Design · Interface Engineering',
+    pitch: 'A subscription product lives or dies in the dashboard, not the marketing page — so that came first.',
+    tags: ['Product Design', 'Next.js', 'Subscription SaaS'],
+  },
+  'aura-villa': {
+    title: 'Aura Villa',
+    discipline: 'Hospitality Web · Direct Booking · Motion Ad',
+    pitch: 'Every dollar saved on platform commission had to feel earned, not extracted — hence the direct-booking flow.',
+    tags: ['Next.js', 'Direct Checkout', 'Motion Trailer'],
   },
   'apex-flow': {
     title: 'Apex Flow',
     discipline: 'Conversion Rate Optimization · Landing Page · WhatsApp Kit',
-    pitch:
-      'Sub-second affiliate presell landing page with psychological conversion triggers, comparison matrix, and instant WhatsApp launch kit.',
+    pitch: 'Comparison tables convert better than adjectives, so the whole page argues in numbers.',
     tags: ['Ultra-Fast React', 'Tailwind CSS', 'Ad System'],
   },
   'studio-system': {
     title: 'Studio System',
     discipline: 'Paid Social Creatives · Instagram Carousels · WhatsApp Banners',
-    pitch: 'Complete creative volume machine for brands scaling paid traffic and social media.',
+    pitch: 'One visual system, cut into every format a paid-social calendar actually needs.',
     tags: ['Motion Design', 'Social Growth', 'Brand Identity'],
+  },
+  zstudio: {
+    title: 'Zstudio',
+    discipline: 'Brand Identity · Design System · This Website',
+    pitch: 'The studio had to survive the same scrutiny as any client’s brand — this site is the proof.',
+    tags: ['Brand System', 'Next.js 15', 'Motion Design'],
   },
 };
 
 const services: Record<string, ServiceText> = {
-  'web-dev': {
-    title: 'Web Architecture',
-    items: ['SaaS Websites', 'Airbnb Direct-Booking', 'Affiliate Engines', 'Custom React/Next.js'],
+  brand: {
+    title: 'Brand',
+    items: ['Identity', 'Branding', 'Visual Direction'],
   },
-  'motion-video': {
-    title: 'Motion & Video',
-    items: ['Apple-style Keynote Motion', 'UI Feature Teasers', 'Kinetic Typography Reels'],
+  digital: {
+    title: 'Digital',
+    items: ['Websites', 'Landing Pages', 'SaaS Products', 'UI/UX Design'],
   },
-  'social-ads': {
-    title: 'Performance Creative',
-    items: ['Meta & LinkedIn Ads', 'High-Retention Carousels', 'WhatsApp Promo Kits'],
+  content: {
+    title: 'Content',
+    items: ['Social Media', 'Ad Creatives', 'Product Videos', 'Apple-style Motion'],
   },
-  'brand-assets': {
-    title: 'Brand & Strategy',
-    items: ['Visual Identity', 'Design Tokens', 'Design Systems in Figma'],
+  growth: {
+    title: 'Growth',
+    items: ['Sales Pages', 'Affiliate Funnels', 'Digital Campaigns'],
   },
 };
 
 export const en = {
   meta: {
-    role: 'Creative Engineering & Digital Systems',
+    role: 'Digital Design & Technology Studio',
     description:
-      'Zstudio is an independent studio crafting high-converting web experiences, cinematic product teasers, and performance creative systems for global brands and founders.',
-    ogTagline: 'We build digital products that command attention.',
-    ogServices: 'Web · Motion · Ads · Brand',
+      'Zstudio is an independent studio designing and engineering websites, brands and digital products for founders, companies and creators — in Brazil and abroad.',
+    ogTagline: 'Websites, brands and digital products, built with intention.',
+    ogServices: 'Brand · Digital · Content · Growth',
   },
 
   header: {
     status: 'Available for new projects · Q2/Q3',
     bookProject: 'Start a Project',
+  },
+
+  nav: {
+    work: 'Work',
+    services: 'Services',
+    about: 'About',
+    contact: 'Contact',
   },
 
   languageSwitcher: {
@@ -96,13 +112,13 @@ export const en = {
   },
 
   hero: {
-    eyebrow: 'Creative Engineering & Digital Systems / 2026',
-    lines: ['We build digital products,', 'Apple-style motion, and', 'websites that command attention.'],
+    eyebrow: 'Design, Technology & Digital Products / 2026',
+    lines: ['Websites, brands and', 'digital products —', 'built with intention.'],
     subcopy:
-      'An independent studio crafting high-converting web experiences, cinematic product teasers, and performance creative systems for global brands and founders.',
+      'Zstudio is an independent studio designing and engineering digital experiences for founders, companies and brands across Brazil and abroad.',
     ctaPrimary: 'Explore Selected Work',
     ctaSecondary: 'Start a Project',
-    metrics: ['7-Day Sprint Delivery', 'Sub-Second Speed', 'Global Timezone (EST/BRT)'],
+    metrics: ['Design + Development, One Team', 'Independent Studio, By Design', 'BR + Global Timezones (EST/BRT)'],
   },
 
   work: {
@@ -113,16 +129,55 @@ export const en = {
   },
 
   services: {
-    label: 'Capabilities',
-    title: ['Capabilities', 'Matrix'],
+    label: 'Services',
+    title: ['Full-Service,', 'By Discipline'],
     items: services,
   },
 
-  footer: {
-    titleLines: ["Let's build something", 'unforgettable.'],
+  about: {
+    label: 'About',
+    title: ['One Studio,', 'Every Discipline'],
+    body: "Zstudio works at the intersection of design, technology and strategy. Every project moves through the same hands — from the first wireframe to the last line of motion code — so the thinking behind a brand and the execution of its product never drift apart. We build for founders and companies who need more than a good-looking interface: a system that holds together under real use, in any language, on any screen.",
+    disciplines: ['Design', 'Technology', 'Strategy', 'Motion', 'Branding', 'UX'],
+  },
+
+  process: {
+    label: 'Process',
+    title: ['How a Project', 'Moves Forward'],
+    steps: [
+      {
+        title: 'Discover',
+        body: 'Understand the business, the audience, and what "done well" actually means for this project.',
+      },
+      {
+        title: 'Define',
+        body: 'Turn that understanding into scope, structure and a clear content map — before any pixel is placed.',
+      },
+      {
+        title: 'Design',
+        body: 'Visual direction, typography and layout, tested against real content, not placeholder text.',
+      },
+      {
+        title: 'Build',
+        body: 'Production-grade code — responsive, accessible, fast — not a static mockup pretending to be a product.',
+      },
+      {
+        title: 'Refine',
+        body: 'Polish motion, performance and edge cases until the experience holds up under real use.',
+      },
+    ],
+  },
+
+  contact: {
+    label: 'Contact',
+    title: ['Have a Project', 'in Mind?'],
+    subcopy: "Tell us what you're building — a brand, a product or a campaign — and we'll get back with next steps.",
     whatsapp: 'Message us on WhatsApp',
     copyEmail: 'Copy email',
     copied: 'Copied!',
+  },
+
+  footer: {
     onlineNow: 'Online now',
     backToTop: 'Back to top ↑',
     copyright: '© 2026 ZSTUDIO. ALL RIGHTS RESERVED. TIMEZONE COMPATIBLE (EST / BRT).',

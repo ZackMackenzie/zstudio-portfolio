@@ -2,7 +2,7 @@ import { Hanken_Grotesk, Inter, IBM_Plex_Mono, Newsreader } from 'next/font/goog
 
 export const display = Hanken_Grotesk({
   subsets: ['latin'],
-  weight: ['300', '400', '500', '600'],
+  weight: ['300', '400', '500', '600', '700', '800'],
   variable: '--font-display',
   display: 'swap',
 });

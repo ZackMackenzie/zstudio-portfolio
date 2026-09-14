@@ -4,6 +4,7 @@ import { DashboardMockup } from '@/components/work/mockups/DashboardMockup';
 import { AirbnbShowcaseMockup } from '@/components/work/mockups/AirbnbShowcaseMockup';
 import { BrowserLandingMockup } from '@/components/work/mockups/BrowserLandingMockup';
 import { SocialGridMockup } from '@/components/work/mockups/SocialGridMockup';
+import { BrandIdentityMockup } from '@/components/work/mockups/BrandIdentityMockup';
 import type { MockupRef } from '@/content/projects';
 
 export type MediaSource = {
@@ -27,6 +28,7 @@ const mockupComponents = {
   airbnb: AirbnbShowcaseMockup,
   browser: BrowserLandingMockup,
   social: SocialGridMockup,
+  brand: BrandIdentityMockup,
 };
 
 /**

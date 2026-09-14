@@ -33,7 +33,7 @@ export function SectionHeader({
       <MotionText
         as="h2"
         lines={title}
-        className={`mt-6 font-display text-2xl font-medium leading-[1.02] tracking-tighter md:text-3xl ${
+        className={`mt-6 font-display text-2xl font-extrabold leading-[1.02] tracking-tighter md:text-3xl ${
           align === 'right' ? 'text-right' : ''
         }`}
       />
