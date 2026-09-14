@@ -80,7 +80,7 @@ export default async function CaseStudyPage({
           </Link>
 
           <div className="mt-8 flex flex-wrap items-center gap-3">
-            <span className="rounded-pill border border-[#3a5bff66] px-3 py-1 font-mono text-xs tracking-wide text-accent">
+            <span className="rounded-pill border border-[#3a5bff66] px-3 py-1 font-mono text-xs tracking-wide text-accent-soft">
               {dict.work.concept}
             </span>
           </div>

@@ -49,7 +49,7 @@ export function ProjectCard({ project, copy, dict, locale, index }: ProjectCardP
                 </span>
               ))}
             </div>
-            <span className="number-label mt-5 inline-flex items-center gap-2 text-dim transition-colors duration-400 group-hover:text-accent">
+            <span className="number-label mt-5 inline-flex items-center gap-2 text-dim transition-colors duration-400 group-hover:text-accent-soft">
               {dict.work.viewCase}
               <span className="transition-transform duration-400 group-hover:translate-x-1">→</span>
             </span>

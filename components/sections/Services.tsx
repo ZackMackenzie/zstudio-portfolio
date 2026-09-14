@@ -45,7 +45,7 @@ export function Services({ dict, locale }: ServicesProps) {
               <a
                 href={`/${locale}#contact`}
                 data-cursor-hover
-                className="inline-flex items-center rounded-pill border border-line px-5 py-2.5 text-sm transition-colors duration-400 hover:border-accent hover:text-accent"
+                className="inline-flex items-center rounded-pill border border-line px-5 py-2.5 text-sm transition-colors duration-400 hover:border-accent hover:text-accent-soft"
               >
                 {dict.nav.cta}
               </a>

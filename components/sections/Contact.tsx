@@ -49,7 +49,7 @@ export function Contact({ dict }: ContactProps) {
           <Reveal delay={0.15}>
             <p className="mt-10 text-sm text-dim">
               {dict.contact.directLabel}{' '}
-              <a href={`mailto:${site.email}`} data-cursor-hover className="text-text underline decoration-line underline-offset-4 hover:text-accent">
+              <a href={`mailto:${site.email}`} data-cursor-hover className="text-text underline decoration-line underline-offset-4 hover:text-accent-soft">
                 {site.email}
               </a>
             </p>
@@ -122,7 +122,7 @@ export function Contact({ dict }: ContactProps) {
                 </MagneticButton>
 
                 {status === 'success' ? (
-                  <span className="text-sm text-accent">{dict.contact.formSuccess}</span>
+                  <span className="text-sm text-accent-soft">{dict.contact.formSuccess}</span>
                 ) : null}
                 {status === 'error' ? (
                   <span className="text-sm text-dim">{dict.contact.formError}</span>
