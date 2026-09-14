@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { LOCALES, isLocale, type Locale } from '@/lib/i18n/types';
 import { getDictionary } from '@/lib/i18n/dictionaries';
-import { projects, getProject } from '@/content/projects';
+import { services, getService } from '@/content/services';
 import { ProjectVisual } from '@/components/work/ProjectVisual';
 import { MediaPlayer } from '@/components/ui/MediaPlayer';
 import { Reveal } from '@/components/ui/Reveal';
@@ -11,7 +11,7 @@ import { MagneticButton } from '@/components/ui/MagneticButton';
 import { site } from '@/content/site';
 
 export function generateStaticParams() {
-  return LOCALES.flatMap((locale) => projects.map((project) => ({ locale, slug: project.slug })));
+  return LOCALES.flatMap((locale) => services.map((service) => ({ locale, slug: service.slug })));
 }
 
 export async function generateMetadata({
@@ -21,9 +21,9 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale: rawLocale, slug } = await params;
   const locale: Locale = isLocale(rawLocale) ? rawLocale : 'en';
-  const project = getProject(slug);
-  if (!project) return {};
-  const copy = project.copy[locale];
+  const service = getService(slug);
+  if (!service) return {};
+  const copy = service.copy[locale];
 
   return {
     title: copy.title,
@@ -47,17 +47,14 @@ export default async function CaseStudyPage({
   if (!isLocale(rawLocale)) notFound();
   const locale = rawLocale;
   const dict = getDictionary(locale);
-  const project = getProject(slug);
-  if (!project) notFound();
+  const service = getService(slug);
+  if (!service) notFound();
 
-  const copy = project.copy[locale];
-  const categoryNames = project.categoryIndices
-    .map((i) => dict.services.categories[i]?.label)
-    .filter(Boolean);
+  const copy = service.copy[locale];
 
-  const currentIndex = projects.findIndex((p) => p.slug === slug);
-  const nextProject = projects[(currentIndex + 1) % projects.length];
-  const nextCopy = nextProject.copy[locale];
+  const currentIndex = services.findIndex((s) => s.slug === slug);
+  const nextService = services[(currentIndex + 1) % services.length];
+  const nextCopy = nextService.copy[locale];
 
   const stages: { label: string; body: string }[] = [
     { label: dict.caseStudy.concept, body: copy.concept },
@@ -72,7 +69,7 @@ export default async function CaseStudyPage({
       <header className="pb-section pt-36">
         <div className="container-page">
           <Link
-            href={`/${locale}#work`}
+            href={`/${locale}#services`}
             data-cursor-hover
             className="number-label inline-flex items-center gap-2 text-dim hover:text-text"
           >
@@ -93,7 +90,7 @@ export default async function CaseStudyPage({
       </header>
 
       <div className="container-page">
-        {project.audiovisual ? (
+        {service.audiovisual ? (
           <MediaPlayer
             src="/media/apex-reel.mp4"
             webmSrc="/media/apex-reel.webm"
@@ -101,7 +98,7 @@ export default async function CaseStudyPage({
             label={copy.title}
           />
         ) : (
-          <ProjectVisual visual={project.visual} title={copy.title} className="aspect-video" />
+          <ProjectVisual visual={service.visual} title={copy.title} className="aspect-video" />
         )}
       </div>
 
@@ -113,15 +110,15 @@ export default async function CaseStudyPage({
           <div className="grid grid-cols-2 gap-8 md:col-span-9 md:grid-cols-4">
             <div>
               <dt className="number-label text-dim">{dict.caseStudy.category}</dt>
-              <dd className="mt-2 text-sm">{categoryNames[0]}</dd>
+              <dd className="mt-2 text-sm">{copy.serviceLabel}</dd>
             </div>
             <div>
               <dt className="number-label text-dim">{dict.caseStudy.servicesLabel}</dt>
-              <dd className="mt-2 text-sm">{categoryNames.join(', ')}</dd>
+              <dd className="mt-2 text-sm">{service.tech.join(', ')}</dd>
             </div>
             <div>
               <dt className="number-label text-dim">{dict.caseStudy.year}</dt>
-              <dd className="mt-2 text-sm">{project.year}</dd>
+              <dd className="mt-2 text-sm">{service.year}</dd>
             </div>
             <div>
               <dt className="number-label text-dim">{dict.work.role}</dt>
@@ -159,20 +156,30 @@ export default async function CaseStudyPage({
 
       <section className="border-t border-line py-section">
         <div className="container-page grid grid-cols-1 gap-10 md:grid-cols-2">
-          <ProjectVisual visual={project.visual} title={copy.title} variant="detail" />
-          <ProjectVisual visual={project.visual} title={copy.title} variant="mobile" />
+          <ProjectVisual visual={service.visual} title={copy.title} variant="detail" />
+          <ProjectVisual visual={service.visual} title={copy.title} variant="mobile" />
         </div>
       </section>
 
       <section className="border-t border-line py-16">
-        <div className="container-page flex items-center justify-between">
-          <span className="number-label uppercase text-dim">{dict.caseStudy.next}</span>
+        <div className="container-page flex flex-col gap-8 sm:flex-row sm:items-center sm:justify-between">
+          <MagneticButton>
+            <a
+              href={`/${locale}#contact`}
+              data-cursor-hover
+              className="inline-flex items-center rounded-pill bg-text px-6 py-3.5 text-sm font-medium text-ink transition-colors duration-400 hover:bg-accent hover:text-white"
+            >
+              {dict.nav.cta}
+            </a>
+          </MagneticButton>
+
           <MagneticButton>
             <Link
-              href={`/${locale}/work/${nextProject.slug}`}
+              href={`/${locale}/work/${nextService.slug}`}
               data-cursor-hover
-              className="font-display text-2xl font-medium tracking-tighter hover:text-accent"
+              className="flex items-center gap-3 font-display text-xl font-medium tracking-tighter hover:text-accent-soft sm:text-2xl"
             >
+              <span className="number-label text-dim">{dict.caseStudy.next}</span>
               {nextCopy.title} →
             </Link>
           </MagneticButton>

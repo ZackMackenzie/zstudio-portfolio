@@ -31,7 +31,6 @@ export function Navigation({ dict, locale }: NavigationProps) {
   const links = [
     { href: `/${locale}#work`, label: dict.nav.work },
     { href: `/${locale}#services`, label: dict.nav.services },
-    { href: `/${locale}#about`, label: dict.nav.about },
     { href: `/${locale}#contact`, label: dict.nav.contact },
   ];
 

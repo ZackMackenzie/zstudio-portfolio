@@ -1,8 +1,9 @@
 # Z.studio
 
-The official portfolio for **Z.studio** — a digital design & technology studio. Built from
-scratch as a full Next.js App Router site: editorial home page, individual case-study pages,
-a working contact form, and a Remotion pipeline for the motion pieces embedded in the work.
+The official portfolio for **Z.studio** — a digital design & technology studio. A deliberately
+short, editorial home page (hero → 6 clickable services → 3 featured projects → contact) where
+each of the 6 services is its own case-study page, a working contact form, and a Remotion
+pipeline for the motion pieces embedded in the work.
 
 ## Identity
 
@@ -54,27 +55,34 @@ locale-less path to the best match: a saved `z_locale` cookie first, then the br
 **Where the text lives:**
 
 - `lib/i18n/types.ts` — the `Dictionary` type every locale must satisfy.
-- `lib/i18n/locales/{en,pt,es}.ts` — full copy per locale (nav, hero, services, about, contact
-  form, footer, 404, case-study labels).
-- `content/projects.ts` — structural project data (slug, year, tech, which services apply)
-  plus each project's copy nested per locale (`project.copy.en/pt/es`).
+- `lib/i18n/locales/{en,pt,es}.ts` — full copy per locale (nav, hero, services, contact form,
+  footer, 404, case-study labels).
+- `content/services.ts` — the 6 services **are** the work: each entry is both a row in the
+  home page's Services list and the full case-study content for `/work/<slug>`, nested per
+  locale (`service.copy.en/pt/es`).
 
 **To add a 4th language:** add it to `LOCALES`/`LOCALE_LABELS`/`LOCALE_NAMES` in
 `lib/i18n/types.ts`, add `lib/i18n/locales/<locale>.ts` (copy `en.ts` and translate every
 value), register it in `lib/i18n/dictionaries.ts`, and add a `copy.<locale>` entry to every
-project in `content/projects.ts`.
+service in `content/services.ts`.
 
 ## Work / case studies
 
-`content/projects.ts` defines 6 **self-directed concept projects** — clearly labelled
-"Concept project" on every card and case page. None are real clients; no invented metrics or
-testimonials. Each has a `visual` id rendered by `components/work/ProjectVisual.tsx` — bespoke
-SVG/CSS compositions (not fake screenshots) standing in for product shots. The one audiovisual
-case (`apex`) embeds a real rendered video from the Remotion pipeline instead.
+Six services, six routes, six flagship projects — `content/services.ts` — `websites`, `saas`,
+`brand`, `motion`, `creative`, `funnels`. Every one is clearly labelled "Z.studio Concept" on
+its card and case page. None are real clients; no invented metrics or testimonials — the
+`result` field is always phrased as a hypothetical design objective. Each has a `visual` id
+rendered by `components/work/ProjectVisual.tsx` — bespoke SVG/CSS compositions (not fake
+screenshots) standing in for product shots. The one audiovisual case (`motion` / Apex) embeds
+a real rendered video from the Remotion pipeline instead.
 
-Case study route: `app/[locale]/work/[slug]/page.tsx` — Overview → Challenge → Solution →
-(optional) Process → Result (omitted/honest placeholder when there's no real metric to report,
-per project) → visual showcase → next project.
+Case study route: `app/[locale]/work/[slug]/page.tsx` — Overview → Concept → Direction →
+(optional) Interface → (optional) Motion → Development → Result → visual gallery (detail +
+mobile crops of the same composition) → "Start a project" CTA + next project.
+
+The home page shows only 3 of the 6 (`components/sections/SelectedWork.tsx`, `FEATURED`
+constant — currently `motion`, `saas`, `brand`) to stay short; all 6 are one click away via the
+Services list, which sits above it on the page.
 
 ## Remotion (motion pipeline)
 
@@ -144,12 +152,12 @@ app/
   robots.ts, sitemap.ts, opengraph-image.tsx   — locale-agnostic, site-wide
   fonts.ts, globals.css
 components/
-  sections/               Hero, SelectedWork, Services, About, Contact
+  sections/               Hero, Services (6 clickable rows), SelectedWork (3 featured), Contact
   work/                   ProjectCard, ProjectVisual
   layout/                 Navigation, Footer, Grain
   ui/                     Logo, CustomCursor, MagneticButton, Reveal, SectionHeader,
                           LanguageSwitcher, MediaPlayer, Marquee
-content/                  site.ts (config), projects.ts (structural + per-locale copy)
+content/                  site.ts (config), services.ts (the 6 services/case studies, per-locale)
 lib/
   i18n/                   types, dictionaries, locales/{en,pt,es}, detect (Accept-Language)
   hooks/, motion.ts, utils.ts
@@ -170,6 +178,9 @@ scripts/                  gen-icons.mjs, render-motion.mjs
 
 - All 6 case studies are self-directed **concept projects** — see "Work / case studies" above.
   Never invent real clients, metrics, or testimonials when adding more.
+- No "About" section by design — the brief this version was built to explicitly asked for the
+  home page to be as short as possible. The `about` key still exists in `Dictionary` (unused,
+  harmless) in case that changes later.
 - `content/site.ts` has placeholder contact details (`hello@zstudio.design`, social links) —
   replace with real ones before this goes in front of paying clients.
 - Icons are generated from `public/favicon.svg` via `npm run icons:gen` (uses `sharp`) —

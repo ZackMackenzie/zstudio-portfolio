@@ -9,17 +9,14 @@ const en: Dictionary = {
   nav: {
     work: 'Work',
     services: 'Services',
-    about: 'About',
     contact: 'Contact',
     cta: 'Start a project',
   },
   hero: {
-    kicker: 'Design, engineering & motion — one small studio',
-    line1: 'We build digital things',
-    line2: 'with intent.',
-    subhead:
-      'Z.studio designs and builds digital work end to end — from brand identity to shipped product to the motion and ads that sell it. One team, one system, not three vendors stitched together.',
-    chips: ['Websites', 'SaaS / Product', 'Brand Identity', 'Motion / Film', 'Creative & Ads', 'Funnels'],
+    kicker: 'Digital design & technology studio',
+    line1: 'Digital products,',
+    line2: 'brands & experiences.',
+    subhead: 'A small studio designing across web, product, brand, and motion.',
     ctaPrimary: 'Start a project',
     ctaSecondary: 'See the work',
     scroll: 'Scroll',
@@ -38,34 +35,6 @@ const en: Dictionary = {
   services: {
     kicker: 'What we do',
     title: 'Services',
-    intro: 'Four disciplines, one studio. Scope is set project by project — no packages, no filler.',
-    cta: "Don't see exactly what you need? Ask us anyway.",
-    categories: [
-      {
-        index: '01',
-        label: 'Digital',
-        description: 'Fast, precise digital products — built to convert, not just exist.',
-        items: ['Websites', 'SaaS', 'Landing Pages'],
-      },
-      {
-        index: '02',
-        label: 'Brand',
-        description: 'Systems, not just logos — identity that holds up across every surface.',
-        items: ['Brand Identity', 'Design Systems', 'Art Direction'],
-      },
-      {
-        index: '03',
-        label: 'Motion',
-        description: 'Motion that explains, sells, and sticks — from UI micro-detail to full films.',
-        items: ['Product Films', 'Motion Graphics', 'Remotion'],
-      },
-      {
-        index: '04',
-        label: 'Growth',
-        description: 'Performance creative and pages built around one goal: the next click.',
-        items: ['Ads', 'Creative Systems', 'Funnels', 'Conversion'],
-      },
-    ],
   },
   about: {
     kicker: 'About',
@@ -84,7 +53,7 @@ const en: Dictionary = {
   },
   contact: {
     kicker: 'Contact',
-    title: 'Start a project',
+    title: 'Have a project in mind?',
     intro: "Tell us what you're building. We reply within one business day.",
     formName: 'Name',
     formEmail: 'Email',
@@ -121,7 +90,7 @@ const en: Dictionary = {
   caseStudy: {
     overview: 'Overview',
     category: 'Category',
-    servicesLabel: 'Capabilities',
+    servicesLabel: 'Stack',
     year: 'Year',
     concept: 'Concept',
     direction: 'Direction',

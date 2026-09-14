@@ -26,7 +26,6 @@ export interface Dictionary {
   nav: {
     work: string;
     services: string;
-    about: string;
     contact: string;
     cta: string;
   };
@@ -35,7 +34,6 @@ export interface Dictionary {
     line1: string;
     line2: string;
     subhead: string;
-    chips: string[];
     ctaPrimary: string;
     ctaSecondary: string;
     scroll: string;
@@ -53,9 +51,6 @@ export interface Dictionary {
   services: {
     kicker: string;
     title: string;
-    intro: string;
-    cta: string;
-    categories: { index: string; label: string; description: string; items: string[] }[];
   };
   about: {
     kicker: string;

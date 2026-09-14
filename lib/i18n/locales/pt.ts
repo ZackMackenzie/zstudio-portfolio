@@ -9,17 +9,14 @@ const pt: Dictionary = {
   nav: {
     work: 'Trabalhos',
     services: 'Serviços',
-    about: 'Sobre',
     contact: 'Contato',
     cta: 'Iniciar projeto',
   },
   hero: {
-    kicker: 'Design, engenharia & motion — um único estúdio',
-    line1: 'Criamos coisas digitais',
-    line2: 'com intenção.',
-    subhead:
-      'A Z.studio projeta e constrói do início ao fim — da identidade de marca ao produto no ar, passando pelo motion e pelos anúncios que vendem tudo isso. Um time, um sistema só, não três fornecedores diferentes.',
-    chips: ['Websites', 'SaaS / Produto', 'Identidade de Marca', 'Motion / Filme', 'Criativo & Ads', 'Funis'],
+    kicker: 'Estúdio digital de design & tecnologia',
+    line1: 'Produtos digitais,',
+    line2: 'marcas & experiências.',
+    subhead: 'Um estúdio pequeno, projetando em web, produto, marca e motion.',
     ctaPrimary: 'Iniciar projeto',
     ctaSecondary: 'Ver trabalhos',
     scroll: 'Rolar',
@@ -38,34 +35,6 @@ const pt: Dictionary = {
   services: {
     kicker: 'O que fazemos',
     title: 'Serviços',
-    intro: 'Quatro frentes, um único estúdio. Escopo definido projeto a projeto — sem pacote fechado, sem enrolação.',
-    cta: 'Não achou exatamente o que precisa? Fale com a gente mesmo assim.',
-    categories: [
-      {
-        index: '01',
-        label: 'Digital',
-        description: 'Produtos digitais rápidos e precisos — feitos para converter, não só para existir.',
-        items: ['Websites', 'SaaS', 'Landing Pages'],
-      },
-      {
-        index: '02',
-        label: 'Marca',
-        description: 'Sistema de marca, não só um logo — identidade que se sustenta em qualquer superfície.',
-        items: ['Identidade de Marca', 'Design Systems', 'Direção de Arte'],
-      },
-      {
-        index: '03',
-        label: 'Motion',
-        description: 'Motion que explica, vende e fica na cabeça — do micro-detalhe de UI ao filme completo.',
-        items: ['Filmes de Produto', 'Motion Graphics', 'Remotion'],
-      },
-      {
-        index: '04',
-        label: 'Growth',
-        description: 'Criativo de performance e páginas desenhadas em torno de um objetivo: o próximo clique.',
-        items: ['Ads', 'Sistemas Criativos', 'Funis', 'Conversão'],
-      },
-    ],
   },
   about: {
     kicker: 'Sobre',
@@ -84,7 +53,7 @@ const pt: Dictionary = {
   },
   contact: {
     kicker: 'Contato',
-    title: 'Iniciar projeto',
+    title: 'Tem um projeto em mente?',
     intro: 'Conte o que você está construindo. Respondemos em até um dia útil.',
     formName: 'Nome',
     formEmail: 'E-mail',
@@ -121,7 +90,7 @@ const pt: Dictionary = {
   caseStudy: {
     overview: 'Visão geral',
     category: 'Categoria',
-    servicesLabel: 'Capacidades',
+    servicesLabel: 'Stack',
     year: 'Ano',
     concept: 'Conceito',
     direction: 'Direção',

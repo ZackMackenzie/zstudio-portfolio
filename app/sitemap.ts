@@ -1,7 +1,7 @@
 import type { MetadataRoute } from 'next';
 import { site } from '@/content/site';
 import { LOCALES } from '@/lib/i18n/types';
-import { projects } from '@/content/projects';
+import { services } from '@/content/services';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
@@ -14,9 +14,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly',
       priority: 1,
     });
-    for (const project of projects) {
+    for (const service of services) {
       entries.push({
-        url: `${site.url}/${locale}/work/${project.slug}`,
+        url: `${site.url}/${locale}/work/${service.slug}`,
         lastModified: now,
         changeFrequency: 'yearly',
         priority: 0.7,

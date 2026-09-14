@@ -13,7 +13,7 @@ export function Footer({ dict, locale }: FooterProps) {
 
   return (
     <footer className="border-t border-line">
-      <div className="container-page flex flex-col gap-10 py-14 md:flex-row md:items-end md:justify-between">
+      <div className="container-page flex flex-col gap-10 py-12 md:flex-row md:items-end md:justify-between">
         <div>
           <Link href={`/${locale}`} data-cursor-hover className="text-xl">
             <Logo />
@@ -27,9 +27,6 @@ export function Footer({ dict, locale }: FooterProps) {
           </a>
           <a href={`/${locale}#services`} data-cursor-hover className="hover:text-text">
             {dict.nav.services}
-          </a>
-          <a href={`/${locale}#about`} data-cursor-hover className="hover:text-text">
-            {dict.nav.about}
           </a>
           <a href={site.social.instagram} target="_blank" rel="noreferrer" data-cursor-hover className="hover:text-text">
             Instagram

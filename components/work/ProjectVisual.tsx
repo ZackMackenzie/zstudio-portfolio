@@ -82,26 +82,44 @@ function VisualContent({ variant, frame }: { variant: number; frame: 'full' | 'm
 
   switch (variant) {
     case 1:
-      return <Meridian />;
-    case 2:
-      return <Northbank />;
-    case 3:
       return <Aurelia />;
+    case 2:
+      return <Meridian />;
+    case 3:
+      return <NoirMaison />;
     case 4:
       return <Apex />;
     case 5:
-      return <Halcyon />;
+      return <Verve />;
     case 6:
-      return <NoirMaison />;
-    case 7:
-      return <Lumiere />;
-    case 8:
     default:
-      return <Fluxpoint />;
+      return <Ascent />;
   }
 }
 
-/* ---------- 1. Meridian — AI SaaS ---------- */
+/* ---------- 1. Aurelia — Websites ---------- */
+function Aurelia() {
+  return (
+    <g>
+      <Defs />
+      <rect x={0} y={0} width={400} height={240} fill={photoFill} />
+      <path d="M120 240 V150 A80 80 0 0 1 280 150 V240" fill="none" stroke={strokeStrong} strokeWidth={1.5} />
+      <line x1={0} y1={240} x2={400} y2={240} stroke={stroke} />
+      <text x={200} y={40} textAnchor="middle" fontSize={22} fill="#fff" fontFamily="var(--font-display)" letterSpacing={4}>
+        AURELIA
+      </text>
+      <rect x={32} y={260} width={336} height={26} rx={13} fill="none" stroke={stroke} />
+      <text x={48} y={277} fontSize={10} fill="rgba(255,255,255,0.6)" fontFamily="var(--font-mono)">
+        CHECK-IN — CHECK-OUT
+      </text>
+      <text x={352} y={277} textAnchor="end" fontSize={10} fill="var(--accent)" fontFamily="var(--font-mono)">
+        BOOK →
+      </text>
+    </g>
+  );
+}
+
+/* ---------- 2. Meridian — SaaS / Product ---------- */
 function Meridian() {
   return (
     <g>
@@ -137,117 +155,7 @@ function Meridian() {
   );
 }
 
-/* ---------- 2. Northbank — Fintech SaaS ---------- */
-function Northbank() {
-  return (
-    <g>
-      <Defs />
-      <rect x={28} y={30} width={168} height={104} rx={14} fill={photoFill} stroke={strokeStrong} />
-      <circle cx={50} cy={54} r={9} fill="var(--accent)" opacity={0.85} />
-      <circle cx={62} cy={54} r={9} fill="rgba(255,255,255,0.5)" />
-      <text x={44} y={110} fontSize={17} fill="#fff" fontFamily="var(--font-mono)" letterSpacing={2}>
-        4291 •••• 8830
-      </text>
-      <text x={44} y={126} fontSize={9} fill="rgba(255,255,255,0.55)" fontFamily="var(--font-mono)">
-        NORTHBANK BUSINESS
-      </text>
-      <text x={220} y={54} fontSize={11} fill="rgba(255,255,255,0.5)" fontFamily="var(--font-sans)">
-        Available balance
-      </text>
-      <text x={220} y={82} fontSize={28} fill="#fff" fontFamily="var(--font-display)" fontWeight={600}>
-        $48,204
-      </text>
-      <line x1={24} y1={168} x2={376} y2={168} stroke={stroke} />
-      {['Stripe payout', 'Studio rent', 'Client invoice'].map((label, i) => (
-        <g key={label}>
-          <text x={24} y={198 + i * 30} fontSize={12} fill="rgba(255,255,255,0.75)" fontFamily="var(--font-sans)">
-            {label}
-          </text>
-          <text
-            x={376}
-            y={198 + i * 30}
-            fontSize={12}
-            textAnchor="end"
-            fill={i === 1 ? 'rgba(255,255,255,0.5)' : 'var(--accent)'}
-            fontFamily="var(--font-mono)"
-          >
-            {i === 1 ? '-$2,400' : '+$6,120'}
-          </text>
-        </g>
-      ))}
-    </g>
-  );
-}
-
-/* ---------- 3. Aurelia — Luxury Hotel ---------- */
-function Aurelia() {
-  return (
-    <g>
-      <Defs />
-      <rect x={0} y={0} width={400} height={240} fill={photoFill} />
-      <path d="M120 240 V150 A80 80 0 0 1 280 150 V240" fill="none" stroke={strokeStrong} strokeWidth={1.5} />
-      <line x1={0} y1={240} x2={400} y2={240} stroke={stroke} />
-      <text x={200} y={40} textAnchor="middle" fontSize={22} fill="#fff" fontFamily="var(--font-display)" letterSpacing={4}>
-        AURELIA
-      </text>
-      <rect x={32} y={260} width={336} height={26} rx={13} fill="none" stroke={stroke} />
-      <text x={48} y={277} fontSize={10} fill="rgba(255,255,255,0.6)" fontFamily="var(--font-mono)">
-        CHECK-IN — CHECK-OUT
-      </text>
-      <text x={352} y={277} textAnchor="end" fontSize={10} fill="var(--accent)" fontFamily="var(--font-mono)">
-        BOOK →
-      </text>
-    </g>
-  );
-}
-
-/* ---------- 4. Apex — Product film ---------- */
-function Apex() {
-  return (
-    <g>
-      <rect x={20} y={20} width={360} height={260} rx={4} fill="none" stroke={stroke} />
-      {Array.from({ length: 5 }).map((_, i) => (
-        <line key={i} x1={20} y1={20 + i * 65} x2={380} y2={20 + i * 65} stroke={stroke} strokeDasharray="1 6" />
-      ))}
-      <circle cx={200} cy={150} r={34} fill="none" stroke="var(--accent)" strokeWidth={2} />
-      <path d="M191 134 L216 150 L191 166 Z" fill="var(--accent)" />
-    </g>
-  );
-}
-
-/* ---------- 5. Halcyon — Real Estate ---------- */
-function Halcyon() {
-  return (
-    <g>
-      <Defs />
-      <rect x={0} y={0} width={230} height={300} fill="none" stroke={stroke} />
-      {Array.from({ length: 5 }).map((_, i) => (
-        <line key={`h${i}`} x1={0} y1={i * 60} x2={230} y2={i * 60} stroke={stroke} strokeDasharray="1 5" />
-      ))}
-      {Array.from({ length: 4 }).map((_, i) => (
-        <line key={`v${i}`} x1={i * 58} y1={0} x2={i * 58} y2={300} stroke={stroke} strokeDasharray="1 5" />
-      ))}
-      {[
-        [40, 60],
-        [130, 130],
-        [70, 210],
-      ].map(([x, y], i) => (
-        <g key={i}>
-          <circle cx={x} cy={y} r={7} fill="var(--accent)" opacity={0.9} />
-          <circle cx={x} cy={y} r={14} fill="none" stroke="var(--accent)" opacity={0.4} />
-        </g>
-      ))}
-      <rect x={250} y={24} width={126} height={252} rx={8} fill={photoFill} stroke={strokeStrong} />
-      <rect x={264} y={190} width={98} height={12} rx={2} fill="rgba(255,255,255,0.7)" />
-      <rect x={264} y={210} width={70} height={9} rx={2} fill="rgba(255,255,255,0.4)" />
-      <text x={264} y={250} fontSize={14} fill="var(--accent)" fontFamily="var(--font-mono)">
-        $2,450,000
-      </text>
-    </g>
-  );
-}
-
-/* ---------- 6. Noir Maison — Luxury Fashion / Brand ---------- */
+/* ---------- 3. Noir Maison — Brand Identity ---------- */
 function NoirMaison() {
   return (
     <g transform="translate(200,150)">
@@ -284,68 +192,105 @@ function NoirMaison() {
   );
 }
 
-/* ---------- 7. Lumière — Premium E-commerce ---------- */
-function Lumiere() {
+/* ---------- 4. Apex — Motion / Film ---------- */
+function Apex() {
   return (
     <g>
-      <Defs />
-      <rect x={24} y={24} width={168} height={252} rx={6} fill={photoFill} stroke={strokeStrong} />
-      <text x={40} y={260} fontSize={12} fill="#fff" fontFamily="var(--font-display)">
-        Object No. 04
-      </text>
-      <text x={40} y={276} fontSize={11} fill="var(--accent)" fontFamily="var(--font-mono)">
-        $1,280
-      </text>
-      {[0, 1].map((row) =>
-        [0, 1].map((col) => (
-          <rect
-            key={`${row}-${col}`}
-            x={206 + col * 90}
-            y={24 + row * 128}
-            width={78}
-            height={110}
-            rx={5}
-            fill={photoFill}
-            stroke={stroke}
-          />
-        ))
-      )}
+      <rect x={20} y={20} width={360} height={260} rx={4} fill="none" stroke={stroke} />
+      {Array.from({ length: 5 }).map((_, i) => (
+        <line key={i} x1={20} y1={20 + i * 65} x2={380} y2={20 + i * 65} stroke={stroke} strokeDasharray="1 6" />
+      ))}
+      <circle cx={200} cy={150} r={34} fill="none" stroke="var(--accent)" strokeWidth={2} />
+      <path d="M191 134 L216 150 L191 166 Z" fill="var(--accent)" />
     </g>
   );
 }
 
-/* ---------- 8. Fluxpoint — B2B SaaS ---------- */
-function Fluxpoint() {
-  const cols = [
-    { x: 24, label: 'Backlog', n: 4 },
-    { x: 152, label: 'In progress', n: 3 },
-    { x: 280, label: 'Done', n: 5 },
+/* ---------- 5. Verve — Creative & Ads ---------- */
+function Verve() {
+  return (
+    <g>
+      <Defs />
+      <rect x={24} y={24} width={170} height={252} rx={6} fill={photoFill} stroke={strokeStrong} />
+      <path d="M24 130 L194 60" stroke="var(--accent)" strokeWidth={1.5} opacity={0.6} />
+      <path d="M24 190 L194 120" stroke="var(--accent)" strokeWidth={1.5} opacity={0.35} />
+      <text x={40} y={250} fontSize={12} fill="#fff" fontFamily="var(--font-display)" fontWeight={600}>
+        VERVE
+      </text>
+      <rect x={206} y={24} width={78} height={78} rx={6} fill={photoFill} stroke={stroke} />
+      <text x={216} y={92} fontSize={9} fill="rgba(255,255,255,0.6)" fontFamily="var(--font-mono)">
+        1:1
+      </text>
+      <rect x={296} y={24} width={80} height={120} rx={6} fill={photoFill} stroke={stroke} />
+      <text x={306} y={136} fontSize={9} fill="rgba(255,255,255,0.6)" fontFamily="var(--font-mono)">
+        9:16
+      </text>
+      <rect x={206} y={114} width={170} height={80} rx={6} fill="none" stroke={stroke} />
+      {[0, 1, 2].map((i) => (
+        <rect key={i} x={214 + i * 55} y={122} width={48} height={64} rx={4} fill={photoFill} stroke={stroke} />
+      ))}
+      <rect x={206} y={206} width={170} height={70} rx={6} fill="rgba(58,91,255,0.1)" stroke="var(--accent)" strokeWidth={1.2} />
+      <circle cx={228} cy={241} r={12} fill="none" stroke="var(--accent)" strokeWidth={1.5} />
+      <path d="M224 236 L234 241 L224 246 Z" fill="var(--accent)" />
+      <text x={248} y={245} fontSize={9} fill="rgba(255,255,255,0.7)" fontFamily="var(--font-mono)">
+        MOTION CUT
+      </text>
+    </g>
+  );
+}
+
+/* ---------- 6. Ascent — Funnels ---------- */
+function Ascent() {
+  const steps = [
+    { y: 24, w: 200, label: 'AD' },
+    { y: 82, w: 250, label: 'LANDING' },
+    { y: 140, w: 300, label: 'OFFER' },
+    { y: 198, w: 350, label: 'CTA' },
   ];
   return (
     <g>
-      <rect x={24} y={24} width={352} height={30} rx={6} fill="none" stroke={strokeStrong} />
-      <text x={40} y={44} fontSize={11} fill="rgba(255,255,255,0.6)" fontFamily="var(--font-mono)">
-        ⌘K — JUMP TO...
-      </text>
-      {cols.map((col) => (
-        <g key={col.label}>
-          <text x={col.x} y={78} fontSize={10} fill="rgba(255,255,255,0.5)" fontFamily="var(--font-mono)">
-            {col.label.toUpperCase()}
+      {steps.map((step, i) => (
+        <g key={step.label}>
+          <rect
+            x={200 - step.w / 2}
+            y={step.y}
+            width={step.w}
+            height={40}
+            rx={6}
+            fill="none"
+            stroke={i === steps.length - 1 ? 'var(--accent)' : stroke}
+            strokeWidth={i === steps.length - 1 ? 1.5 : 1}
+          />
+          <text
+            x={200}
+            y={step.y + 25}
+            textAnchor="middle"
+            fontSize={11}
+            fill={i === steps.length - 1 ? 'var(--accent)' : 'rgba(255,255,255,0.6)'}
+            fontFamily="var(--font-mono)"
+            letterSpacing={1}
+          >
+            {step.label}
           </text>
-          {Array.from({ length: col.n }).map((_, i) => (
-            <rect
-              key={i}
-              x={col.x}
-              y={90 + i * 34}
-              width={92}
-              height={24}
-              rx={5}
-              fill="none"
-              stroke={i === 0 && col.label === 'In progress' ? 'var(--accent)' : stroke}
+          {i < steps.length - 1 ? (
+            <path
+              d={`M200 ${step.y + 40} L200 ${steps[i + 1].y}`}
+              stroke={stroke}
+              strokeWidth={1}
+              markerEnd="url(#ascentArrow)"
             />
-          ))}
+          ) : null}
         </g>
       ))}
+      <rect x={140} y={256} width={120} height={30} rx={15} fill="var(--accent)" />
+      <text x={200} y={276} textAnchor="middle" fontSize={10} fill="#08090a" fontFamily="var(--font-mono)" fontWeight={600}>
+        CONVERTED
+      </text>
+      <defs>
+        <marker id="ascentArrow" markerWidth={6} markerHeight={6} refX={3} refY={3} orient="auto">
+          <path d="M0,0 L6,3 L0,6 Z" fill={stroke} />
+        </marker>
+      </defs>
     </g>
   );
 }

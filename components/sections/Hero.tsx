@@ -24,7 +24,7 @@ const fadeUp = {
 
 export function Hero({ dict, locale }: HeroProps) {
   return (
-    <section id="top" className="relative flex min-h-[92dvh] items-center pt-32 pb-16">
+    <section id="top" className="relative flex min-h-[78dvh] items-center pt-32 pb-16">
       <div className="container-page w-full">
         <motion.span
           initial={{ opacity: 0, y: 12 }}
@@ -63,26 +63,10 @@ export function Hero({ dict, locale }: HeroProps) {
             {dict.hero.subhead}
           </motion.p>
 
-          <motion.ul
-            variants={fadeUp}
-            transition={{ duration: 0.6, ease: EASE }}
-            className="mt-7 flex flex-wrap gap-2.5"
-            aria-label="Capabilities"
-          >
-            {dict.hero.chips.map((chip) => (
-              <li
-                key={chip}
-                className="rounded-pill border border-line px-3.5 py-1.5 text-sm text-dim"
-              >
-                {chip}
-              </li>
-            ))}
-          </motion.ul>
-
           <motion.div
             variants={fadeUp}
             transition={{ duration: 0.6, ease: EASE }}
-            className="mt-9 flex flex-wrap items-center gap-5"
+            className="mt-8 flex flex-wrap items-center gap-5"
           >
             <MagneticButton>
               <a
