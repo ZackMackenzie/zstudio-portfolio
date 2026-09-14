@@ -1,0 +1,165 @@
+import type { Dictionary } from '../types';
+
+const es: Dictionary = {
+  meta: {
+    title: 'Z.studio — Estudio Digital de Diseño & Tecnología',
+    description:
+      'Z.studio diseña y construye sitios web, productos SaaS, motion y creatividades de performance para marcas que quieren parecer que van en serio.',
+  },
+  nav: {
+    work: 'Trabajos',
+    services: 'Servicios',
+    about: 'Nosotros',
+    contact: 'Contacto',
+    cta: 'Iniciar proyecto',
+  },
+  hero: {
+    kicker: 'Estudio digital de diseño & tecnología',
+    line1: 'Creamos cosas digitales',
+    line2: 'con intención.',
+    subhead:
+      'Sitios, productos, motion y la creatividad que los sostiene — diseñados y construidos de punta a punta por un único equipo senior.',
+    ctaPrimary: 'Iniciar proyecto',
+    ctaSecondary: 'Ver trabajos',
+    scroll: 'Desplázate',
+  },
+  work: {
+    kicker: 'Trabajos seleccionados',
+    title: 'Trabajos',
+    intro:
+      'Proyectos propios, construidos con el mismo rigor y el mismo sistema que usamos con clientes — sin atajos.',
+    concept: 'Proyecto conceptual',
+    viewCase: 'Ver caso',
+    allProjects: 'Todos los proyectos',
+    role: 'Rol',
+    year: 'Año',
+  },
+  services: {
+    kicker: 'Qué hacemos',
+    title: 'Servicios',
+    intro: 'Nueve disciplinas, un solo equipo. El alcance se define proyecto a proyecto — sin paquetes cerrados.',
+    cta: '¿No encuentras exactamente lo que necesitas? Escríbenos igual.',
+    items: [
+      {
+        index: '01',
+        title: 'Sitios web',
+        description: 'Rápidos, precisos, hechos para convertir — no solo para existir.',
+        tags: ['Next.js', 'React', 'Performance', 'SEO'],
+      },
+      {
+        index: '02',
+        title: 'SaaS',
+        description: 'Interfaces de producto que las personas realmente quieren usar.',
+        tags: ['Product design', 'Dashboards', 'Onboarding'],
+      },
+      {
+        index: '03',
+        title: 'Redes Sociales',
+        description: 'Sistemas de contenido que mantienen la marca en movimiento.',
+        tags: ['Sistemas de contenido', 'Plantillas', 'Calendario'],
+      },
+      {
+        index: '04',
+        title: 'Video',
+        description: 'Motion que explica, vende y se queda.',
+        tags: ['Motion graphics', 'Edición', 'Diseño de sonido'],
+      },
+      {
+        index: '05',
+        title: 'Videos de Producto estilo Apple',
+        description: 'Films de producto cinematográficos, con acabado de keynote.',
+        tags: ['Cinemática', '3D', 'Acabado premium'],
+      },
+      {
+        index: '06',
+        title: 'Ads & Creatividades para SaaS',
+        description: 'Creatividades de performance hechas para detener el scroll y convertir.',
+        tags: ['Meta', 'LinkedIn', 'Testing de creatividades'],
+      },
+      {
+        index: '07',
+        title: 'Sitios de Embudo de Afiliados',
+        description: 'Páginas diseñadas alrededor de una sola decisión: el clic.',
+        tags: ['Landing pages', 'Conversión', 'Analítica'],
+      },
+      {
+        index: '08',
+        title: 'Ads para Anuncios de Airbnb',
+        description: 'Anuncios que se reservan solos.',
+        tags: ['Dirección de fotografía', 'Copy', 'Ads de reserva'],
+      },
+      {
+        index: '09',
+        title: 'Identidad de Marca',
+        description: 'Sistema de marca, no solo un logo.',
+        tags: ['Identidad', 'Design systems', 'Guidelines'],
+      },
+    ],
+  },
+  about: {
+    kicker: 'Nosotros',
+    title: 'Un estudio pequeño, hecho para hacerlo todo bien.',
+    paragraphs: [
+      'Z.studio es un equipo pequeño y senior que diseña y construye productos digitales de punta a punta — sitios, interfaces de SaaS, motion y los anuncios que los sostienen.',
+      'Trabajamos diseño, ingeniería y motion bajo un mismo techo, para que el sitio, el producto y el contenido de una marca compartan un solo sistema — en vez de tres proveedores distintos.',
+      'Cada proyecto de esta página fue diseñado y construido por nosotros, para nosotros — prueba de cómo trabajamos, antes de que nos contrates para hacerlo por tu marca.',
+    ],
+    stack: [
+      { label: 'Diseño', items: ['Product design', 'Design systems', 'Dirección de arte'] },
+      { label: 'Ingeniería', items: ['Next.js', 'React', 'TypeScript', 'Performance'] },
+      { label: 'Motion', items: ['Remotion', 'Motion graphics', 'Kinetic typography'] },
+      { label: 'Growth', items: ['Creatividades de ads', 'Embudos', 'Copywriting'] },
+    ],
+  },
+  contact: {
+    kicker: 'Contacto',
+    title: 'Iniciar proyecto',
+    intro: 'Cuéntanos qué estás construyendo. Respondemos dentro de un día hábil.',
+    formName: 'Nombre',
+    formEmail: 'Email',
+    formCompany: 'Empresa / Marca',
+    formCompanyOptional: '(opcional)',
+    formType: 'Tipo de proyecto',
+    formTypeOptions: [
+      'Sitio web',
+      'Producto SaaS',
+      'Social & Contenido',
+      'Video & Motion',
+      'Identidad de Marca',
+      'Otro',
+    ],
+    formMessage: 'Mensaje',
+    formMessagePlaceholder: '¿Qué estás construyendo y cómo se ve el éxito para este proyecto?',
+    formSubmit: 'Enviar mensaje',
+    formSubmitting: 'Enviando…',
+    formSuccess: 'Mensaje enviado. Te contactaremos pronto.',
+    formError: 'Algo salió mal. Intenta de nuevo o escríbenos directamente.',
+    directLabel: 'O escribe directamente a',
+  },
+  footer: {
+    tagline: 'Estudio digital de diseño & tecnología.',
+    rights: 'Todos los derechos reservados.',
+    back: 'Volver arriba',
+  },
+  notFound: {
+    kicker: '404',
+    title: 'Esta página no existe.',
+    body: 'La página que buscas fue movida, renombrada o nunca existió.',
+    cta: 'Volver al inicio',
+  },
+  caseStudy: {
+    overview: 'Resumen',
+    category: 'Categoría',
+    servicesLabel: 'Servicios',
+    year: 'Año',
+    challenge: 'Desafío',
+    solution: 'Solución',
+    process: 'Proceso',
+    result: 'Resultado',
+    noResult: 'Proyecto conceptual propio — sin métricas de producción para reportar.',
+    next: 'Siguiente proyecto',
+    back: 'Todos los trabajos',
+  },
+};
+
+export default es;

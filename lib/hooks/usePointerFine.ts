@@ -1,21 +1,18 @@
 'use client';
 
-import { useSyncExternalStore } from 'react';
+import { useEffect, useState } from 'react';
 
-const QUERY = '(pointer: fine) and (hover: hover)';
-
-function subscribe(callback: () => void) {
-  if (typeof window === 'undefined') return () => {};
-  const mql = window.matchMedia(QUERY);
-  mql.addEventListener('change', callback);
-  return () => mql.removeEventListener('change', callback);
-}
-
-/** True only on devices with a precise pointer (desktop). Drives the custom cursor. */
+/** True when the primary input is a precise pointer (mouse/trackpad) — used to gate cursor/hover-only effects off touch devices. */
 export function usePointerFine() {
-  return useSyncExternalStore(
-    subscribe,
-    () => window.matchMedia(QUERY).matches,
-    () => false,
-  );
+  const [fine, setFine] = useState(false);
+
+  useEffect(() => {
+    const query = window.matchMedia('(pointer: fine)');
+    setFine(query.matches);
+    const onChange = (event: MediaQueryListEvent) => setFine(event.matches);
+    query.addEventListener('change', onChange);
+    return () => query.removeEventListener('change', onChange);
+  }, []);
+
+  return fine;
 }

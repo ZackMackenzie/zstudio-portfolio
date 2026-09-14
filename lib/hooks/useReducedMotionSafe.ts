@@ -1,21 +1,18 @@
 'use client';
 
-import { useSyncExternalStore } from 'react';
+import { useEffect, useState } from 'react';
 
-const QUERY = '(prefers-reduced-motion: reduce)';
-
-function subscribe(callback: () => void) {
-  if (typeof window === 'undefined') return () => {};
-  const mql = window.matchMedia(QUERY);
-  mql.addEventListener('change', callback);
-  return () => mql.removeEventListener('change', callback);
-}
-
-/** SSR-safe prefers-reduced-motion. Returns false during SSR / first paint. */
+/** Mirrors `prefers-reduced-motion`, safe for SSR (defaults to false on first render). */
 export function useReducedMotionSafe() {
-  return useSyncExternalStore(
-    subscribe,
-    () => window.matchMedia(QUERY).matches,
-    () => false,
-  );
+  const [reduced, setReduced] = useState(false);
+
+  useEffect(() => {
+    const query = window.matchMedia('(prefers-reduced-motion: reduce)');
+    setReduced(query.matches);
+    const onChange = (event: MediaQueryListEvent) => setReduced(event.matches);
+    query.addEventListener('change', onChange);
+    return () => query.removeEventListener('change', onChange);
+  }, []);
+
+  return reduced;
 }

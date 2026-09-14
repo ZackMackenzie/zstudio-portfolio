@@ -1,194 +1,165 @@
-/**
- * ============================================================================
- * en — base locale (English, default for international reach)
- * ============================================================================
- * Every visible string on the site lives here (and in the pt-BR.ts copy).
- * Structural data (slugs, mockup refs) lives in content/*.ts.
- *
- * `Dictionary` (the type inferred from this file) is the contract pt-BR.ts
- * must satisfy — TypeScript flags any missing field.
- * ============================================================================
- */
+import type { Dictionary } from '../types';
 
-export type ProjectText = {
-  title: string;
-  discipline: string;
-  pitch: string;
-  tags: string[];
-};
-
-export type ServiceText = {
-  title: string;
-  items: string[];
-};
-
-const projects: Record<string, ProjectText> = {
-  'kroma-ai': {
-    title: 'Kroma AI',
-    discipline: 'SaaS Product Design · Kinetic Video · Performance Ads',
-    pitch: "A command palette isn't a gimmick here — for a technical buyer, speed is the whole pitch.",
-    tags: ['Next.js 15', 'Framer Motion', 'Ad Creatives'],
-  },
-  acompanhai: {
-    title: 'AcompanhaAí',
-    discipline: 'SaaS Product Design · Interface Engineering',
-    pitch: 'A subscription product lives or dies in the dashboard, not the marketing page — so that came first.',
-    tags: ['Product Design', 'Next.js', 'Subscription SaaS'],
-  },
-  'aura-villa': {
-    title: 'Aura Villa',
-    discipline: 'Hospitality Web · Direct Booking · Motion Ad',
-    pitch: 'Every dollar saved on platform commission had to feel earned, not extracted — hence the direct-booking flow.',
-    tags: ['Next.js', 'Direct Checkout', 'Motion Trailer'],
-  },
-  'apex-flow': {
-    title: 'Apex Flow',
-    discipline: 'Conversion Rate Optimization · Landing Page · WhatsApp Kit',
-    pitch: 'Comparison tables convert better than adjectives, so the whole page argues in numbers.',
-    tags: ['Ultra-Fast React', 'Tailwind CSS', 'Ad System'],
-  },
-  'studio-system': {
-    title: 'Studio System',
-    discipline: 'Paid Social Creatives · Instagram Carousels · WhatsApp Banners',
-    pitch: 'One visual system, cut into every format a paid-social calendar actually needs.',
-    tags: ['Motion Design', 'Social Growth', 'Brand Identity'],
-  },
-  zstudio: {
-    title: 'Zstudio',
-    discipline: 'Brand Identity · Design System · This Website',
-    pitch: 'The studio had to survive the same scrutiny as any client’s brand — this site is the proof.',
-    tags: ['Brand System', 'Next.js 15', 'Motion Design'],
-  },
-};
-
-const services: Record<string, ServiceText> = {
-  brand: {
-    title: 'Brand',
-    items: ['Identity', 'Branding', 'Visual Direction'],
-  },
-  digital: {
-    title: 'Digital',
-    items: ['Websites', 'Landing Pages', 'SaaS Products', 'UI/UX Design'],
-  },
-  content: {
-    title: 'Content',
-    items: ['Social Media', 'Ad Creatives', 'Product Videos', 'Apple-style Motion'],
-  },
-  growth: {
-    title: 'Growth',
-    items: ['Sales Pages', 'Affiliate Funnels', 'Digital Campaigns'],
-  },
-};
-
-export const en = {
+const en: Dictionary = {
   meta: {
-    role: 'Digital Design & Technology Studio',
+    title: 'Z.studio — Digital Design & Technology Studio',
     description:
-      'Zstudio is an independent studio designing and engineering websites, brands and digital products for founders, companies and creators — in Brazil and abroad.',
-    ogTagline: 'Websites, brands and digital products, built with intention.',
-    ogServices: 'Brand · Digital · Content · Growth',
+      'Z.studio designs and builds websites, SaaS products, motion, and performance creative for brands that want to look like they mean it.',
   },
-
-  header: {
-    status: 'Available for new projects · Q2/Q3',
-    bookProject: 'Start a Project',
-  },
-
   nav: {
     work: 'Work',
     services: 'Services',
     about: 'About',
     contact: 'Contact',
+    cta: 'Start a project',
   },
-
-  languageSwitcher: {
-    label: 'Language',
-  },
-
-  whatsappMessage: "Hi, I'm interested in working with Zstudio on a project.",
-
-  cta: {
-    pricingNote: 'Every project is scoped to its own goals and timeline — reach out and we’ll figure out the right fit.',
-  },
-
   hero: {
-    eyebrow: 'Design, Technology & Digital Products / 2026',
-    lines: ['Websites, brands and', 'digital products —', 'built with intention.'],
-    subcopy:
-      'Zstudio is an independent studio designing and engineering digital experiences for founders, companies and brands across Brazil and abroad.',
-    ctaPrimary: 'Explore Selected Work',
-    ctaSecondary: 'Start a Project',
-    metrics: ['Design + Development, One Team', 'Independent Studio, By Design', 'BR + Global Timezones (EST/BRT)'],
+    kicker: 'Digital design & technology studio',
+    line1: 'We build digital things',
+    line2: 'with intent.',
+    subhead:
+      "Websites, products, motion, and the creative that carries them — designed and built end to end by one senior team.",
+    ctaPrimary: 'Start a project',
+    ctaSecondary: 'See the work',
+    scroll: 'Scroll',
   },
-
   work: {
-    label: 'Selected Work',
-    title: ['Curated', 'Showcase'],
+    kicker: 'Selected work',
+    title: 'Work',
+    intro:
+      "A set of self-directed projects, built the way we'd build for a client — same rigor, same system, no shortcuts.",
     concept: 'Concept project',
-    projects,
+    viewCase: 'View case',
+    allProjects: 'All projects',
+    role: 'Role',
+    year: 'Year',
   },
-
   services: {
-    label: 'Services',
-    title: ['Full-Service,', 'By Discipline'],
-    items: services,
-  },
-
-  about: {
-    label: 'About',
-    title: ['One Studio,', 'Every Discipline'],
-    body: "Zstudio works at the intersection of design, technology and strategy. Every project moves through the same hands — from the first wireframe to the last line of motion code — so the thinking behind a brand and the execution of its product never drift apart. We build for founders and companies who need more than a good-looking interface: a system that holds together under real use, in any language, on any screen.",
-    disciplines: ['Design', 'Technology', 'Strategy', 'Motion', 'Branding', 'UX'],
-  },
-
-  process: {
-    label: 'Process',
-    title: ['How a Project', 'Moves Forward'],
-    steps: [
+    kicker: 'What we do',
+    title: 'Services',
+    intro: 'Nine disciplines, one team. Scope is set project by project — no packages, no filler.',
+    cta: "Don't see exactly what you need? Ask us anyway.",
+    items: [
       {
-        title: 'Discover',
-        body: 'Understand the business, the audience, and what "done well" actually means for this project.',
+        index: '01',
+        title: 'Websites',
+        description: 'Fast, precise, built to convert — not just to exist.',
+        tags: ['Next.js', 'React', 'Performance', 'SEO'],
       },
       {
-        title: 'Define',
-        body: 'Turn that understanding into scope, structure and a clear content map — before any pixel is placed.',
+        index: '02',
+        title: 'SaaS',
+        description: 'Product interfaces people actually want to use.',
+        tags: ['Product design', 'Dashboards', 'Onboarding'],
       },
       {
-        title: 'Design',
-        body: 'Visual direction, typography and layout, tested against real content, not placeholder text.',
+        index: '03',
+        title: 'Social Media',
+        description: 'Content systems that keep a brand moving.',
+        tags: ['Content systems', 'Templates', 'Calendars'],
       },
       {
-        title: 'Build',
-        body: 'Production-grade code — responsive, accessible, fast — not a static mockup pretending to be a product.',
+        index: '04',
+        title: 'Video',
+        description: 'Motion that explains, sells, and sticks.',
+        tags: ['Motion graphics', 'Edit', 'Sound design'],
       },
       {
-        title: 'Refine',
-        body: 'Polish motion, performance and edge cases until the experience holds up under real use.',
+        index: '05',
+        title: 'Apple-style Product Videos',
+        description: 'Cinematic product films with keynote-grade polish.',
+        tags: ['Cinematics', '3D', 'Keynote-grade'],
+      },
+      {
+        index: '06',
+        title: 'SaaS Ads & Creatives',
+        description: 'Performance creative built to stop the scroll and convert.',
+        tags: ['Meta', 'LinkedIn', 'Creative testing'],
+      },
+      {
+        index: '07',
+        title: 'Affiliate Funnel Sites',
+        description: 'Pages engineered around one decision: click.',
+        tags: ['Landing pages', 'Conversion', 'Analytics'],
+      },
+      {
+        index: '08',
+        title: 'Airbnb Listing Ads',
+        description: 'Listings that book themselves.',
+        tags: ['Photography direction', 'Copy', 'Booking ads'],
+      },
+      {
+        index: '09',
+        title: 'Brand Identity',
+        description: 'Systems, not just logos.',
+        tags: ['Identity', 'Design systems', 'Guidelines'],
       },
     ],
   },
-
+  about: {
+    kicker: 'About',
+    title: 'A small studio, built to do it all well.',
+    paragraphs: [
+      'Z.studio is a small, senior team that designs and builds digital products end to end — websites, SaaS interfaces, motion, and the ads that carry them.',
+      'We work across design, engineering, and motion under one roof, so a site, a product, and its content share one system instead of three different vendors.',
+      'Every project on this page was designed and built by us, for us — proof of how we work, before you hire us to do it for you.',
+    ],
+    stack: [
+      { label: 'Design', items: ['Product design', 'Design systems', 'Art direction'] },
+      { label: 'Engineering', items: ['Next.js', 'React', 'TypeScript', 'Performance'] },
+      { label: 'Motion', items: ['Remotion', 'Motion graphics', 'Kinetic typography'] },
+      { label: 'Growth', items: ['Ad creative', 'Funnel design', 'Copywriting'] },
+    ],
+  },
   contact: {
-    label: 'Contact',
-    title: ['Have a Project', 'in Mind?'],
-    subcopy: "Tell us what you're building — a brand, a product or a campaign — and we'll get back with next steps.",
-    whatsapp: 'Message us on WhatsApp',
-    copyEmail: 'Copy email',
-    copied: 'Copied!',
+    kicker: 'Contact',
+    title: 'Start a project',
+    intro: "Tell us what you're building. We reply within one business day.",
+    formName: 'Name',
+    formEmail: 'Email',
+    formCompany: 'Company / Brand',
+    formCompanyOptional: '(optional)',
+    formType: 'Project type',
+    formTypeOptions: [
+      'Website',
+      'SaaS Product',
+      'Social & Content',
+      'Video & Motion',
+      'Brand Identity',
+      'Other',
+    ],
+    formMessage: 'Message',
+    formMessagePlaceholder: "What are you building, and what does success look like?",
+    formSubmit: 'Send message',
+    formSubmitting: 'Sending…',
+    formSuccess: "Message sent. We'll be in touch shortly.",
+    formError: 'Something went wrong. Please try again or email us directly.',
+    directLabel: 'Or write directly to',
   },
-
   footer: {
-    onlineNow: 'Online now',
-    backToTop: 'Back to top ↑',
-    copyright: '© 2026 ZSTUDIO. ALL RIGHTS RESERVED. TIMEZONE COMPATIBLE (EST / BRT).',
+    tagline: 'Digital design & technology studio.',
+    rights: 'All rights reserved.',
+    back: 'Back to top',
   },
-
   notFound: {
-    badge: 'Error 404',
-    titleLines: ['This page', "doesn’t exist."],
-    body: 'The link is broken or the page has moved. Everything else is one click away.',
-    back: '← Back to home',
+    kicker: '404',
+    title: "This page doesn't exist.",
+    body: 'The page you were looking for was moved, renamed, or never existed.',
+    cta: 'Back to home',
+  },
+  caseStudy: {
+    overview: 'Overview',
+    category: 'Category',
+    servicesLabel: 'Services',
+    year: 'Year',
+    challenge: 'Challenge',
+    solution: 'Solution',
+    process: 'Process',
+    result: 'Result',
+    noResult: 'Self-directed concept project — no production metrics to report.',
+    next: 'Next project',
+    back: 'All work',
   },
 };
 
-export type Dictionary = typeof en;
+export default en;

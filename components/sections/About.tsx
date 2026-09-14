@@ -1,39 +1,45 @@
-'use client';
-
+import type { Dictionary } from '@/lib/i18n/types';
 import { SectionHeader } from '@/components/ui/SectionHeader';
 import { Reveal } from '@/components/ui/Reveal';
-import { Marquee } from '@/components/ui/Marquee';
-import { useI18n } from '@/lib/i18n/LanguageProvider';
 
-/**
- * The site's one editorial "breather" — inverts to the light `.paper` token
- * scope (see app/globals.css) so the dark, technical rhythm of the rest of
- * the page has a single confident pause instead of running together.
- */
-export function About() {
-  const { dict } = useI18n();
+interface AboutProps {
+  dict: Dictionary;
+}
 
+export function About({ dict }: AboutProps) {
   return (
-    <section id="about" className="paper scroll-mt-24 py-section">
-      <div className="shell">
-        <SectionHeader index={3} label={dict.about.label} title={dict.about.title} />
+    <section id="about" className="border-t border-line py-section">
+      <div className="container-page grid grid-cols-1 gap-16 md:grid-cols-12">
+        <div className="md:col-span-6">
+          <SectionHeader kicker={dict.about.kicker} title={dict.about.title} />
+          <div className="mt-8 space-y-5">
+            {dict.about.paragraphs.map((paragraph, index) => (
+              <Reveal key={index} delay={0.08 * index}>
+                <p className="max-w-xl text-lg text-dim text-balance">{paragraph}</p>
+              </Reveal>
+            ))}
+          </div>
+        </div>
 
-        <Reveal className="mt-14 md:mt-20">
-          <p className="max-w-3xl font-serif text-xl italic leading-snug tracking-tight text-ink md:text-3xl">
-            {dict.about.body}
-          </p>
-        </Reveal>
+        <div className="md:col-span-5 md:col-start-8">
+          <dl className="grid grid-cols-1 gap-x-8 gap-y-8 sm:grid-cols-2">
+            {dict.about.stack.map((group, index) => (
+              <Reveal key={group.label} delay={0.06 * index}>
+                <div className="border-t border-line pt-4">
+                  <dt className="number-label uppercase text-dim">{group.label}</dt>
+                  <dd className="mt-3 space-y-1.5">
+                    {group.items.map((item) => (
+                      <div key={item} className="text-sm">
+                        {item}
+                      </div>
+                    ))}
+                  </dd>
+                </div>
+              </Reveal>
+            ))}
+          </dl>
+        </div>
       </div>
-
-      <Reveal delay={0.1} className="mt-16 border-y border-line px-gutter py-5 md:mt-20">
-        <Marquee durationSec={32}>
-          {dict.about.disciplines.map((d) => (
-            <span key={d} className="font-mono text-2xs uppercase tracking-[0.14em] text-dim">
-              {d}
-            </span>
-          ))}
-        </Marquee>
-      </Reveal>
     </section>
   );
 }

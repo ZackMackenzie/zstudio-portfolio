@@ -1,0 +1,165 @@
+import type { Dictionary } from '../types';
+
+const pt: Dictionary = {
+  meta: {
+    title: 'Z.studio — Estúdio Digital de Design & Tecnologia',
+    description:
+      'A Z.studio projeta e constrói sites, produtos SaaS, motion e criativos de performance para marcas que querem parecer que levam isso a sério.',
+  },
+  nav: {
+    work: 'Trabalhos',
+    services: 'Serviços',
+    about: 'Sobre',
+    contact: 'Contato',
+    cta: 'Iniciar projeto',
+  },
+  hero: {
+    kicker: 'Estúdio digital de design & tecnologia',
+    line1: 'Criamos coisas digitais',
+    line2: 'com intenção.',
+    subhead:
+      'Sites, produtos, motion e o criativo que os sustenta — projetados e construídos do início ao fim por um único time sênior.',
+    ctaPrimary: 'Iniciar projeto',
+    ctaSecondary: 'Ver trabalhos',
+    scroll: 'Rolar',
+  },
+  work: {
+    kicker: 'Trabalhos selecionados',
+    title: 'Trabalhos',
+    intro:
+      'Projetos autorais, construídos com o mesmo rigor e o mesmo sistema que usamos com clientes — sem atalhos.',
+    concept: 'Projeto conceitual',
+    viewCase: 'Ver case',
+    allProjects: 'Todos os projetos',
+    role: 'Atuação',
+    year: 'Ano',
+  },
+  services: {
+    kicker: 'O que fazemos',
+    title: 'Serviços',
+    intro: 'Nove frentes, um único time. Escopo definido projeto a projeto — sem pacote fechado, sem enrolação.',
+    cta: 'Não achou exatamente o que precisa? Fale com a gente mesmo assim.',
+    items: [
+      {
+        index: '01',
+        title: 'Websites',
+        description: 'Rápidos, precisos, feitos para converter — não só para existir.',
+        tags: ['Next.js', 'React', 'Performance', 'SEO'],
+      },
+      {
+        index: '02',
+        title: 'SaaS',
+        description: 'Interfaces de produto que as pessoas realmente querem usar.',
+        tags: ['Product design', 'Dashboards', 'Onboarding'],
+      },
+      {
+        index: '03',
+        title: 'Social Media',
+        description: 'Sistemas de conteúdo que mantêm a marca em movimento.',
+        tags: ['Sistemas de conteúdo', 'Templates', 'Calendário'],
+      },
+      {
+        index: '04',
+        title: 'Vídeo',
+        description: 'Motion que explica, vende e fica na cabeça.',
+        tags: ['Motion graphics', 'Edição', 'Sound design'],
+      },
+      {
+        index: '05',
+        title: 'Vídeos de Produto estilo Apple',
+        description: 'Filmes de produto cinematográficos, com acabamento de keynote.',
+        tags: ['Cinemática', '3D', 'Acabamento premium'],
+      },
+      {
+        index: '06',
+        title: 'Ads & Criativos para SaaS',
+        description: 'Criativos de performance feitos para parar o scroll e converter.',
+        tags: ['Meta', 'LinkedIn', 'Teste de criativos'],
+      },
+      {
+        index: '07',
+        title: 'Sites de Funil de Afiliado',
+        description: 'Páginas desenhadas em torno de uma única decisão: o clique.',
+        tags: ['Landing pages', 'Conversão', 'Analytics'],
+      },
+      {
+        index: '08',
+        title: 'Ads para Anúncios Airbnb',
+        description: 'Anúncios que se reservam sozinhos.',
+        tags: ['Direção de fotografia', 'Copy', 'Ads de reserva'],
+      },
+      {
+        index: '09',
+        title: 'Identidade de Marca',
+        description: 'Sistema de marca, não só um logo.',
+        tags: ['Identidade', 'Design systems', 'Guidelines'],
+      },
+    ],
+  },
+  about: {
+    kicker: 'Sobre',
+    title: 'Um estúdio pequeno, feito para fazer tudo bem-feito.',
+    paragraphs: [
+      'A Z.studio é um time pequeno e sênior que projeta e constrói produtos digitais do início ao fim — sites, interfaces de SaaS, motion e os anúncios que os sustentam.',
+      'Trabalhamos design, engenharia e motion sob o mesmo teto, para que o site, o produto e o conteúdo de uma marca sigam um único sistema — em vez de três fornecedores diferentes.',
+      'Todo projeto desta página foi projetado e construído por nós, para nós — prova de como trabalhamos, antes de você nos contratar para fazer isso pela sua marca.',
+    ],
+    stack: [
+      { label: 'Design', items: ['Product design', 'Design systems', 'Direção de arte'] },
+      { label: 'Engenharia', items: ['Next.js', 'React', 'TypeScript', 'Performance'] },
+      { label: 'Motion', items: ['Remotion', 'Motion graphics', 'Kinetic typography'] },
+      { label: 'Growth', items: ['Criativos de ads', 'Funil', 'Copywriting'] },
+    ],
+  },
+  contact: {
+    kicker: 'Contato',
+    title: 'Iniciar projeto',
+    intro: 'Conte o que você está construindo. Respondemos em até um dia útil.',
+    formName: 'Nome',
+    formEmail: 'E-mail',
+    formCompany: 'Empresa / Marca',
+    formCompanyOptional: '(opcional)',
+    formType: 'Tipo de projeto',
+    formTypeOptions: [
+      'Website',
+      'Produto SaaS',
+      'Social & Conteúdo',
+      'Vídeo & Motion',
+      'Identidade de Marca',
+      'Outro',
+    ],
+    formMessage: 'Mensagem',
+    formMessagePlaceholder: 'O que você está construindo, e como seria o sucesso desse projeto?',
+    formSubmit: 'Enviar mensagem',
+    formSubmitting: 'Enviando…',
+    formSuccess: 'Mensagem enviada. Retornamos em breve.',
+    formError: 'Algo deu errado. Tente novamente ou escreva direto para o nosso e-mail.',
+    directLabel: 'Ou escreva direto para',
+  },
+  footer: {
+    tagline: 'Estúdio digital de design & tecnologia.',
+    rights: 'Todos os direitos reservados.',
+    back: 'Voltar ao topo',
+  },
+  notFound: {
+    kicker: '404',
+    title: 'Essa página não existe.',
+    body: 'A página que você procura foi movida, renomeada ou nunca existiu.',
+    cta: 'Voltar ao início',
+  },
+  caseStudy: {
+    overview: 'Visão geral',
+    category: 'Categoria',
+    servicesLabel: 'Serviços',
+    year: 'Ano',
+    challenge: 'Desafio',
+    solution: 'Solução',
+    process: 'Processo',
+    result: 'Resultado',
+    noResult: 'Projeto conceitual autoral — sem métricas de produção para reportar.',
+    next: 'Próximo projeto',
+    back: 'Todos os trabalhos',
+  },
+};
+
+export default pt;

@@ -1,58 +1,137 @@
 'use client';
 
-import { useState } from 'react';
-import { site, whatsappHref } from '@/content/site';
-import { useI18n } from '@/lib/i18n/LanguageProvider';
+import { useState, type FormEvent } from 'react';
+import type { Dictionary } from '@/lib/i18n/types';
 import { SectionHeader } from '@/components/ui/SectionHeader';
-import { Reveal } from '@/components/ui/Reveal';
 import { MagneticButton } from '@/components/ui/MagneticButton';
+import { Reveal } from '@/components/ui/Reveal';
+import { site } from '@/content/site';
+import { cn } from '@/lib/utils';
 
-/**
- * The dedicated contact hub — promoted out of the footer so it reads as a
- * full section (not a closing afterthought). Footer keeps the ambient
- * status/clock strip and copyright line only.
- */
-export function Contact() {
-  const { dict } = useI18n();
-  const [copied, setCopied] = useState(false);
+interface ContactProps {
+  dict: Dictionary;
+}
 
-  async function copyEmail() {
+type Status = 'idle' | 'submitting' | 'success' | 'error';
+
+export function Contact({ dict }: ContactProps) {
+  const [status, setStatus] = useState<Status>('idle');
+
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setStatus('submitting');
+
+    const form = event.currentTarget;
+    const data = Object.fromEntries(new FormData(form).entries());
+
     try {
-      await navigator.clipboard.writeText(site.contact.email);
-      setCopied(true);
-      window.setTimeout(() => setCopied(false), 1800);
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+      if (!response.ok) throw new Error('Request failed');
+      setStatus('success');
+      form.reset();
     } catch {
-      // clipboard unavailable — the email stays visible/selectable text
+      setStatus('error');
     }
   }
 
+  const inputClass =
+    'w-full border-b border-line bg-transparent py-3 text-base placeholder:text-dim/70 focus:border-accent focus:outline-none transition-colors duration-400';
+
   return (
-    <section id="contact" className="shell scroll-mt-24 py-section">
-      <SectionHeader index={5} label={dict.contact.label} title={dict.contact.title} />
-
-      <Reveal className="mt-14 md:mt-20">
-        <p className="max-w-lg text-base text-dim md:text-lg">{dict.contact.subcopy}</p>
-
-        <div className="mt-10 flex flex-wrap items-center gap-4">
-          <MagneticButton href={whatsappHref(dict.whatsappMessage)} cursorLabel="WhatsApp" className="text-text">
-            {dict.contact.whatsapp}
-            <span aria-hidden>↗</span>
-          </MagneticButton>
-
-          <div className="relative">
-            <MagneticButton onClick={copyEmail} cursorLabel={dict.contact.copyEmail} className="text-dim">
-              {site.contact.email}
-            </MagneticButton>
-            <span
-              className={`pointer-events-none absolute -top-9 left-1/2 -translate-x-1/2 rounded-pill bg-accent2 px-3 py-1 font-mono text-2xs text-black transition-opacity duration-300 ${
-                copied ? 'opacity-100' : 'opacity-0'
-              }`}
-            >
-              {dict.contact.copied}
-            </span>
-          </div>
+    <section id="contact" className="border-t border-line py-section">
+      <div className="container-page grid grid-cols-1 gap-16 md:grid-cols-12">
+        <div className="md:col-span-5">
+          <SectionHeader kicker={dict.contact.kicker} title={dict.contact.title} intro={dict.contact.intro} />
+          <Reveal delay={0.15}>
+            <p className="mt-10 text-sm text-dim">
+              {dict.contact.directLabel}{' '}
+              <a href={`mailto:${site.email}`} data-cursor-hover className="text-text underline decoration-line underline-offset-4 hover:text-accent">
+                {site.email}
+              </a>
+            </p>
+          </Reveal>
         </div>
-      </Reveal>
+
+        <div className="md:col-span-6 md:col-start-7">
+          <Reveal>
+            <form onSubmit={handleSubmit} className="space-y-8" aria-live="polite">
+              <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
+                <div>
+                  <label htmlFor="name" className="number-label mb-2 block text-dim">
+                    {dict.contact.formName}
+                  </label>
+                  <input id="name" name="name" type="text" required className={inputClass} />
+                </div>
+                <div>
+                  <label htmlFor="email" className="number-label mb-2 block text-dim">
+                    {dict.contact.formEmail}
+                  </label>
+                  <input id="email" name="email" type="email" required className={inputClass} />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
+                <div>
+                  <label htmlFor="company" className="number-label mb-2 block text-dim">
+                    {dict.contact.formCompany} <span className="normal-case">{dict.contact.formCompanyOptional}</span>
+                  </label>
+                  <input id="company" name="company" type="text" className={inputClass} />
+                </div>
+                <div>
+                  <label htmlFor="type" className="number-label mb-2 block text-dim">
+                    {dict.contact.formType}
+                  </label>
+                  <select id="type" name="type" required className={cn(inputClass, 'appearance-none')}>
+                    {dict.contact.formTypeOptions.map((option) => (
+                      <option key={option} value={option} className="bg-bg text-text">
+                        {option}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+
+              <div>
+                <label htmlFor="message" className="number-label mb-2 block text-dim">
+                  {dict.contact.formMessage}
+                </label>
+                <textarea
+                  id="message"
+                  name="message"
+                  required
+                  rows={4}
+                  placeholder={dict.contact.formMessagePlaceholder}
+                  className={cn(inputClass, 'resize-none')}
+                />
+              </div>
+
+              <div className="flex items-center gap-5 pt-2">
+                <MagneticButton>
+                  <button
+                    type="submit"
+                    disabled={status === 'submitting'}
+                    data-cursor-hover
+                    className="inline-flex items-center rounded-pill bg-text px-6 py-3.5 text-sm font-medium text-ink transition-colors duration-400 hover:bg-accent hover:text-white disabled:opacity-60"
+                  >
+                    {status === 'submitting' ? dict.contact.formSubmitting : dict.contact.formSubmit}
+                  </button>
+                </MagneticButton>
+
+                {status === 'success' ? (
+                  <span className="text-sm text-accent">{dict.contact.formSuccess}</span>
+                ) : null}
+                {status === 'error' ? (
+                  <span className="text-sm text-dim">{dict.contact.formError}</span>
+                ) : null}
+              </div>
+            </form>
+          </Reveal>
+        </div>
+      </div>
     </section>
   );
 }

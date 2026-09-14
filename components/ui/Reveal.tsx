@@ -1,69 +1,28 @@
 'use client';
 
-import { type ReactNode } from 'react';
 import { motion } from 'framer-motion';
-import { reveal, stagger, viewport } from '@/lib/motion';
-import { cn } from '@/lib/utils';
+import type { ReactNode } from 'react';
+import { revealUp } from '@/lib/motion';
 
-/** Fade + rise on scroll into view. */
-export function Reveal({
-  children,
-  className,
-  delay = 0,
-  as = 'div',
-}: {
+interface RevealProps {
   children: ReactNode;
-  className?: string;
   delay?: number;
-  as?: 'div' | 'li' | 'span';
-}) {
-  const Comp = as === 'li' ? motion.li : as === 'span' ? motion.span : motion.div;
+  className?: string;
+  as?: 'div' | 'span';
+}
+
+export function Reveal({ children, delay = 0, className, as = 'div' }: RevealProps) {
+  const Component = motion[as];
   return (
-    <Comp
+    <Component
       className={className}
       initial="hidden"
-      whileInView="visible"
-      viewport={viewport}
-      variants={{
-        hidden: reveal.hidden,
-        visible: {
-          ...(reveal.visible as object),
-          transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1], delay },
-        },
-      }}
+      whileInView="show"
+      viewport={{ once: true, margin: '-10% 0px -10% 0px' }}
+      variants={revealUp}
+      transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay }}
     >
       {children}
-    </Comp>
-  );
-}
-
-/** Staggered container — direct children should use <RevealItem>. */
-export function RevealGroup({
-  children,
-  className,
-  amount = 0.1,
-}: {
-  children: ReactNode;
-  className?: string;
-  amount?: number;
-}) {
-  return (
-    <motion.div
-      className={cn(className)}
-      initial="hidden"
-      whileInView="visible"
-      viewport={viewport}
-      variants={stagger(amount)}
-    >
-      {children}
-    </motion.div>
-  );
-}
-
-export function RevealItem({ children, className }: { children: ReactNode; className?: string }) {
-  return (
-    <motion.div className={className} variants={reveal}>
-      {children}
-    </motion.div>
+    </Component>
   );
 }

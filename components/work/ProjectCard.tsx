@@ -1,65 +1,54 @@
-'use client';
+import Link from 'next/link';
+import type { Project, ProjectCopy } from '@/content/projects';
+import type { Dictionary, Locale } from '@/lib/i18n/types';
+import { ProjectVisual } from './ProjectVisual';
+import { Reveal } from '@/components/ui/Reveal';
+import { cn } from '@/lib/utils';
 
-import { Media } from '@/components/ui/Media';
-import { formatIndex } from '@/lib/utils';
-import type { ProjectStructure } from '@/content/projects';
-import type { ProjectText } from '@/lib/i18n/locales/en';
-
-/**
- * Full-width editorial spread, not a bordered card — the mockup is left
- * to breathe with no frame/background, and a huge faint index numeral sits
- * behind the copy. Alternates image/text sides per row (see SelectedWork).
- */
-export function ProjectCard({
-  structure,
-  text,
-  index,
-  concept,
-  reversed,
-}: {
-  structure: ProjectStructure;
-  text: ProjectText;
+interface ProjectCardProps {
+  project: Project;
+  copy: ProjectCopy;
+  dict: Dictionary;
+  locale: Locale;
   index: number;
-  concept: string;
-  reversed?: boolean;
-}) {
+}
+
+export function ProjectCard({ project, copy, dict, locale, index }: ProjectCardProps) {
+  const isFeature = project.size === 'xl';
+
   return (
-    <article className="relative grid gap-10 md:grid-cols-12 md:gap-8 lg:gap-12">
-      <span
-        aria-hidden
-        className="pointer-events-none absolute -top-6 select-none font-display text-[7rem] font-extrabold leading-none text-white/[0.03] md:-top-10 md:text-[11rem]"
-        style={{ [reversed ? 'right' : 'left']: 0 } as React.CSSProperties}
-      >
-        {formatIndex(index)}
-      </span>
+    <Reveal className={cn(isFeature ? 'md:col-span-12' : 'md:col-span-6')} delay={0.04 * (index % 3)}>
+      <Link href={`/${locale}/work/${project.slug}`} data-cursor-hover className="group block">
+        <div className={cn(isFeature && 'md:grid md:grid-cols-12 md:items-center md:gap-10')}>
+          <ProjectVisual
+            visual={project.visual}
+            title={copy.title}
+            className={cn(isFeature && 'md:col-span-7 md:aspect-[16/10]')}
+          />
 
-      <div className={reversed ? 'md:order-2 md:col-span-7' : 'md:col-span-7'}>
-        <Media
-          alt={text.title}
-          width={1400}
-          height={933}
-          mockup={structure.mockup}
-          className="w-full rounded-sm"
-        />
-      </div>
-
-      <div className={reversed ? 'relative md:order-1 md:col-span-5 md:self-center' : 'relative md:col-span-5 md:self-center'}>
-        <div className="flex items-center gap-3">
-          <span className="font-mono text-2xs uppercase tracking-[0.14em] text-accent2">{formatIndex(index)}</span>
-          {structure.status === 'concept' && (
-            <span className="font-mono text-2xs uppercase tracking-[0.14em] text-dim">{concept}</span>
-          )}
+          <div className={cn('mt-5', isFeature && 'md:col-span-5 md:mt-0')}>
+            <div className="flex items-center gap-3">
+              <span className="number-label text-dim">{String(index + 1).padStart(2, '0')}</span>
+              <span className="number-label rounded-pill border border-line px-2 py-0.5 text-dim">
+                {dict.work.concept}
+              </span>
+            </div>
+            <h3
+              className={cn(
+                'mt-3 font-display font-medium tracking-tighter',
+                isFeature ? 'text-2xl' : 'text-xl'
+              )}
+            >
+              {copy.title}
+            </h3>
+            <p className={cn('mt-3 text-dim', isFeature ? 'max-w-md text-lg' : 'text-sm')}>{copy.tagline}</p>
+            <span className="number-label mt-5 inline-flex items-center gap-2 text-dim transition-colors duration-400 group-hover:text-accent">
+              {dict.work.viewCase}
+              <span className="transition-transform duration-400 group-hover:translate-x-1">→</span>
+            </span>
+          </div>
         </div>
-
-        <h3 className="mt-4 font-display text-4xl font-extrabold leading-[0.98] tracking-tightest md:text-5xl">
-          {text.title}
-        </h3>
-        <p className="mt-3 font-mono text-2xs uppercase tracking-[0.12em] text-dim">{text.discipline}</p>
-
-        <p className="mt-6 max-w-md font-serif text-lg italic leading-snug text-text/90 md:text-xl">{text.pitch}</p>
-
-        <p className="mt-6 text-sm text-dim">{text.tags.join(' · ')}</p>
-      </div>
-    </article>
+      </Link>
+    </Reveal>
   );
 }

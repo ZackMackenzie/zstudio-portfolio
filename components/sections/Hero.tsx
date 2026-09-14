@@ -1,88 +1,105 @@
 'use client';
 
-import { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { MotionText } from '@/components/ui/MotionText';
+import { motion } from 'framer-motion';
+import type { Dictionary, Locale } from '@/lib/i18n/types';
 import { MagneticButton } from '@/components/ui/MagneticButton';
-import { HeroField } from './HeroField';
-import { useI18n } from '@/lib/i18n/LanguageProvider';
-import { whatsappHref } from '@/content/site';
-import { scrollToId } from '@/components/layout/SmoothScroll';
+import { staggerChildren } from '@/lib/motion';
 
-export function Hero() {
-  const { dict } = useI18n();
-  const ref = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] });
-  const y = useTransform(scrollYProgress, [0, 1], ['0%', '9%']);
-  const opacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
+interface HeroProps {
+  dict: Dictionary;
+  locale: Locale;
+}
 
-  const [line1, line2, line3] = dict.hero.lines;
+const EASE = [0.16, 1, 0.3, 1] as const;
 
+const lineVariants = {
+  hidden: { y: '110%' },
+  show: { y: '0%', transition: { duration: 0.9, ease: EASE } },
+};
+
+export function Hero({ dict, locale }: HeroProps) {
   return (
-    <section ref={ref} id="top" className="relative flex min-h-[100svh] flex-col overflow-hidden">
-      <HeroField />
+    <section id="top" className="relative flex min-h-[92dvh] items-center pt-28">
+      <div className="container-page w-full">
+        <motion.span
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: EASE }}
+          className="number-label mb-6 block uppercase text-dim"
+        >
+          {dict.hero.kicker}
+        </motion.span>
 
-      <motion.div
-        style={{ y, opacity }}
-        className="shell relative z-10 flex flex-1 flex-col justify-center pb-24 pt-28"
-      >
-        <p className="label mb-6 flex items-center gap-3">
-          <span className="inline-block h-1.5 w-1.5 rounded-pill bg-accent2" />
-          {dict.hero.eyebrow}
-        </p>
-
-        <h1 className="font-display text-4xl font-extrabold leading-[0.92] tracking-tightest md:text-5xl">
-          <MotionText
-            as="span"
-            trigger="mount"
-            lineClassName="block"
-            lines={[
-              line1,
-              line2,
-              <span key="3" className="text-gradient">
-                {line3}
-              </span>,
-            ]}
-          />
+        <h1 className="font-display font-semibold tracking-tightest text-5xl">
+          <span className="block overflow-hidden">
+            <motion.span initial="hidden" animate="show" variants={lineVariants} className="block">
+              {dict.hero.line1}
+            </motion.span>
+          </span>
+          <span className="block overflow-hidden text-dim">
+            <motion.span
+              initial="hidden"
+              animate="show"
+              variants={lineVariants}
+              transition={{ ...lineVariants.show.transition, delay: 0.08 }}
+              className="block"
+            >
+              {dict.hero.line2}
+            </motion.span>
+          </span>
         </h1>
 
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.9, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="mt-8 max-w-lg text-base text-dim md:text-lg"
-        >
-          {dict.hero.subcopy}
-        </motion.p>
-
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.05, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="mt-10 flex flex-wrap items-center gap-4"
+          initial="hidden"
+          animate="show"
+          variants={staggerChildren(0.08, 0.5)}
+          className="mt-8 flex flex-col items-start gap-8 md:flex-row md:items-end md:justify-between"
         >
-          <MagneticButton onClick={() => scrollToId('work')} cursorLabel={dict.hero.ctaPrimary} className="text-text">
-            {dict.hero.ctaPrimary}
-            <span aria-hidden>↓</span>
-          </MagneticButton>
-          <MagneticButton href={whatsappHref(dict.whatsappMessage)} cursorLabel={dict.hero.ctaSecondary} className="text-dim">
-            {dict.hero.ctaSecondary}
-            <span aria-hidden>↗</span>
-          </MagneticButton>
-        </motion.div>
+          <motion.p
+            variants={{ hidden: { opacity: 0, y: 16 }, show: { opacity: 1, y: 0 } }}
+            transition={{ duration: 0.6, ease: EASE }}
+            className="max-w-md text-lg text-dim text-balance"
+          >
+            {dict.hero.subhead}
+          </motion.p>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.2, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="mt-14 flex flex-wrap gap-x-8 gap-y-3 border-t border-white/[0.08] pt-6"
-        >
-          {dict.hero.metrics.map((m, i) => (
-            <span key={m} className="font-mono text-2xs uppercase tracking-[0.14em] text-dim">
-              <span className="text-accent2">{String(i + 1).padStart(2, '0')}.</span> {m}
-            </span>
-          ))}
+          <motion.div
+            variants={{ hidden: { opacity: 0, y: 16 }, show: { opacity: 1, y: 0 } }}
+            transition={{ duration: 0.6, ease: EASE }}
+            className="flex shrink-0 items-center gap-4"
+          >
+            <MagneticButton>
+              <a
+                href={`/${locale}#contact`}
+                data-cursor-hover
+                className="inline-flex items-center rounded-pill bg-text px-6 py-3.5 text-sm font-medium text-ink transition-colors duration-400 hover:bg-accent hover:text-white"
+              >
+                {dict.hero.ctaPrimary}
+              </a>
+            </MagneticButton>
+            <a
+              href={`/${locale}#work`}
+              data-cursor-hover
+              className="inline-flex items-center gap-2 text-sm text-dim transition-colors duration-400 hover:text-text"
+            >
+              {dict.hero.ctaSecondary}
+            </a>
+          </motion.div>
         </motion.div>
+      </div>
+
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1, duration: 0.8 }}
+        className="absolute bottom-10 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 md:flex"
+      >
+        <span className="number-label uppercase text-dim">{dict.hero.scroll}</span>
+        <motion.span
+          animate={{ y: [0, 8, 0] }}
+          transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
+          className="h-8 w-px bg-line"
+        />
       </motion.div>
     </section>
   );

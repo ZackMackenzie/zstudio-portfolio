@@ -1,11 +1,10 @@
-import { loadFont as loadDisplay } from '@remotion/google-fonts/HankenGrotesk';
-import { loadFont as loadMono } from '@remotion/google-fonts/IBMPlexMono';
+import { loadFont as loadSpaceGrotesk } from '@remotion/google-fonts/SpaceGrotesk';
+import { loadFont as loadInter } from '@remotion/google-fonts/Inter';
+import { loadFont as loadPlexMono } from '@remotion/google-fonts/IBMPlexMono';
 
-const display = loadDisplay('normal', { weights: ['400', '500', '600'], subsets: ['latin'] });
-const mono = loadMono('normal', { weights: ['400', '500'], subsets: ['latin'] });
-
-export const fontFamilyDisplay = display.fontFamily;
-export const fontFamilyMono = mono.fontFamily;
-
-export const waitForFonts = () =>
-  Promise.all([display.waitUntilDone(), mono.waitUntilDone()]);
+export function loadFonts() {
+  const { fontFamily: display } = loadSpaceGrotesk('normal', { weights: ['500', '600', '700'] });
+  const { fontFamily: sans } = loadInter('normal', { weights: ['400', '500', '600'] });
+  const { fontFamily: mono } = loadPlexMono('normal', { weights: ['400', '500'] });
+  return { display, sans, mono };
+}

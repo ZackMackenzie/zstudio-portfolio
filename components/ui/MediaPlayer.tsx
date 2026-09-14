@@ -1,83 +1,77 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
+import { useReducedMotionSafe } from '@/lib/hooks/useReducedMotionSafe';
 import { cn } from '@/lib/utils';
-import { GeneratedArt } from './GeneratedArt';
 
-/**
- * Autoplaying, muted, looping video for Remotion-rendered motion clips.
- * - preload="none" + IntersectionObserver: nothing downloads until it's near the viewport
- * - plays only while visible, pauses when scrolled away (saves CPU/battery)
- * - webm (VP9) with mp4 (H.264) fallback, poster image, reserved aspect box
- */
-export function MediaPlayer({
-  id,
-  alt,
-  width = 1600,
-  height = 900,
-  className,
-  seed,
-}: {
-  /** Base name of the rendered files in /public/media (no extension). */
-  id: string;
-  alt: string;
-  width?: number;
-  height?: number;
+interface MediaPlayerProps {
+  src: string;
+  webmSrc?: string;
+  poster: string;
+  label: string;
   className?: string;
-  seed?: string;
-}) {
-  const ref = useRef<HTMLVideoElement>(null);
-  const [inView, setInView] = useState(false);
+}
+
+export function MediaPlayer({ src, webmSrc, poster, label, className }: MediaPlayerProps) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const reduced = useReducedMotionSafe();
+  const [playing, setPlaying] = useState(!reduced);
   const [failed, setFailed] = useState(false);
 
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const io = new IntersectionObserver(
-      ([entry]) => {
-        setInView(entry.isIntersecting);
-        if (entry.isIntersecting) {
-          el.play().catch(() => {});
-        } else {
-          el.pause();
-        }
-      },
-      { rootMargin: '200px 0px', threshold: 0.1 },
-    );
-    io.observe(el);
-    return () => io.disconnect();
-  }, []);
-
-  const ratio = `${width} / ${height}`;
+  function toggle() {
+    const video = videoRef.current;
+    if (!video) return;
+    if (video.paused) {
+      video.play();
+      setPlaying(true);
+    } else {
+      video.pause();
+      setPlaying(false);
+    }
+  }
 
   if (failed) {
     return (
-      <div className={cn('relative overflow-hidden bg-raised', className)} style={{ aspectRatio: ratio }}>
-        <GeneratedArt seed={seed ?? id} accent />
+      <div className={cn('relative aspect-video w-full overflow-hidden rounded-md border border-line bg-raised', className)}>
+        <img src={poster} alt={label} className="h-full w-full object-cover" />
       </div>
     );
   }
 
   return (
-    <div className={cn('relative overflow-hidden bg-raised', className)} style={{ aspectRatio: ratio }}>
+    <div className={cn('group relative aspect-video w-full overflow-hidden rounded-md border border-line bg-raised', className)}>
       <video
-        ref={ref}
+        ref={videoRef}
         className="h-full w-full object-cover"
+        poster={poster}
+        autoPlay={!reduced}
         muted
         loop
         playsInline
-        preload="none"
-        poster={`/media/${id}-poster.jpg`}
-        aria-label={alt}
+        aria-label={label}
         onError={() => setFailed(true)}
       >
-        {inView && (
-          <>
-            <source src={`/media/${id}.webm`} type="video/webm" />
-            <source src={`/media/${id}.mp4`} type="video/mp4" />
-          </>
-        )}
+        <source src={webmSrc ?? src} type="video/webm" />
+        <source src={src} type="video/mp4" />
       </video>
+      <button
+        type="button"
+        onClick={toggle}
+        data-cursor-hover
+        aria-label={playing ? 'Pause video' : 'Play video'}
+        className="absolute bottom-4 right-4 flex h-10 w-10 items-center justify-center rounded-full border border-white/30 bg-black/50 text-white opacity-0 backdrop-blur-sm transition-opacity duration-400 group-hover:opacity-100 focus-visible:opacity-100"
+      >
+        {playing ? (
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor">
+            <rect x="1" width="3.5" height="12" />
+            <rect x="7" width="3.5" height="12" />
+          </svg>
+        ) : (
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor">
+            <path d="M0 0 L12 6 L0 12 Z" />
+          </svg>
+        )}
+      </button>
     </div>
   );
 }

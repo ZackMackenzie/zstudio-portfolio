@@ -1,155 +1,130 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { AnimatePresence, motion, useMotionValueEvent, useScroll } from 'framer-motion';
-import { site, whatsappHref } from '@/content/site';
-import { useI18n } from '@/lib/i18n/LanguageProvider';
-import { scrollToId } from './SmoothScroll';
+import { motion } from 'framer-motion';
+import type { Dictionary } from '@/lib/i18n/types';
+import type { Locale } from '@/lib/i18n/types';
+import { Logo } from '@/components/ui/Logo';
 import { LanguageSwitcher } from '@/components/ui/LanguageSwitcher';
 import { MagneticButton } from '@/components/ui/MagneticButton';
-import { cursorHover } from '@/components/cursor/cursor-store';
 import { cn } from '@/lib/utils';
 
-const NAV_IDS = ['work', 'services', 'about', 'contact'] as const;
+interface NavigationProps {
+  dict: Dictionary;
+  locale: Locale;
+}
 
-/**
- * Sticky header: wordmark, four scroll-anchored nav links (desktop), a live
- * "available for work" status pill, the language toggle, and a single direct
- * CTA. Below `md` the links collapse into a simple slide-down panel — still
- * a one-page, scroll-driven flow (see app/page.tsx), just with real nav.
- */
-export function Navigation() {
-  const { dict } = useI18n();
-  const [hidden, setHidden] = useState(false);
-  const [atTop, setAtTop] = useState(true);
-  const [menuOpen, setMenuOpen] = useState(false);
-  const { scrollY } = useScroll();
+export function Navigation({ dict, locale }: NavigationProps) {
+  const [scrolled, setScrolled] = useState(false);
+  const [open, setOpen] = useState(false);
 
-  useMotionValueEvent(scrollY, 'change', (y) => {
-    const prev = scrollY.getPrevious() ?? 0;
-    setAtTop(y < 24);
-    setHidden(!menuOpen && y > prev && y > 240);
-  });
+  useEffect(() => {
+    function onScroll() {
+      setScrolled(window.scrollY > 24);
+    }
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
-  function goTo(id: string) {
-    setMenuOpen(false);
-    scrollToId(id);
-  }
+  const links = [
+    { href: `/${locale}#work`, label: dict.nav.work },
+    { href: `/${locale}#services`, label: dict.nav.services },
+    { href: `/${locale}#about`, label: dict.nav.about },
+    { href: `/${locale}#contact`, label: dict.nav.contact },
+  ];
 
   return (
-    <motion.header
-      initial={{ y: 0 }}
-      animate={{ y: hidden ? '-110%' : '0%' }}
-      transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+    <header
       className={cn(
-        'fixed inset-x-0 top-0 z-[80] transition-colors duration-500',
-        (!atTop || menuOpen) && 'bg-bg/70 backdrop-blur-md',
+        'fixed inset-x-0 top-0 z-50 transition-all duration-400',
+        scrolled ? 'border-b border-line bg-bg/85 backdrop-blur-md' : 'border-b border-transparent'
       )}
     >
-      <div className="shell flex items-center justify-between gap-4 py-5">
-        <Link
-          href="/"
-          onClick={(e) => {
-            if (window.location.pathname === '/') {
-              e.preventDefault();
-              goTo('top');
-            }
-          }}
-          className="font-display text-xl font-extrabold tracking-tight"
-          {...cursorHover('link')}
-        >
-          {site.wordmark}
+      <nav className="container-page flex h-[72px] items-center justify-between" aria-label="Primary">
+        <Link href={`/${locale}`} data-cursor-hover className="text-lg">
+          <Logo />
         </Link>
 
-        <nav className="hidden items-center gap-6 md:flex lg:gap-8" aria-label="Primary">
-          {NAV_IDS.map((id) => (
-            <button
-              key={id}
-              type="button"
-              onClick={() => goTo(id)}
-              className="link-underline font-mono text-2xs uppercase tracking-[0.14em] text-dim transition-colors duration-300 hover:text-text"
-              {...cursorHover('link')}
-            >
-              {dict.nav[id]}
-            </button>
+        <ul className="hidden items-center gap-9 md:flex">
+          {links.map((link) => (
+            <li key={link.href}>
+              <a
+                href={link.href}
+                data-cursor-hover
+                className="text-sm text-dim transition-colors duration-400 hover:text-text"
+              >
+                {link.label}
+              </a>
+            </li>
           ))}
-        </nav>
+        </ul>
 
-        <div className="hidden items-center gap-2 2xl:flex">
-          <span className="relative flex h-2 w-2">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent2 opacity-75" />
-            <span className="relative inline-flex h-2 w-2 rounded-full bg-accent2" />
-          </span>
-          <span className="whitespace-nowrap font-mono text-2xs uppercase tracking-[0.14em] text-dim">{dict.header.status}</span>
-        </div>
-
-        <div className="flex items-center gap-4 md:gap-5 lg:gap-6">
-          <LanguageSwitcher className="hidden sm:flex" />
-          <MagneticButton
-            href={whatsappHref(dict.whatsappMessage)}
-            cursorLabel={dict.header.bookProject}
-            className="hidden px-4 py-2.5 text-2xs sm:inline-flex sm:px-5 sm:py-3 sm:text-xs"
-          >
-            {dict.header.bookProject}
-            <span aria-hidden>↗</span>
+        <div className="flex items-center gap-5">
+          <LanguageSwitcher current={locale} className="hidden sm:flex" />
+          <MagneticButton className="hidden md:inline-block">
+            <a
+              href={`/${locale}#contact`}
+              data-cursor-hover
+              className="rounded-pill border border-line px-5 py-2.5 text-sm transition-colors duration-400 hover:border-accent hover:text-accent"
+            >
+              {dict.nav.cta}
+            </a>
           </MagneticButton>
 
           <button
             type="button"
-            onClick={() => setMenuOpen((v) => !v)}
-            aria-expanded={menuOpen}
-            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
-            className="relative flex h-9 w-9 flex-col items-center justify-center gap-1.5 md:hidden"
-            {...cursorHover('link')}
+            className="flex h-9 w-9 flex-col items-center justify-center gap-1.5 md:hidden"
+            aria-expanded={open}
+            aria-label={open ? 'Close menu' : 'Open menu'}
+            onClick={() => setOpen((v) => !v)}
           >
-            <span
-              className={cn(
-                'h-px w-5 bg-text transition-transform duration-300',
-                menuOpen && 'translate-y-[3.5px] rotate-45',
-              )}
+            <motion.span
+              animate={{ rotate: open ? 45 : 0, y: open ? 5 : 0 }}
+              className="h-px w-6 bg-text"
             />
-            <span
-              className={cn(
-                'h-px w-5 bg-text transition-transform duration-300',
-                menuOpen && '-translate-y-[3.5px] -rotate-45',
-              )}
+            <motion.span
+              animate={{ rotate: open ? -45 : 0, y: open ? -5 : 0 }}
+              className="h-px w-6 bg-text"
             />
           </button>
         </div>
-      </div>
+      </nav>
 
-      <AnimatePresence>
-        {menuOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="overflow-hidden border-t border-white/[0.08] bg-bg md:hidden"
-          >
-            <div className="shell flex flex-col gap-1 py-6">
-              {NAV_IDS.map((id) => (
-                <button
-                  key={id}
-                  type="button"
-                  onClick={() => goTo(id)}
-                  className="py-3 text-left font-display text-2xl font-extrabold tracking-tight"
+      {open ? (
+        <motion.div
+          initial={{ height: 0, opacity: 0 }}
+          animate={{ height: 'auto', opacity: 1 }}
+          exit={{ height: 0, opacity: 0 }}
+          transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+          className="border-t border-line bg-bg md:hidden"
+        >
+          <ul className="container-page flex flex-col gap-1 py-6">
+            {links.map((link) => (
+              <li key={link.href}>
+                <a
+                  href={link.href}
+                  onClick={() => setOpen(false)}
+                  className="block py-3 text-xl font-display"
                 >
-                  {dict.nav[id]}
-                </button>
-              ))}
-              <div className="mt-4 flex items-center justify-between border-t border-white/[0.08] pt-5">
-                <LanguageSwitcher />
-                <MagneticButton href={whatsappHref(dict.whatsappMessage)} cursorLabel={dict.header.bookProject} className="px-5 py-3 text-xs">
-                  {dict.header.bookProject}
-                  <span aria-hidden>↗</span>
-                </MagneticButton>
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.header>
+                  {link.label}
+                </a>
+              </li>
+            ))}
+            <li className="mt-4 flex items-center justify-between">
+              <LanguageSwitcher current={locale} />
+              <a
+                href={`/${locale}#contact`}
+                onClick={() => setOpen(false)}
+                className="rounded-pill border border-line px-5 py-2.5 text-sm"
+              >
+                {dict.nav.cta}
+              </a>
+            </li>
+          </ul>
+        </motion.div>
+      ) : null}
+    </header>
   );
 }

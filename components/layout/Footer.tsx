@@ -1,68 +1,58 @@
-'use client';
-
-import { useEffect, useState } from 'react';
+import Link from 'next/link';
+import type { Dictionary, Locale } from '@/lib/i18n/types';
+import { Logo } from '@/components/ui/Logo';
 import { site } from '@/content/site';
-import { useI18n } from '@/lib/i18n/LanguageProvider';
-import { cursorHover } from '@/components/cursor/cursor-store';
-import { scrollToId } from './SmoothScroll';
 
-function useLocalTime(timeZone: string, locale: string) {
-  const [time, setTime] = useState('');
-  useEffect(() => {
-    const update = () => {
-      try {
-        setTime(new Intl.DateTimeFormat(locale, { hour: '2-digit', minute: '2-digit', timeZone }).format(new Date()));
-      } catch {
-        setTime('');
-      }
-    };
-    update();
-    const id = setInterval(update, 30_000);
-    return () => clearInterval(id);
-  }, [timeZone, locale]);
-  return time;
+interface FooterProps {
+  dict: Dictionary;
+  locale: Locale;
 }
 
-function ClockBadge({ city, time }: { city: string; time: string }) {
-  return (
-    <span className="font-mono text-2xs uppercase tracking-[0.14em] text-dim">
-      {city} <span className="text-text/60">{time || '—'}</span>
-    </span>
-  );
-}
-
-/**
- * Slim closing bar — status/clocks + copyright/back-to-top. The primary
- * contact CTA lives in components/sections/Contact.tsx; keeping this ambient
- * strip here (not duplicated) reinforces "available now, in your timezone"
- * on every page without repeating the WhatsApp/email actions.
- */
-export function Footer() {
-  const { locale, dict } = useI18n();
-  const saoPaulo = useLocalTime(site.contact.timezone, locale);
-  const newYork = useLocalTime('America/New_York', locale);
+export function Footer({ dict, locale }: FooterProps) {
+  const year = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-white/[0.08] bg-bg">
-      <div className="shell py-10 md:py-12">
-        <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
-          <span className="flex items-center gap-2 font-mono text-2xs uppercase tracking-[0.14em] text-dim">
-            <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent2 opacity-75" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-accent2" />
-            </span>
-            <span className="text-text/75">{dict.footer.onlineNow}</span>
-          </span>
-          <ClockBadge city="São Paulo / UTC-3" time={saoPaulo} />
-          <ClockBadge city="New York / UTC-5" time={newYork} />
+    <footer className="border-t border-line">
+      <div className="container-page flex flex-col gap-10 py-14 md:flex-row md:items-end md:justify-between">
+        <div>
+          <Link href={`/${locale}`} data-cursor-hover className="text-xl">
+            <Logo />
+          </Link>
+          <p className="mt-3 max-w-xs text-sm text-dim">{dict.footer.tagline}</p>
         </div>
 
-        <div className="mt-6 flex flex-col gap-4 border-t border-white/[0.08] pt-6 font-mono text-2xs uppercase tracking-[0.14em] text-dim md:flex-row md:items-center md:justify-between">
-          <span>{dict.footer.copyright}</span>
-          <button onClick={() => scrollToId('top')} className="link-underline w-fit" {...cursorHover('link')}>
-            {dict.footer.backToTop}
-          </button>
+        <div className="flex flex-wrap gap-x-10 gap-y-4 text-sm text-dim">
+          <a href={`/${locale}#work`} data-cursor-hover className="hover:text-text">
+            {dict.nav.work}
+          </a>
+          <a href={`/${locale}#services`} data-cursor-hover className="hover:text-text">
+            {dict.nav.services}
+          </a>
+          <a href={`/${locale}#about`} data-cursor-hover className="hover:text-text">
+            {dict.nav.about}
+          </a>
+          <a href={site.social.instagram} target="_blank" rel="noreferrer" data-cursor-hover className="hover:text-text">
+            Instagram
+          </a>
+          <a href={site.social.linkedin} target="_blank" rel="noreferrer" data-cursor-hover className="hover:text-text">
+            LinkedIn
+          </a>
         </div>
+
+        <a
+          href="#top"
+          data-cursor-hover
+          className="text-sm text-dim underline decoration-line underline-offset-4 hover:text-text"
+        >
+          {dict.footer.back}
+        </a>
+      </div>
+
+      <div className="container-page flex flex-col gap-2 border-t border-line py-6 text-2xs text-dim sm:flex-row sm:items-center sm:justify-between">
+        <span>
+          © {year} {site.legalName}. {dict.footer.rights}
+        </span>
+        <span className="font-mono uppercase">Built in Next.js — São Paulo</span>
       </div>
     </footer>
   );

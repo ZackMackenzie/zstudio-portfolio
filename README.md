@@ -1,27 +1,30 @@
-# Zstudio
+# Z.studio
 
-Portfolio site for **ZSTUDIO®** — an independent studio building high-converting websites,
-Apple-style product motion, and performance creative systems for global brands, founders, and
-Brazilian clients alike.
+The official portfolio for **Z.studio** — a digital design & technology studio. Built from
+scratch as a full Next.js App Router site: editorial home page, individual case-study pages,
+a working contact form, and a Remotion pipeline for the motion pieces embedded in the work.
 
-A single-page, visual-first flow, Sui-inspired (Swiss grid, geometric type, dark obsidian +
-electric cyan): **Header → Hero (headline + quick-metrics bar) → Curated Showcase (4 self-contained
-project cards, no subpages) → Capabilities Matrix**. Footer (global, in `layout.tsx`) is the
-conversion hub. No About section, no multi-field contact form, no case-study subroutes — every
-case is fully readable in its own card, in under 5 seconds; see "Show less" at the bottom of this
-file.
+## Identity
+
+- **Palette**: black, white, neutral grays — plus one accent, electric blue (`--accent:
+  #3a5bff`), used sparingly for CTAs, links, hover states, and motion details. See
+  "Design tokens" below.
+- **Type**: Space Grotesk (display/headlines), Inter (body/UI), IBM Plex Mono (labels,
+  index numbers, tags) — all loaded via `next/font/google`.
+- **Wordmark**: `Z.studio`, set in the display face with the period in accent blue
+  (`components/ui/Logo.tsx`). No external logo file exists yet — if one is supplied later,
+  swap it in `Logo.tsx`, `favicon.svg`, and `app/opengraph-image.tsx` without touching layout.
 
 ## Stack
 
 | | |
 |---|---|
-| Framework | Next.js 15 (App Router, **static export** → `out/`) |
+| Framework | Next.js 15 (App Router, standard Node/Vercel runtime — not static export, because the contact form needs a live API route) |
 | Language | TypeScript |
 | Styling | Tailwind CSS v3 + CSS custom-property design tokens |
-| Motion | Framer Motion + Lenis (smooth scroll) |
-| Video / motion assets | Remotion → rendered to `public/media/` |
-| Fonts | `next/font` — Hanken Grotesk, Inter, IBM Plex Mono |
-| i18n | Custom client-side system — `lib/i18n/` (English default, Portuguese toggle) |
+| Motion | Framer Motion (site), Remotion (rendered video assets) |
+| Email | Resend (`app/api/contact/route.ts`) |
+| i18n | `/pt`, `/en`, `/es` — URL-segment based, middleware-detected, cookie-persisted |
 
 ## Develop
 
@@ -30,183 +33,144 @@ npm install
 npm run dev            # http://localhost:3000
 ```
 
-Type-checking and linting are **not** part of `next build` (keeps peak memory low). Run them
-directly:
+**Never run `next build` while `next dev` is running against the same `.next` folder** — they
+can race and corrupt the dev server's module cache (manifests as `__webpack_modules__[id] is
+not a function` / random 500s). Stop one before running the other, or point `next build` at a
+separate working copy.
 
 ```bash
 npm run typecheck
 npm run lint
+npm run build
 ```
 
-**Never run `next build` while `next dev` is running** — they share `.next` and the dev server
-breaks (500s). Stop the dev server, build, then restart it.
+## i18n
 
-## Build
-
-```bash
-npm run build          # static export to ./out
-```
-
-Deploy `out/` to any static host (Vercel, Netlify, Cloudflare Pages, S3…). `content/site.ts`
-(`site.url`) resolves from `NEXT_PUBLIC_SITE_URL` and falls back to the live Vercel URL; set that
-env var once a custom domain is live — it drives canonical URLs, OG tags, sitemap and robots.
-
-## Motion assets (Remotion)
-
-```bash
-npm run motion:studio                 # preview / tweak compositions
-npm run motion:render                 # render all → public/media/<id>.{webm,mp4} + poster
-```
-
-See [`remotion/README.md`](remotion/README.md) for how compositions map to the site.
-
-## Languages (English default / Portuguese toggle)
-
-Client-side i18n — no `/en`, `/pt` routes (the site stays a single static export). Resolution
-order: a saved choice (`localStorage["zstudio-lang"]`) → the browser's language (`pt*` → pt-BR,
-anything else → English) → English.
-
-The exported HTML is always English (the base locale); `app/layout.tsx` injects a tiny inline
-script that resolves the real language into `window.__Z_LANG__` before the app loads. React
-hydrates as English (required — anything else throws a hydration mismatch), then
-`lib/i18n/LanguageProvider.tsx` swaps to the resolved language right after mount. The `EN | PT`
-switcher in the header (`components/ui/LanguageSwitcher.tsx`) saves the choice to `localStorage`.
+Locales live at `/pt`, `/en`, `/es` (`app/[locale]/…`). `middleware.ts` redirects `/` and any
+locale-less path to the best match: a saved `z_locale` cookie first, then the browser's
+`Accept-Language` header, then English. The in-page `PT / EN / ES` switcher
+(`components/ui/LanguageSwitcher.tsx`) sets that cookie and re-routes client-side.
 
 **Where the text lives:**
 
-- `lib/i18n/locales/en.ts` — base locale + the `Dictionary` type `pt-BR.ts` must satisfy.
-- `lib/i18n/locales/pt-BR.ts` — full, natural (not literal) translation.
-- `content/*.ts` holds only **structural, non-text** data (slugs, ids, order, mockup refs).
+- `lib/i18n/types.ts` — the `Dictionary` type every locale must satisfy.
+- `lib/i18n/locales/{en,pt,es}.ts` — full copy per locale (nav, hero, services, about, contact
+  form, footer, 404, case-study labels).
+- `content/projects.ts` — structural project data (slug, year, tech, which services apply)
+  plus each project's copy nested per locale (`project.copy.en/pt/es`).
 
-**To add a 3rd language:** copy `en.ts` → `lib/i18n/locales/<locale>.ts`, translate every value,
-add it to `LOCALES`/`LOCALE_LABELS` in `lib/i18n/types.ts`, register it in
-`LanguageProvider.tsx`'s `dictionaries` map, and add a match rule in `detect.ts`.
+**To add a 4th language:** add it to `LOCALES`/`LOCALE_LABELS`/`LOCALE_NAMES` in
+`lib/i18n/types.ts`, add `lib/i18n/locales/<locale>.ts` (copy `en.ts` and translate every
+value), register it in `lib/i18n/dictionaries.ts`, and add a `copy.<locale>` entry to every
+project in `content/projects.ts`.
 
-**Known limitation:** `<title>`/meta description/OG image/JSON-LD are baked at build time in
-English only (static export, no per-request rendering). Page content re-localizes correctly
-client-side in both languages; only the SEO/social-preview layer stays English.
+## Work / case studies
 
-**WhatsApp messages are locale-aware**: `dict.whatsappMessage` holds the pre-filled text per
-language; `whatsappHref(message)` in `content/site.ts` builds the `wa.me` link from it. Every
-WhatsApp CTA on the site (header, hero, footer) calls this with the current `dict.whatsappMessage`
-— never a hardcoded link.
+`content/projects.ts` defines 6 **self-directed concept projects** — clearly labelled
+"Concept project" on every card and case page. None are real clients; no invented metrics or
+testimonials. Each has a `visual` id rendered by `components/work/ProjectVisual.tsx` — bespoke
+SVG/CSS compositions (not fake screenshots) standing in for product shots. The one audiovisual
+case (`apex`) embeds a real rendered video from the Remotion pipeline instead.
 
-## Capabilities Matrix
+Case study route: `app/[locale]/work/[slug]/page.tsx` — Overview → Challenge → Solution →
+(optional) Process → Result (omitted/honest placeholder when there's no real metric to report,
+per project) → visual showcase → next project.
 
-`content/services.ts` (4 ids, order only) + `dict.services.items` — a bordered, Sui-style
-technical grid (`components/sections/Services.tsx`), **not** cards or an accordion: each row is
-`01 / LABEL` on the left and a `·`-separated capability list on the right.
+## Remotion (motion pipeline)
 
-1. **Web Architecture** — SaaS websites, Airbnb direct-booking, affiliate engines, custom
-   React/Next.js.
-2. **Motion & Video** — Apple-style keynote motion, UI feature teasers, kinetic typography reels.
-3. **Performance Creative** — Meta & LinkedIn ads, high-retention carousels, WhatsApp promo kits.
-4. **Brand & Strategy** — visual identity, design tokens, design systems in Figma.
+```bash
+npm run motion:studio     # preview/tweak compositions in Remotion Studio
+npm run motion:render     # render all compositions → public/media/
+```
 
-No pricing table; `dict.cta.pricingNote` says proposals are scoped per project.
+`remotion/components/` holds the reusable building blocks (`KineticText`, `DeviceFrame`,
+`BrowserMockup`, `PhoneMockup`, `ProductScreen`, `Cursor`, `ProjectPreview`) so new
+compositions compose from the same system instead of one-off code. `remotion/Root.tsx`
+registers compositions; `scripts/render-motion.mjs` bundles and renders each one to
+`public/media/<name>.{mp4,webm}` + a JPEG poster. Currently renders `ApexReel`
+(`public/media/apex-reel.*`), embedded on the Apex case study via
+`components/ui/MediaPlayer.tsx` (falls back to the poster image, then to `ProjectVisual`, if
+video fails to load).
 
-## Selected Work — 4 self-contained showcase cards
+Add a new video: build a composition in `remotion/compositions/`, register it in
+`remotion/Root.tsx`, add it to the `RENDER` array in `scripts/render-motion.mjs`, run
+`npm run motion:render`, commit the output.
 
-**There are no `/work/[slug]` subpages.** Every case study is a single, complete card rendered
-directly on the home page (`components/work/ProjectCard.tsx`, listed by
-`components/sections/SelectedWork.tsx`) — mockup, title, discipline, a one-paragraph pitch, and
-tech tags, all visible without a click. All 4 are **concept projects** (a discreet badge on every
-card) — self-directed studio work, not real-client claims. No invented clients, metrics, or
-testimonials.
+## Contact form
 
-| Slug | Card |
-|---|---|
-| `aura-villa` | Airbnb direct-booking listing split with an Apple-style video teaser |
-| `kroma-ai` | Dark SaaS dashboard with a ⌘K command palette + launch-teaser badge |
-| `apex-flow` | Affiliate bridge page — countdown, Lighthouse-99 badge, trust stars, comparison table |
-| `studio-system` | Paid-social bento: WhatsApp banner + carousel slide + story ad |
+`components/sections/Contact.tsx` posts to `app/api/contact/route.ts`, which validates with
+Zod, rate-limits per IP (in-memory, 5 / 10 min — resets on cold start, good enough without
+extra infra), and sends via [Resend](https://resend.com).
 
-`content/projects.ts` defines each project's `mockup: {kind, variant}`; `components/ui/Media.tsx`
-renders the matching component from `components/work/mockups/` (falling back to the abstract
-`GeneratedArt` SVG wherever no mockup is set — unused today, kept for future placeholder cases):
+**Required environment variables** (see `.env.example`):
 
-- `DashboardMockup` — `overview` / `table` / `metric` / `cmdk` (⌘K palette + video-teaser badge).
-- `AirbnbShowcaseMockup` — `listing` / `video` / `split` (both side-by-side).
-- `BrowserLandingMockup` — browser-chrome wrapper; `hero` / `pricing` / `proof` / `funnel`
-  (countdown + Lighthouse badge + trust stars + comparison table).
-- `SocialGridMockup` — `grid` / `square` / `story` / `whatsapp` / `bento` (3-tile composite).
+| Variable | Required | Purpose |
+|---|---|---|
+| `RESEND_API_KEY` | Yes | Resend API key. Without it, the endpoint returns 500 and the form shows its error state — it never pretends to send. |
+| `CONTACT_TO_EMAIL` | Yes | Inbox that receives submissions. |
+| `CONTACT_FROM_EMAIL` | No | Verified sender address. Defaults to Resend's shared `onboarding@resend.dev`, which works without domain verification. |
+| `NEXT_PUBLIC_SITE_URL` | No | Canonical URL for metadata/OG/sitemap/robots. Falls back to the live Vercel URL. |
 
-**⚠️ `Math.sin`/`Math.cos` gotcha:** transcendental math isn't guaranteed bit-identical between
-Node's SSR pass and the browser's V8 — round any such value (e.g. `.toFixed(2)`) before
-interpolating it into SSR'd markup, or it produces a real hydration mismatch (hit once on
-`DashboardMockup`'s SVG sparkline).
+Set these in the Vercel project's Environment Variables before relying on the form in
+production.
 
-**Mockup copy stays in English regardless of site locale** — decorative product-UI text ("MRR",
-"Get started", "Claim your spot") reads as a normal SaaS/ad-creative convention in any language
-context; it is not wired to the dictionary on purpose.
+## Design tokens
 
-## Header & Footer — the conversion hub
+Canonical values are CSS custom properties in `app/globals.css` (`:root`), mirrored in
+`tailwind.config.ts` (utilities) and `remotion/theme.ts` (video). Update a value in all three
+to keep the system in sync.
 
-The header is a wordmark (`ZSTUDIO®`), a live "available for new projects" status pill (pulsing
-cyan dot), the `EN | PT` toggle, and a single `Start a Project` CTA straight to WhatsApp. No
-hamburger, no nav links — the page is scroll-driven (Hero's primary CTA scrolls to `#work`).
+- Background `--bg: #060607`; raised surface `--bg-raised: #101013`; hairline `--line`
+- Text `--text: #f6f6f4`; secondary `--text-dim: #97979d`
+- Accent `--accent: #3a5bff` (the one chosen color — blue over red, for a more contemporary,
+  trust-forward "digital studio" read); soft variant `--accent-soft`; tint `--accent-tint`
 
-`components/layout/Footer.tsx` is the **entire** contact system — frictionless by design:
+## Accessibility & motion
 
-- A direct WhatsApp link (`whatsappHref(dict.whatsappMessage)`, locale-aware pre-filled text).
-- Click-to-copy email (`site.contact.email`) with a "Copied!" tooltip (`navigator.clipboard`,
-  gracefully no-ops if permission is denied — the email stays visible/selectable either way).
-- Two live clocks side by side — São Paulo/UTC-3 and New York/UTC-5 (`Intl.DateTimeFormat`) —
-  next to an "Online now" pulsing-dot badge.
+- `prefers-reduced-motion` disables the grain animation, the hero's autoplay-by-default video
+  behavior, and collapses all Framer Motion transition durations globally (see the media query
+  at the bottom of `app/globals.css`).
+- The custom cursor (`components/ui/CustomCursor.tsx`) is **additive** — it never hides the
+  real system cursor, and disables itself off `pointer: fine` and reduced-motion.
+- Skip link, semantic landmarks, visible `:focus-visible` rings, keyboard-operable nav and
+  language switcher, labelled form fields.
 
 ## Where things live
 
 ```
-app/                     routes, layout, metadata, sitemap/robots, OG image
+app/
+  [locale]/              layout (root — html/body lives here), home page, work/[slug]
+  api/contact/            contact form endpoint
+  robots.ts, sitemap.ts, opengraph-image.tsx   — locale-agnostic, site-wide
+  fonts.ts, globals.css
 components/
-  sections/              Hero, SelectedWork, Services
-  work/                  ProjectCard
-    mockups/               DashboardMockup, AirbnbShowcaseMockup, BrowserLandingMockup,
-                           SocialGridMockup — code-rendered case-study UI previews
-  layout/                Navigation, Footer, SmoothScroll, Grain
-  ui/                    MotionText, MagneticButton, LanguageSwitcher, Reveal, Media,
-                         MediaPlayer, GeneratedArt, SectionHeader
-content/                 ← structural data only (see "Languages" above for where text lives)
-  site.ts                non-translatable config: brand name, url, email, WhatsApp, timezone,
-                         whatsappHref() helper
-  projects.ts             project order + mockup refs (4 entries)
-  services.ts             capability id order (4 entries — copy lives in the dictionaries)
+  sections/               Hero, SelectedWork, Services, About, Contact
+  work/                   ProjectCard, ProjectVisual
+  layout/                 Navigation, Footer, Grain
+  ui/                     Logo, CustomCursor, MagneticButton, Reveal, SectionHeader,
+                          LanguageSwitcher, MediaPlayer, Marquee
+content/                  site.ts (config), projects.ts (structural + per-locale copy)
 lib/
-  i18n/                  locales (en base / pt-BR), LanguageProvider, detect.ts
-  motion.ts  hooks/  utils.ts  art (via GeneratedArt)
-remotion/                motion compositions + shared theme
+  i18n/                   types, dictionaries, locales/{en,pt,es}, detect (Accept-Language)
+  hooks/, motion.ts, utils.ts
+middleware.ts             locale detection/redirect
+remotion/                 motion compositions + reusable components + shared theme
+scripts/                  gen-icons.mjs, render-motion.mjs
 ```
 
-## Design tokens
+## Deploy (Vercel)
 
-Canonical values are CSS custom properties in `app/globals.css` (`:root`). They are mirrored in
-`tailwind.config.ts` (utilities) and `remotion/theme.ts` (video). Change a value in all three to
-keep the system in sync.
-
-- Background: `--bg: #08090a` (technical black); card surface: `--bg-raised: #12151a`
-  (`border-white/[0.08]` on cards, not the flatter `--line` hairline used for section rules)
-- Text: `--text: #fafafa`; secondary: `--text-dim: #9aa0a8`
-- Accent: `--accent: #0284c7` (deep cyan); `--accent-2: #38bdf8` (electric cyan — status dots, the
-  signature bottom-left aura, active states); `--accent-tint: #e0f2fe` (rarely used ice tint)
-
-## Accessibility & motion
-
-- Lenis smooth scroll disables itself under `prefers-reduced-motion`; transform animations fall
-  back to opacity/instant.
-- Skip link, semantic landmarks, `:focus-visible` rings, keyboard-operable language switcher.
-- Standard system pointer everywhere (no custom cursor).
-- Secondary text uses `--text-dim` at full opacity — avoid reintroducing low-opacity
-  `text-dim/40`-`/60` modifiers, they read fine on a design file but fail contrast on a real
-  screen.
+1. Push to the connected GitHub repo (`origin`).
+2. Import the repo in Vercel (or it auto-deploys if already connected).
+3. Set the environment variables above in the Vercel project settings.
+4. Deploy. `NEXT_PUBLIC_SITE_URL` can be left unset for the first deploy (canonical/OG URLs
+   fall back to the live Vercel URL); set it once a custom domain is attached, and redeploy.
 
 ## Notes
 
-- All 4 case cards are self-directed **concept projects** — see "Selected Work" above. Never
-  invent real clients, metrics, or testimonials.
-- Placeholder contact data (`content/site.ts`) — email, WhatsApp number, Cal.com link — needs
-  real values before this goes in front of paying clients; everything is marked PLACEHOLDER.
-- `favicon`/icons are generated from `public/favicon.svg` via `node scripts/gen-icons.mjs`.
-- **Show less, make it better.** Before adding a new top-level section, ask whether it helps a
-  visitor understand the studio, judge the work, or reach out in one click — if not, it doesn't
-  belong on the page. This is why there's no About section, no contact form, and no case-study
-  subroutes: the cards + footer already do that job, faster.
+- All 6 case studies are self-directed **concept projects** — see "Work / case studies" above.
+  Never invent real clients, metrics, or testimonials when adding more.
+- `content/site.ts` has placeholder contact details (`hello@zstudio.design`, social links) —
+  replace with real ones before this goes in front of paying clients.
+- Icons are generated from `public/favicon.svg` via `npm run icons:gen` (uses `sharp`) —
+  regenerate after changing the mark.
