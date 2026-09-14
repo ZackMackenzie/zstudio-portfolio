@@ -17,9 +17,14 @@ const lineVariants = {
   show: { y: '0%', transition: { duration: 0.9, ease: EASE } },
 };
 
+const fadeUp = {
+  hidden: { opacity: 0, y: 16 },
+  show: { opacity: 1, y: 0 },
+};
+
 export function Hero({ dict, locale }: HeroProps) {
   return (
-    <section id="top" className="relative flex min-h-[92dvh] items-center pt-28">
+    <section id="top" className="relative flex min-h-[92dvh] items-center pt-32 pb-16">
       <div className="container-page w-full">
         <motion.span
           initial={{ opacity: 0, y: 12 }}
@@ -31,12 +36,12 @@ export function Hero({ dict, locale }: HeroProps) {
         </motion.span>
 
         <h1 className="font-display font-semibold tracking-tightest text-5xl">
-          <span className="block overflow-hidden">
+          <span className="block overflow-hidden pb-1">
             <motion.span initial="hidden" animate="show" variants={lineVariants} className="block">
               {dict.hero.line1}
             </motion.span>
           </span>
-          <span className="block overflow-hidden text-dim">
+          <span className="block overflow-hidden pb-1 text-dim">
             <motion.span
               initial="hidden"
               animate="show"
@@ -49,24 +54,35 @@ export function Hero({ dict, locale }: HeroProps) {
           </span>
         </h1>
 
-        <motion.div
-          initial="hidden"
-          animate="show"
-          variants={staggerChildren(0.08, 0.5)}
-          className="mt-8 flex flex-col items-start gap-8 md:flex-row md:items-end md:justify-between"
-        >
+        <motion.div initial="hidden" animate="show" variants={staggerChildren(0.08, 0.5)} className="mt-8">
           <motion.p
-            variants={{ hidden: { opacity: 0, y: 16 }, show: { opacity: 1, y: 0 } }}
+            variants={fadeUp}
             transition={{ duration: 0.6, ease: EASE }}
-            className="max-w-md text-lg text-dim text-balance"
+            className="max-w-xl text-lg text-dim text-balance"
           >
             {dict.hero.subhead}
           </motion.p>
 
-          <motion.div
-            variants={{ hidden: { opacity: 0, y: 16 }, show: { opacity: 1, y: 0 } }}
+          <motion.ul
+            variants={fadeUp}
             transition={{ duration: 0.6, ease: EASE }}
-            className="flex shrink-0 items-center gap-4"
+            className="mt-7 flex flex-wrap gap-2.5"
+            aria-label="Capabilities"
+          >
+            {dict.hero.chips.map((chip) => (
+              <li
+                key={chip}
+                className="rounded-pill border border-line px-3.5 py-1.5 text-sm text-dim"
+              >
+                {chip}
+              </li>
+            ))}
+          </motion.ul>
+
+          <motion.div
+            variants={fadeUp}
+            transition={{ duration: 0.6, ease: EASE }}
+            className="mt-9 flex flex-wrap items-center gap-5"
           >
             <MagneticButton>
               <a
@@ -92,7 +108,7 @@ export function Hero({ dict, locale }: HeroProps) {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1, duration: 0.8 }}
-        className="absolute bottom-10 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 md:flex"
+        className="absolute bottom-6 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 md:flex"
       >
         <span className="number-label uppercase text-dim">{dict.hero.scroll}</span>
         <motion.span

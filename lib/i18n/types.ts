@@ -35,6 +35,7 @@ export interface Dictionary {
     line1: string;
     line2: string;
     subhead: string;
+    chips: string[];
     ctaPrimary: string;
     ctaSecondary: string;
     scroll: string;
@@ -54,7 +55,7 @@ export interface Dictionary {
     title: string;
     intro: string;
     cta: string;
-    items: { index: string; title: string; description: string; tags: string[] }[];
+    categories: { index: string; label: string; description: string; items: string[] }[];
   };
   about: {
     kicker: string;
@@ -96,9 +97,11 @@ export interface Dictionary {
     category: string;
     servicesLabel: string;
     year: string;
-    challenge: string;
-    solution: string;
-    process: string;
+    concept: string;
+    direction: string;
+    interface: string;
+    motion: string;
+    development: string;
     result: string;
     noResult: string;
     next: string;

@@ -51,11 +51,21 @@ export default async function CaseStudyPage({
   if (!project) notFound();
 
   const copy = project.copy[locale];
-  const serviceNames = project.serviceIndices.map((i) => dict.services.items[i]?.title).filter(Boolean);
+  const categoryNames = project.categoryIndices
+    .map((i) => dict.services.categories[i]?.label)
+    .filter(Boolean);
 
   const currentIndex = projects.findIndex((p) => p.slug === slug);
   const nextProject = projects[(currentIndex + 1) % projects.length];
   const nextCopy = nextProject.copy[locale];
+
+  const stages: { label: string; body: string }[] = [
+    { label: dict.caseStudy.concept, body: copy.concept },
+    { label: dict.caseStudy.direction, body: copy.direction },
+    ...(copy.interfaceNote ? [{ label: dict.caseStudy.interface, body: copy.interfaceNote }] : []),
+    ...(copy.motionNote ? [{ label: dict.caseStudy.motion, body: copy.motionNote }] : []),
+    { label: dict.caseStudy.development, body: copy.development },
+  ];
 
   return (
     <article>
@@ -69,7 +79,13 @@ export default async function CaseStudyPage({
             ← {dict.caseStudy.back}
           </Link>
 
-          <h1 className="mt-8 max-w-4xl font-display text-4xl font-semibold tracking-tightest text-balance">
+          <div className="mt-8 flex flex-wrap items-center gap-3">
+            <span className="rounded-pill border border-[#3a5bff66] px-3 py-1 font-mono text-xs tracking-wide text-accent">
+              {dict.work.concept}
+            </span>
+          </div>
+
+          <h1 className="mt-5 max-w-4xl font-display text-4xl font-semibold tracking-tightest text-balance">
             {copy.title}
           </h1>
           <p className="mt-4 max-w-xl text-lg text-dim text-balance">{copy.tagline}</p>
@@ -97,11 +113,11 @@ export default async function CaseStudyPage({
           <div className="grid grid-cols-2 gap-8 md:col-span-9 md:grid-cols-4">
             <div>
               <dt className="number-label text-dim">{dict.caseStudy.category}</dt>
-              <dd className="mt-2 text-sm">{serviceNames[0]}</dd>
+              <dd className="mt-2 text-sm">{categoryNames[0]}</dd>
             </div>
             <div>
               <dt className="number-label text-dim">{dict.caseStudy.servicesLabel}</dt>
-              <dd className="mt-2 text-sm">{serviceNames.join(', ')}</dd>
+              <dd className="mt-2 text-sm">{categoryNames.join(', ')}</dd>
             </div>
             <div>
               <dt className="number-label text-dim">{dict.caseStudy.year}</dt>
@@ -116,45 +132,35 @@ export default async function CaseStudyPage({
       </section>
 
       <section className="border-t border-line py-section">
-        <div className="container-page grid grid-cols-1 gap-16 md:grid-cols-2">
-          <Reveal>
-            <span className="number-label uppercase text-dim">{dict.caseStudy.challenge}</span>
-            <p className="mt-4 text-lg text-balance">{copy.challenge}</p>
-          </Reveal>
-          <Reveal delay={0.08}>
-            <span className="number-label uppercase text-dim">{dict.caseStudy.solution}</span>
-            <p className="mt-4 text-lg text-balance">{copy.solution}</p>
-          </Reveal>
+        <div className="container-page space-y-14">
+          {stages.map((stage, index) => (
+            <Reveal key={stage.label} delay={0.04 * (index % 4)}>
+              <div className="grid grid-cols-1 gap-4 md:grid-cols-12 md:gap-10">
+                <span className="number-label uppercase text-dim md:col-span-3">{stage.label}</span>
+                <p className="text-lg text-balance md:col-span-7">{stage.body}</p>
+              </div>
+            </Reveal>
+          ))}
         </div>
       </section>
 
-      {copy.process ? (
-        <section className="border-t border-line py-section">
-          <div className="container-page max-w-2xl">
-            <Reveal>
-              <span className="number-label uppercase text-dim">{dict.caseStudy.process}</span>
-              <p className="mt-4 text-lg text-balance">{copy.process}</p>
-            </Reveal>
-          </div>
-        </section>
-      ) : null}
-
       <section className="border-t border-line py-section">
-        <div className="container-page max-w-2xl">
+        <div className="container-page">
           <Reveal>
-            <span className="number-label uppercase text-dim">{dict.caseStudy.result}</span>
-            <p className="mt-4 text-lg text-dim text-balance">
-              {copy.result ?? dict.caseStudy.noResult}
-            </p>
+            <div className="rounded-md border border-line bg-raised p-8 sm:p-10">
+              <span className="number-label uppercase text-dim">{dict.caseStudy.result}</span>
+              <p className="mt-4 max-w-2xl text-lg text-balance">
+                {copy.result ?? dict.caseStudy.noResult}
+              </p>
+            </div>
           </Reveal>
         </div>
       </section>
 
       <section className="border-t border-line py-section">
         <div className="container-page grid grid-cols-1 gap-10 md:grid-cols-2">
-          {[1, 2].map((seed) => (
-            <ProjectVisual key={seed} visual={((project.visual + seed) % 6) + 1} title={copy.title} />
-          ))}
+          <ProjectVisual visual={project.visual} title={copy.title} variant="detail" />
+          <ProjectVisual visual={project.visual} title={copy.title} variant="mobile" />
         </div>
       </section>
 

@@ -14,29 +14,32 @@ export function Services({ dict, locale }: ServicesProps) {
       <div className="container-page">
         <SectionHeader kicker={dict.services.kicker} title={dict.services.title} intro={dict.services.intro} />
 
-        <div className="mt-16 border-t border-line">
-          {dict.services.items.map((item, index) => (
-            <Reveal key={item.index} delay={0.03 * (index % 5)}>
-              <div className="group grid grid-cols-1 gap-3 border-b border-line py-7 transition-colors duration-400 md:grid-cols-12 md:items-center md:gap-6 md:py-8">
-                <span className="number-label md:col-span-1">{item.index}</span>
-                <h3 className="font-display text-xl font-medium tracking-tighter md:col-span-3">
-                  {item.title}
+        <div className="mt-16 grid grid-cols-1 gap-x-12 gap-y-12 border-t border-line pt-12 md:grid-cols-2 md:gap-y-16">
+          {dict.services.categories.map((category, index) => (
+            <Reveal key={category.index} delay={0.05 * index}>
+              <div className="flex items-baseline gap-4">
+                <span className="number-label shrink-0 text-dim">{category.index}</span>
+                <h3 className="font-display text-2xl font-medium tracking-tighter sm:text-3xl">
+                  {category.label}
                 </h3>
-                <p className="text-dim md:col-span-5">{item.description}</p>
-                <div className="flex flex-wrap gap-x-3 gap-y-1 text-2xs uppercase text-dim md:col-span-3 md:justify-end">
-                  {item.tags.map((tag) => (
-                    <span key={tag} className="font-mono">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
               </div>
+              <p className="mt-4 max-w-md text-lg text-dim">{category.description}</p>
+              <ul className="mt-5 flex flex-wrap gap-x-3 gap-y-2">
+                {category.items.map((item) => (
+                  <li
+                    key={item}
+                    className="rounded-pill border border-line px-3.5 py-1.5 text-sm text-dim"
+                  >
+                    {item}
+                  </li>
+                ))}
+              </ul>
             </Reveal>
           ))}
         </div>
 
         <Reveal delay={0.1}>
-          <div className="mt-10 flex flex-col items-start gap-5 sm:flex-row sm:items-center sm:justify-between">
+          <div className="mt-14 flex flex-col items-start gap-5 border-t border-line pt-10 sm:flex-row sm:items-center sm:justify-between">
             <p className="text-dim">{dict.services.cta}</p>
             <MagneticButton>
               <a

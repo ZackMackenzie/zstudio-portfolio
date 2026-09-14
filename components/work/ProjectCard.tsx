@@ -42,6 +42,13 @@ export function ProjectCard({ project, copy, dict, locale, index }: ProjectCardP
               {copy.title}
             </h3>
             <p className={cn('mt-3 text-dim', isFeature ? 'max-w-md text-lg' : 'text-sm')}>{copy.tagline}</p>
+            <div className="mt-4 flex flex-wrap gap-x-3 gap-y-1">
+              {project.tech.slice(0, isFeature ? 4 : 3).map((tech) => (
+                <span key={tech} className="font-mono text-2xs uppercase text-dim">
+                  {tech}
+                </span>
+              ))}
+            </div>
             <span className="number-label mt-5 inline-flex items-center gap-2 text-dim transition-colors duration-400 group-hover:text-accent">
               {dict.work.viewCase}
               <span className="transition-transform duration-400 group-hover:translate-x-1">→</span>

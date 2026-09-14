@@ -44,16 +44,18 @@ const config: Config = {
       mono: ['var(--font-mono)', 'ui-monospace', 'monospace'],
     },
     fontSize: {
-      '2xs': ['0.6875rem', { lineHeight: '1.5', letterSpacing: '0.08em' }],
-      xs: ['0.75rem', { lineHeight: '1.5', letterSpacing: '0.04em' }],
-      sm: ['0.875rem', { lineHeight: '1.6' }],
-      base: ['1rem', { lineHeight: '1.65' }],
-      lg: ['clamp(1.125rem, 0.95rem + 0.8vw, 1.375rem)', { lineHeight: '1.5' }],
-      xl: ['clamp(1.375rem, 1rem + 1.6vw, 2rem)', { lineHeight: '1.3' }],
-      '2xl': ['clamp(1.75rem, 1rem + 3vw, 3rem)', { lineHeight: '1.15' }],
-      '3xl': ['clamp(2.25rem, 1rem + 4.6vw, 4.25rem)', { lineHeight: '1.03' }],
-      '4xl': ['clamp(2.75rem, 0.8rem + 7vw, 6.5rem)', { lineHeight: '0.97' }],
-      '5xl': ['clamp(3rem, 0.5rem + 10vw, 9rem)', { lineHeight: '0.9' }],
+      // Legibility first: no token under 12px, no line-height under 1, tracking
+      // eased off across the board — see PRIORIDADE 1 of the commercial-pass brief.
+      '2xs': ['0.75rem', { lineHeight: '1.5', letterSpacing: '0.05em' }],
+      xs: ['0.8125rem', { lineHeight: '1.6', letterSpacing: '0.02em' }],
+      sm: ['0.9375rem', { lineHeight: '1.6' }],
+      base: ['1.0625rem', { lineHeight: '1.7' }],
+      lg: ['clamp(1.125rem, 0.95rem + 0.8vw, 1.4375rem)', { lineHeight: '1.55' }],
+      xl: ['clamp(1.375rem, 1rem + 1.6vw, 2.125rem)', { lineHeight: '1.35' }],
+      '2xl': ['clamp(1.75rem, 1rem + 3vw, 3.125rem)', { lineHeight: '1.2' }],
+      '3xl': ['clamp(2.25rem, 1rem + 4.6vw, 4.375rem)', { lineHeight: '1.08' }],
+      '4xl': ['clamp(2.75rem, 0.8rem + 7vw, 6.75rem)', { lineHeight: '1.02' }],
+      '5xl': ['clamp(2.75rem, 0.5rem + 7.8vw, 7.5rem)', { lineHeight: '1.02' }],
     },
     extend: {
       spacing: {
@@ -85,8 +87,9 @@ const config: Config = {
         1200: '1200ms',
       },
       letterSpacing: {
-        tightest: '-0.045em',
-        tighter: '-0.03em',
+        tightest: '-0.025em',
+        tighter: '-0.015em',
+        tight: '-0.008em',
       },
       keyframes: {
         marquee: {
